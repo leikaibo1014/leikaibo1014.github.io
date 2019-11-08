@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>数据结构--栈</title>
+    <url>/2019/07/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/</url>
+    <content><![CDATA[<h2 id="1-栈"><a href="#1-栈" class="headerlink" title="1. 栈"></a>1. 栈</h2><p>栈是指允许在一端就行插入或删除操作的线性表，首先需要确定的是栈是一种线性表。</p>
+<p>1)栈的英文为 (stack)</p>
+<p>2)栈是一个先入后出 (FILO first In Last Ou的有序列表</p>
+<p>3)( stack)是限制线性表中元素的插入和删除只能在线性表的同一端进行的一种特殊线性表。允许插入和删除的一端,为变化的一端,称为機项(Top),另端为固定的一端,称为底( Bottom)</p>
+<p>4)根据栈的定义可知,最先放入中元素在機底,最后放入的元素在项,而除元素刚好相反,最后放入的元素最先删除,最先放入的元素最后删除</p>
+<a id="more"></a>
+
+
+<h3 id="栈的应用场景"><a href="#栈的应用场景" class="headerlink" title="栈的应用场景"></a>栈的应用场景</h3><p>1)子程序的调用:在跳往子程序前,会先将下个指令的地址存到堆栈中,直到子程序执行完后再将地址取出,以回到原来的程序中。 </p>
+<p>2)处理递归调用:和子程序的调用类似,只是除了備存下一个指令的地址外也将参数、区域变量等数据存入堆栈中。</p>
+<p>3)表达式的转换与求值(实际解决)。</p>
+<p>4)二叉树的遍历。</p>
+<p>5)图形的深度优先{ depth- first)搜素法。</p>
+<p>##栈的实现</p>
+<p>栈的顺序存储称为顺序栈，它是利用一组地址连续的存储单元存放自栈底到栈顶的数据元素</p>
+<p>使用Java语言对栈进行一个简单实现</p>
+<p>用数组模拟栈的使用，由于栈是一种有序表，当然可以使用数据的结构来存储栈的内容、</p>
+<p>【思路分析】</p>
+<ol>
+<li>使用数组模拟栈</li>
+<li>定义变量top表示栈顶，初始化为-1</li>
+<li>入栈，当有数据加入栈时，top++。stack（top）=data</li>
+<li>出栈，从栈顶取出数据，定义变量value用来存储栈顶的数据，然后把top–，return value</li>
+</ol>
+<h5 id="需要注意的是，入栈是栈顶元素先top-，再放数据。出栈是先取数据，再top–。"><a href="#需要注意的是，入栈是栈顶元素先top-，再放数据。出栈是先取数据，再top–。" class="headerlink" title="需要注意的是，入栈是栈顶元素先top++，再放数据。出栈是先取数据，再top–。"></a>需要注意的是，入栈是栈顶元素先top++，再放数据。出栈是先取数据，再top–。</h5><p>用Java定义一个栈，并定义栈中的各种操作方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//定义一个ArrayStack  表示栈</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArrayStack</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> maxSize; <span class="comment">//栈的大小</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] stack; <span class="comment">//数组，数组模拟栈，数据放在该数组中</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> top = -<span class="number">1</span>; <span class="comment">// top表示栈顶，初始化为1</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//构造方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ArrayStack</span><span class="params">(<span class="keyword">int</span> maxSize)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.maxSize = maxSize;</span><br><span class="line">		stack = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="keyword">this</span>.maxSize];  <span class="comment">//我们上面定义完数组，没有进行初始化，我们需要进行初始化</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//判断沾满的方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFull</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> top == maxSize - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//判断栈空的方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> top == -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//入栈的操作</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (isFull()) &#123;</span><br><span class="line">			System.out.println(<span class="string">"栈满"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		top++;</span><br><span class="line">		stack[top] = value;</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//出栈的操作，将栈顶的数据返回</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">			System.out.println(<span class="string">"栈空"</span>);</span><br><span class="line">			<span class="keyword">new</span> IllegalArgumentException(<span class="string">"栈空,没有数据"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> value = stack[top];</span><br><span class="line">		top--;</span><br><span class="line">		<span class="keyword">return</span> value;</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//遍历栈，需要从栈顶往下遍历</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">			System.out.println(<span class="string">"栈空"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = top; i &gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">			System.out.printf(<span class="string">"stack[%d]=%d\n"</span>,i,stack[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写测试方法，测试操作能否正常执行</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//测试栈</span></span><br><span class="line">	<span class="comment">//先创建一个ArrayStack对象，表示栈</span></span><br><span class="line">	ArrayStack stack = <span class="keyword">new</span> ArrayStack(<span class="number">4</span>);</span><br><span class="line">	</span><br><span class="line">	stack.push(<span class="number">2</span>);</span><br><span class="line">	stack.push(<span class="number">3</span>);</span><br><span class="line">	stack.push(<span class="number">6</span>);		</span><br><span class="line">	stack.list();		</span><br><span class="line">	System.out.println(stack.pop());</span><br><span class="line">	stack.list();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用一个计算的式子计算过程来进一步了解栈的实际应用。</p>
+<p>eg：使用栈完成计算一个表达式的结果：<br>7<em>2</em>2-5+1-5+3-4=？</p>
+<p>我们需要定义两个栈，一个是数据栈numStack，用来存放计算式中数据。一个是符号栈，用来存放计算式中的符号。</p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1568774508177.png" alt="1568774508177"></p>
+<p>使用栈完成表达式的计算思路：</p>
+<ol>
+<li><p>通过一个index值也就是索引，来遍历我们的表达式</p>
+</li>
+<li><p>如果我们发现当前索引值是一个数据，就直接入数栈</p>
+</li>
+<li><p>如果发现扫描到是一个符号，就分为以下情况进行考虑    </p>
+<ol start="3">
+<li><ol>
+<li>如果发现当前的符号栈为空，就直接入栈</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>如果符号栈有操作符，就进行比较。如果当前的操作符的优先级小于或者是等于栈中的操作符，就需要从数据栈中pop出两个数，再从符号栈中pop出一个符号，进行运算，将计算得到的结果，放入数据栈，然后将当前的操作符放入符号栈。如果当前的操作符的优先级大于栈中的操作符，就直接入符号栈中。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>当表达式扫描完毕之后，就顺序的从符号栈和数据栈中pop出相应的数和符号，并运行。</p>
+</li>
+<li><p>最后数据栈之后一个数字，就是我们的计算结果。</p>
+</li>
+</ol>
+<p>我们根据上面的思路，使用编程实现计算上面中缀表达式的过程。</p>
+<h3 id="引入：中缀表达式"><a href="#引入：中缀表达式" class="headerlink" title="引入：中缀表达式"></a>引入：中缀表达式</h3><p>形如上面定义的表达式   5+3-6/2 这样的式子就是中缀表达式，是一个通用的算术或逻辑公式表示方法， 操作符是以中缀形式处于操作数的中间（例：3 + 4），中缀表达式是人们常用的算术表示方法。<br>与前缀表达式（例：+ 3 4）或后缀表达式（例：3 4 +）相比，中缀表达式不容易被计算机解析，但仍被许多程序语言使用，因为它符合人们的普遍用法。</p>
+<p>一般是转换为后缀表达式跟容易的计算。</p>
+<p>==++++++++++++++++++++++++++++++++++++++++++++++</p>
+<h5 id="中缀表达式转换为后缀表达式的过程如下："><a href="#中缀表达式转换为后缀表达式的过程如下：" class="headerlink" title="中缀表达式转换为后缀表达式的过程如下："></a>中缀表达式转换为后缀表达式的过程如下：</h5><p>后缀表达式也叫逆波兰表达式，</p>
+<p>规则：</p>
+<p>中缀表达式a + b*c + (d * e + f) * g，其转换成后缀表达式则为a b c * + d e * f  + g * +。</p>
+<p>转换过程需要用到栈，具体过程如下：</p>
+<ul>
+<li><p>1）如果遇到操作数，我们就直接将其输出。</p>
+</li>
+<li><p>2）如果遇到操作符，则我们将其放入到栈中，遇到左括号时我们也将其放入栈中。</p>
+</li>
+<li><p>3）如果遇到一个右括号，则将栈元素弹出，将弹出的操作符输出直到遇到左括号为止。注意，左括号只弹出并不输出。</p>
+</li>
+<li><p>4）如果遇到任何其他的操作符，如（“+”， “*”，“（”）等，从栈中弹出元素直到遇到发现更低优先级的元素(或者栈为空)为止。弹出完这些元素后，才将遇到的操作符压入到栈中。有一点需要注意，只有在遇到” ) “的情况下我们才弹出” ( “，其他情况我们都不会弹出” ( “。</p>
+</li>
+<li><p>5）如果我们读到了输入的末尾，则将栈中所有元素依次弹出。</p>
+</li>
+</ul>
+<p>—+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</p>
+<p>但是在实际应用时，中缀表达式是应用最多的，下面使用栈模拟计算机计算中缀表达式的过程。</p>
+<p>要实现计算中缀表达式的过程，还要在上面我们定义的栈类中新增几个方法。</p>
+<ol>
+<li>新增定义运算符优先级的方法：     </li>
+</ol>
+<p>返回运算符的优先级，优先级是程序员来定的，优先级使用数字表示，数字越大优先级越高。<br>我们假定计算式中只含有加减乘除      </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 返回运算符的优先级，优先级是程序员来定的，优先级使用数字表示，数字越大优先级越高。</span></span><br><span class="line"><span class="comment">//我们假定计算式中只含有加减乘除</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">(<span class="keyword">int</span> oper)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (oper == <span class="string">'*'</span> || oper == <span class="string">'/'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span> (oper == <span class="string">'+'</span> || oper == <span class="string">'-'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>判断是否是运算符方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//判断是不是一个运算符</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isOper</span><span class="params">(<span class="keyword">char</span> val)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> val == <span class="string">'+'</span> || val == <span class="string">'-'</span> || val ==<span class="string">'*'</span> || val == <span class="string">'/'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>计算方法，从栈中弹出的两个数字需要进行运算</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//计算方法，从栈中弹出的两个数需要进行计算</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> num1,<span class="keyword">int</span> num2,<span class="keyword">int</span> oper)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> result =<span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">switch</span> (oper) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'+'</span>:</span><br><span class="line">			result = num1 + num2;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">			</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">			result = num2 - num1;<span class="comment">//注意顺序，这里是num2是栈底元素</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">			</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'*'</span>:</span><br><span class="line">			result = num1 * num2;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">			</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">			result = num2 / num1;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;	</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>增加一个用于返回当前栈顶的值，不是真正的pop操作，用于进行栈顶元素的比较</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//增加一个方法，可以返回当前栈顶的值，但不是真正的pop</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> stack[top];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面我们进行程序的编写。   </p>
+<p>我们需要定义两个栈，一个是数据栈numStack，用来存放计算式中数据。一个是符号栈，用来存放计算式中的符号。</p>
+<ol>
+<li><p>通过一个index值也就是索引，来遍历我们的表达式</p>
+</li>
+<li><p>如果我们发现当前索引值是一个数据，就直接入数栈</p>
+</li>
+<li><p>如果发现扫描到是一个符号，就分为以下情况进行考虑    </p>
+<ol start="3">
+<li><ol>
+<li>如果发现当前的符号栈为空，就直接入栈</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>如果符号栈有操作符，就进行比较。如果当前的操作符的优先级小于或者是等于栈中的操作符，就需要从数据栈中pop出两个数，再从符号栈中pop出一个符号，进行运算，将计算得到的结果，放入数据栈，然后将当前的操作符放入符号栈。如果当前的操作符的优先级大于栈中的操作符，就直接入符号栈中。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>当表达式扫描完毕之后，就顺序的从符号栈和数据栈中pop出相应的数和符号，并运行。</p>
+</li>
+<li><p>最后数据栈之后一个数字，就是我们的计算结果。</p>
+</li>
+</ol>
+<p>具体代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jisuanshi</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//根据上面的思路，进行代码的实现，完成表达式的运算过程</span></span><br><span class="line">		</span><br><span class="line">		String expression = <span class="string">"2+6*8-4"</span>;</span><br><span class="line">		<span class="comment">//创建两个栈，一个是数据栈，一个是符号栈</span></span><br><span class="line">		ArrayStack2 numStack = <span class="keyword">new</span> ArrayStack2(<span class="number">20</span>);</span><br><span class="line">		ArrayStack2 operStack = <span class="keyword">new</span> ArrayStack2(<span class="number">20</span>);</span><br><span class="line">		<span class="comment">//定义需要的相关变量</span></span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">0</span>;<span class="comment">//用于扫描</span></span><br><span class="line">		<span class="keyword">int</span> num1 =<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> num2 =<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> oper = <span class="number">0</span>; <span class="comment">//char和int类型是一样的</span></span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">char</span> ch = <span class="string">' '</span>;<span class="comment">//将每次扫描得到char保存到ch中</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//开始使用while循环的扫描expression</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			<span class="comment">//依次得到expression中的每个字符</span></span><br><span class="line">			ch = expression.substring(index, index+<span class="number">1</span>).charAt(<span class="number">0</span>);</span><br><span class="line">			<span class="comment">//判断ch是什么然后做相应的处理</span></span><br><span class="line">			<span class="keyword">if</span> (operStack.isOper(ch)) &#123;<span class="comment">//如果是运算符</span></span><br><span class="line">				<span class="comment">//判断当前的符号栈是否为空</span></span><br><span class="line">				<span class="keyword">if</span> (!operStack.isEmpty()) &#123;</span><br><span class="line">					<span class="comment">//如果符号栈有操作符，就进行比较，如果当前的操作符的优先级小于或者等于栈中的操作符，就进行下面的操作</span></span><br><span class="line">					<span class="comment">//再从符号栈中pop出一个符号，进行运算，将得到结果，入数栈，然后将当前的操作符入符号栈</span></span><br><span class="line">					</span><br><span class="line">					<span class="keyword">if</span> (operStack.priority(ch) &lt;= operStack.priority(operStack.peek())) &#123;</span><br><span class="line">						<span class="comment">//从数据栈pop两个数进行计算</span></span><br><span class="line">						num1 = numStack.pop();</span><br><span class="line">						num2 = numStack.pop();</span><br><span class="line">						oper = operStack.pop();</span><br><span class="line">						result = numStack.cal(num1, num2, oper);</span><br><span class="line">						<span class="comment">//把运算结果入数栈</span></span><br><span class="line">						numStack.push(result);</span><br><span class="line">						<span class="comment">//然后把操作符入符号栈</span></span><br><span class="line">						operStack.push(ch);</span><br><span class="line">					&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">						<span class="comment">//如果当前的操作符优先级大于栈中的操作符，就直接入符号栈</span></span><br><span class="line">						operStack.push(ch);</span><br><span class="line">					&#125;	</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="comment">//如果为空直接入符号栈</span></span><br><span class="line">					operStack.push(ch);	</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="comment">//处理是数的情况。则直接入数据栈。因为上面把它转换为字符了，所以需要进行转换</span></span><br><span class="line">				numStack.push(ch - <span class="number">48</span>);				</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//让index加1，并判断是否扫描到expression的最后</span></span><br><span class="line">			index++;</span><br><span class="line">			<span class="keyword">if</span> (index &gt;= expression.length()) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;				</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">//当表达式扫描完毕，就顺序的从数据栈和符号栈中pop出相应的数据和符号。并运算</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			<span class="comment">//如果符号栈为空，则计算到最后的结果，数据栈中只有一个数字，这个就是结果</span></span><br><span class="line">			<span class="keyword">if</span> (operStack.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">				num1 = numStack.pop();</span><br><span class="line">				num2 = numStack.pop();</span><br><span class="line"></span><br><span class="line">				oper = operStack.pop();</span><br><span class="line">				result = numStack.cal(num1, num2, oper);</span><br><span class="line">				numStack.push(result);<span class="comment">//入栈		</span></span><br><span class="line">			&#125;			</span><br><span class="line">			<span class="comment">//将数据栈中最后的数pop出来，就是结果</span></span><br><span class="line">				<span class="keyword">int</span> res2 = numStack.pop();</span><br><span class="line">			System.out.printf(<span class="string">"表达式%s = %d"</span>, expression,res2);</span><br><span class="line">		</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运算结果：表达式2+6*8-4 = 46</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构--线性表</title>
+    <url>/2019/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
+    <content><![CDATA[<p>线性结构是最简单最直接的数据关系，数据元素之间一一对应。</p>
+<a id="more"></a>
+
+<h3 id="线性表的概念"><a href="#线性表的概念" class="headerlink" title="线性表的概念"></a>线性表的概念</h3><p>线性表是由n个类型相同数据元素的有限序列。</p>
+<p>线性表的特点：</p>
+<pre><code>同一性：线性表是由同类数据元素组成的，每一个a必须是同一数据对象
+
+有穷性：线性表是由有限个数据元素组成，表长度就是表中数据元素的个数
+
+有序性：线性表中相邻数据元素之间存在着序偶关系</code></pre><p>抽象数据类型的使用：</p>
+<p>由于抽象数据类型定义了相应模型上的基本 运算集，可如同使用整形类型的加减乘除运算集合一样，只要列出线性表抽象数据类型LinearList  就可以直接使用其上的基本运算集</p>
+<h5 id="抽象数据类型的使用："><a href="#抽象数据类型的使用：" class="headerlink" title="抽象数据类型的使用："></a>抽象数据类型的使用：</h5><p>抽象数据类型一经定义，就可以多次使用<br>在实际问题中可利用线性表抽象数据类型的9种基本运算的组合实现对线性表进行合并、分拆、排序等多种需求。</p>
+<p>1、线性结构的特点</p>
+<p>线性结构是最简单、最基本的结构，数据元素间是一一对应关系。</p>
+<p>2、线性表定义</p>
+<p>是由n个数据元素的有限序列。除第一个和最后一个元素以外，其余的每个元素都只有唯一的直接前驱和直接后继。</p>
+<p>3、线性表抽象数据类型定义</p>
+<p>线性表ADT包括抽象数据类型的名称及数据元素、结构关系、基本操作集合三部分。</p>
+<h2 id="线性表的顺序存储结构"><a href="#线性表的顺序存储结构" class="headerlink" title="线性表的顺序存储结构"></a>线性表的顺序存储结构</h2><p>节点顺序存，节点线性化    </p>
+<p>类型和变量的区别：<br> 例如：两室一厅就是一个类型的定义，是一个类型是一个规格，这样301,302 这种门牌号都可以使具有这种规格的空间，这就是变量。</p>
+<p>自定义类型定义了一种规格，如顺序表的数据类型定义SeqList</p>
+<pre><code>typedef  struct
+{
+    ElemType elem[MAXSIZE]   //线性表占用的数组空间
+    int last;                //线性表的最后一个元素在数组中的位置下标
+
+}SeqList;</code></pre><p>(2)变量是规格类型的具体空间,两种定义方式</p>
+<ul>
+<li><p>将L定义为 Seql list:类型的变量,如 Seqlist L   将顺序表定义为一个变量。使用的时候我们<br>可通过属性访问方式L.elem[i-1]访问顺序表中序号为i的元素ai。</p>
+</li>
+<li><p>将L定义为指向 Seqlist类型的指针变量,如 SeqList *L  可通过指针访问方式L-&gt;elem[i-1]访问顺序表中序号为i的元素ai。</p>
+</li>
+</ul>
+<p>类型是一种规格的定义，而变量是一种空间的定义。</p>
+<h2 id="线性表的基本运算"><a href="#线性表的基本运算" class="headerlink" title="线性表的基本运算"></a>线性表的基本运算</h2><p>增删改查</p>
+<p>在上面的定义中，我们通过一个结构体，进行了一个简单线性表的定义，我们在C语言或者C++z中可以通过一个结构体来进行定义，在Java中没有结构体，我么可以通过一个类来进行线性表的表示。</p>
+<p>使用Java语言先定义一个线性表 ，然后我们再定义其中的基本操作</p>
+<p>Java JDK中有ArrayList和LinkedList两个类很好的实现了顺序存储和链式存储。因此学习数据结构的最好方式是去研究JDK源码。</p>
+<p>我们可以看一下Java中ArrayList和LinkedList的区别：</p>
+<ol>
+<li><p>ArrayList和LinkedList可想从名字分析，它们一个是Array(动态数组)的数据结构，一个是Link(链表)的数据结构，此外，它们两个都是对List接口的实现。ArrayList是数组队列，相当于动态数组；LinkedList为双向链表结构，也可当作堆栈、队列、双端队列</p>
+</li>
+<li><p>当随机访问List时（get和set操作），ArrayList比LinkedList的效率更高，因为LinkedList是线性的数据存储方式，所以需要移动指针从前往后依次查找。</p>
+</li>
+<li><p>当对数据进行增加和删除的操作时(add和remove操作)，LinkedList比ArrayList的效率更高，因为ArrayList是数组，所以在其中进行增删操作时，会对操作点之后所有数据的下标索引造成影响，需要进行数据的移动。</p>
+</li>
+<li><p>从利用效率来看，ArrayList自由性较低，因为它需要手动的设置固定大小的容量，但是它的使用比较方便，只需要创建，然后添加数据，通过调用下标进行使用；而LinkedList自由性较高，能够动态的随数据量的变化而变化，但是它不便于使用。</p>
+</li>
+</ol>
+<p>下面使用Java实现一个顺序表</p>
+<p>首先定义一个线性表，并定义线性表中的插入删除的相关的操作。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.shunxubiao;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> lei</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyArrayList</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义一个用来保存数据的数组</span></span><br><span class="line">	<span class="keyword">private</span> Object arr[];	</span><br><span class="line">	<span class="comment">//定义一个空数组，用来初始化空数组</span></span><br><span class="line">	<span class="keyword">private</span> Object[] DEFAULT_EMPTY = &#123;&#125;;</span><br><span class="line">	<span class="comment">//数组的初始容量，我们可以参照ArrayList源码，数组的初始容量为10</span></span><br><span class="line">	<span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_SIZE = <span class="number">10</span>;</span><br><span class="line">	<span class="comment">//数组的大小,也就是数组的最大容量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> maxSize;</span><br><span class="line">	<span class="comment">//定义线性表的大小，线性表的当前个数</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//带参构造方法，提供能构造指定容量的空列表</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyArrayList</span><span class="params">(<span class="keyword">int</span> inittalSize)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (inittalSize &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">this</span>.arr = <span class="keyword">new</span> Object[inittalSize];</span><br><span class="line">			<span class="keyword">this</span>.maxSize = inittalSize;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (inittalSize == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">this</span>.arr = DEFAULT_EMPTY;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"不能为负，非法容量"</span>+inittalSize);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//空参构造，用来初始化一个空数组</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyArrayList</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.arr = DEFAULT_EMPTY;</span><br><span class="line">	&#125;</span><br><span class="line">	   </span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   </span><br><span class="line">   <span class="comment">//往线性表中指定位置插入数据</span></span><br><span class="line"><span class="comment">//在指定位置插入元素，首先就是需要判断插入位置是否正确，然后判断数组长度是否越界，</span></span><br><span class="line"><span class="comment">//如果已经满了我们需要重新增加数组的长度，一般是增加1.5倍长度，ArrayList JDK源码中也是增加1.5倍的数组长度。</span></span><br><span class="line"><span class="comment">//然后移动数组元素，空出需要插入的位置，最后把数据插入到数组中。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">//在数组的指定位置插入元素。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> i,Object elem)</span></span>&#123;</span><br><span class="line">	<span class="comment">//首先判断数组插入的位置是否合法</span></span><br><span class="line">	<span class="keyword">if</span> (i &lt; <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">new</span> IllegalArgumentException(<span class="string">"插入位置不合法"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i &gt; size)&#123;</span><br><span class="line">		<span class="keyword">new</span> IllegalArgumentException(<span class="string">"插入位置越界，当前数组的大小为："</span>+size);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	Object oldArr[];</span><br><span class="line">	Object newArr[];<span class="comment">//用来存放扩容后的容量</span></span><br><span class="line">	<span class="comment">//如果当前线性表中数组为满的，需要增加数组的存储空间</span></span><br><span class="line">	<span class="keyword">if</span> (i == maxSize) &#123;		</span><br><span class="line">		oldArr = arr;			</span><br><span class="line">		newArr = <span class="keyword">new</span> MyArrayList[(<span class="keyword">int</span>) (maxSize*<span class="number">1.5</span>)];</span><br><span class="line">		<span class="comment">//把旧数组中的元素赋值到新的数组中</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; newArr.length; j++) &#123;</span><br><span class="line">			newArr[j] = oldArr[j];</span><br><span class="line">		&#125;			</span><br><span class="line">		maxSize = (<span class="keyword">int</span>) (maxSize*<span class="number">1.5</span>);</span><br><span class="line">		arr = newArr;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//如果插入的位置是最后一个元素，不需要移动元素</span></span><br><span class="line">	<span class="keyword">if</span> (i == size) &#123;</span><br><span class="line">		arr[i] = elem;</span><br><span class="line">		size++;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//如果插入的不是最后一个位置，需要移动元素，先移动位置，空出带插入位置元素</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = size;j &gt; i;j--) &#123;</span><br><span class="line">		arr[j] = arr[j-<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//移动完之后，插入元素</span></span><br><span class="line">	arr[i] = elem;</span><br><span class="line">	size++;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//查看数组中的元素</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">		System.out.print(<span class="string">"  "</span> +arr[j]);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>时间复杂度分析：</p>
+<p>最好情况：在线性表的末尾插入，（i = size）元素后移的语句将不再执行，时间复杂度为O(1)</p>
+<p>最坏情况：在表头插入，（即i=0）元素后移的语句将执行n次，时间复杂度为O(n)</p>
+<p>平均情况：n/2</p>
+<p>因此，线性表插入算法的时间复杂度为O(n)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   </span><br><span class="line">   <span class="comment">//移除指定位置的元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> i,Object elem)</span></span>&#123;</span><br><span class="line">	<span class="comment">//首先判断移除的位置时候合法</span></span><br><span class="line">	<span class="keyword">if</span> (i &lt; <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">new</span> IllegalArgumentException(<span class="string">"插入位置为负，不合法"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (i &gt; size) &#123;</span><br><span class="line">		<span class="keyword">new</span> IllegalArgumentException(<span class="string">"移除位置超越数组长度，当前长度为："</span>+size);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//判断是否是移动的最后一个元素，如果是最后一个元素不需要移动元素</span></span><br><span class="line">	<span class="keyword">if</span> (i == size-<span class="number">1</span>) &#123;</span><br><span class="line">		arr[i] = <span class="keyword">null</span>;</span><br><span class="line">		size--;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//一般情况的处理</span></span><br><span class="line">	arr[i] = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">//移动元素</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=i; j&lt;size-<span class="number">1</span>;j++) &#123;</span><br><span class="line">		arr[j] = arr[j+<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	arr[size-<span class="number">1</span>]=<span class="keyword">null</span>;<span class="comment">//最后一个元素为空</span></span><br><span class="line">	size--;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//查看数组中的元素</span></span><br><span class="line">	<span class="keyword">if</span> (arr != <span class="keyword">null</span>) &#123;</span><br><span class="line">           System.out.println(<span class="string">""</span>);</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">               System.out.print(<span class="string">" "</span> + arr[j]);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度分析：</p>
+<p>最好情况：在线性表的末尾移除，（i = size）元素后移的语句将不再执行，时间复杂度为O(1)</p>
+<p>最坏情况：在表头移除，（即i=0）元素后移的语句将执行n次，时间复杂度为O(n)</p>
+<p>平均情况：n-1/2</p>
+<p>因此，线性表插入算法的时间复杂度为O(n)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//清空数据</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (arr != <span class="keyword">null</span>) &#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">arrs[i] = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是最一种线性表的操作，下面再看一下线性表中对两个顺序表的合并操作。  </p>
+<p>【编写算法】:有两个顺序表LA和LB,其元素均为递增有序排列,编写算法,将两个有序表合并成一个递增有序的顺序表LC</p>
+<p>【算法思路】</p>
+<ul>
+<li><p>1)初始化:LC为空表,设LC表的指示器k=0</p>
+</li>
+<li><p>设两个指示器i,j分别指向表LA和LB的当前位置,初值均为0。</p>
+</li>
+<li><p>2)比较循环:将LA.elem[]和LB.elem[]两元素进行比较,较小元素放入表LC中,且该表的指示器和G表的指示器k均加1移向下一个位置。如此下去,直到LA或LB表中一个表处理完毕为止。都是当前位置的元素做比较。</p>
+</li>
+<li><p>3)复制循环:将未处理完的表中剩余元素通过循环逐一复制到LC表中。</p>
+</li>
+</ul>
+<p>【算法分析】由于两个待归并的表LA、LB本身就是有序表,且表LC的建立采用的是尾插法建表,插入时不需要移动元素,所以算法的时间复杂度O(LA-&gt;last+LB-&gt;last) </p>
+<p>上面的代码，我们依旧使用Java进行实现。</p>
+<p>我们首先定义一个线性表的结构，也就是定义一个线性表的类，线性表中定义一个数组然后定义一个指向数组最后一个元素的变量，提供该类的初始化有参构造方法。</p>
+<p>SeqList.java</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.hebing;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeqList</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span>[] array1;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> last;	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SeqList</span><span class="params">(<span class="keyword">int</span>[] array1)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.array1=array1;</span><br><span class="line">		<span class="keyword">if</span>(array1!=<span class="keyword">null</span>) &#123;<span class="comment">//判断是否为空</span></span><br><span class="line">			last=array1.length;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后写线性表的合并方法，定义一个合并的类，我们按照上面的算法思路实现这个合并类。定义一个空表C 用来存放合并后的类。然后对表A和表B中的元素依次判断放到表C中。</p>
+<p>Combine.java</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.hebing;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Combine</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Combine</span><span class="params">(SeqList A,SeqList B,SeqList C)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>,c=<span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(a&lt;A.last&amp;&amp;b&lt;B.last) &#123;</span><br><span class="line">			<span class="keyword">if</span>(A.array1[a]&lt;B.array1[b]) &#123;</span><br><span class="line">				C.array1[c++]=A.array1[a++];</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				C.array1[c++]=B.array1[b++];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(a&lt;A.last) &#123;</span><br><span class="line">			C.array1[c++]=A.array1[a++];</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(b&lt;B.last) &#123;</span><br><span class="line">			C.array1[c++]=B.array1[b++];</span><br><span class="line">		&#125;</span><br><span class="line">		C.last=c;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.hebing;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SeqList a = <span class="keyword">new</span> SeqList(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">5</span>,<span class="number">6</span>,<span class="number">9</span> ,<span class="number">11</span>&#125;); </span><br><span class="line">		SeqList b = <span class="keyword">new</span> SeqList(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">2</span>,<span class="number">8</span>,<span class="number">10</span>&#125;); </span><br><span class="line">		SeqList c = <span class="keyword">new</span> SeqList(<span class="keyword">new</span> <span class="keyword">int</span>[a.array1.length + b.array1.length]);</span><br><span class="line">		</span><br><span class="line">		Combine cob=<span class="keyword">new</span> Combine();</span><br><span class="line">		cob.Combine(a, b, c);</span><br><span class="line">		</span><br><span class="line">		  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;c.array1.length;i++) &#123;</span><br><span class="line">			  System.out.print(c.array1[i]+<span class="string">" "</span>);</span><br><span class="line">		  &#125;</span><br><span class="line">		  		  </span><br><span class="line">		  </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线性表的链式存储"><a href="#线性表的链式存储" class="headerlink" title="线性表的链式存储"></a>线性表的链式存储</h2><p>上面学习的顺序存储结构是：一组连续单元依次存放表中各个元素<br>顺序存储结构的特点：便于随机存取，不适合动态的变化。</p>
+<p>逻辑上相邻的元素在物理存储位置上也相邻。链式存储结构中，逻辑上相邻的元素在物理存储上不一定相邻。因此设计出结点来对应线性表的元素及元素之间的关系。结点包括两部分 ：结点本身数据信息，元素之间的关联关系。线性表采用链式方式将结点链接起来的存储结构称为链表。</p>
+<p>链式存储结构中结点包括两部分不仅包括结点本身信息,还要包括关联关系部分。线性表采用链式方式将结点链接起来的存储结构称为链表。</p>
+<p>链式存储结构分为单链表、循环单链表、双向链表和静态链表。</p>
+<ul>
+<li>从链接方式看,可分为单链表、循环链表和双向链表</li>
+<li>从实现角度看,可分为动态链表和静态链表。</li>
+</ul>
+<ol>
+<li>单链表结构</li>
+</ol>
+<p>链表中的结点包括数据域和指针域两个域</p>
+<p>数据域data用来存储结点的值</p>
+<p>指针域next用来存储结点本身的信息,邻接关系由后继指针指示其位置。</p>
+<p>线性链表(单链表):</p>
+<p>用一组任意的存储单元存放线性表的结点，每个结点的唯一后继依靠一个结点指针维持。</p>
+<p>(这组存储单元可以是连续的也可以是不连续的、甚至是零散的存储在内存的任何位置。即链表结点的逻辑顺序和物理顺序不一定相同。)</p>
+<ul>
+<li>头指针H指向第一个结点。</li>
+<li>最后一个结点的指针域为“空”（NULL）</li>
+</ul>
+<p>*<em>注意: 链表中头指针，头结点，首结点的关系<br>    链表中头指针指向单链表开始（H）<br>    带头结点的链表中，头指针指向头结点，头结点指向首结点。<br>    无头结点的链表中，头指针指向首结点。<br>*</em></p>
+<h3 id="单链表的基本运算"><a href="#单链表的基本运算" class="headerlink" title="单链表的基本运算"></a>单链表的基本运算</h3><p>链表是一种重要的数据结构，在Java中，HashMap等集合的底层结构都是链表结构。</p>
+<p>链表以结点作为存储单元，这些存储单元可以是不连续的。每个结点由两部分组成：存储的数值+前序结点和后序结点的指针。即有前序结点的指针又有后序结点的指针的链表称为双向链表，只包含后续指针的链表为单链表</p>
+<p>链表是一种线性表但是并不会按顺序来存储元素</p>
+<p>Java中单链表采用Node实体类类标识，其中data为存储的数据，next为下一个节点的指针：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.lianbiao;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 链表结点的实体类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">	Node next = <span class="keyword">null</span>;<span class="comment">//下一个结点</span></span><br><span class="line"><span class="keyword">int</span> data;<span class="comment">//结点数据</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line"><span class="keyword">this</span>.data = data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>往链表中插入元素</li>
+</ol>
+<p>网链表中插入元素有两种方法，一种是采用头插法。一种是采用尾插法，头插法就是每次网表头插入元素，尾插法就是从表单额末尾依次插入元素。</p>
+<p>采用尾插法，必须增加一个节点用来指示链表的末尾节点。</p>
+<p>用Java实现尾插法建立链表：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**链表的根结点*/</span><br><span class="line">   </span><br><span class="line">Node root = null;</span><br><span class="line">       </span><br><span class="line">   /**</span><br><span class="line">    * 链表添加结点:</span><br><span class="line">    * 找到链表的末尾结点，把新添加的数据作为末尾结点的后续结点</span><br><span class="line">    * @param data</span><br><span class="line">    */</span><br><span class="line">   public void addNode(int data)&#123;</span><br><span class="line">       Node newNode = new Node(data);</span><br><span class="line">       if(root == null)&#123;</span><br><span class="line">           root = newNode;</span><br><span class="line">           return;</span><br><span class="line">       &#125;</span><br><span class="line">       Node temp = root;</span><br><span class="line">       while(temp.next != null)&#123;</span><br><span class="line">           temp = temp.next;</span><br><span class="line">       &#125;</span><br><span class="line">       temp.next = newNode;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ol start="2">
+<li>删除链表中的数据</li>
+</ol>
+<p>删除链表中的数据，有两种方式进行删除，首先我们可以删除指定位置上的元素。我们还可以按值删除链表中的元素。</p>
+<p>首先<br>按值删除链表中的元素。</p>
+<p>删除结点，主要是查找删除结点的前驱结点。然后改变前驱结点的指向就可以了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">deleteNodeData</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line">  	Node curNode = root;</span><br><span class="line">  	</span><br><span class="line">  	<span class="keyword">if</span> (curNode != <span class="keyword">null</span> &amp;&amp; curNode.data == data) &#123;</span><br><span class="line">	root = curNode.next;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">  	</span><br><span class="line">  	<span class="keyword">if</span> (curNode != <span class="keyword">null</span> ) &#123;    		</span><br><span class="line">  		<span class="keyword">while</span>(curNode.next.data != data)&#123;</span><br><span class="line">  			curNode = curNode.next;</span><br><span class="line">  		&#125;    		</span><br><span class="line">  		curNode.next = curNode.next.next;</span><br><span class="line">&#125;</span><br><span class="line">  	</span><br><span class="line">  	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>按位置删除链表中的元素</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">deleteNode</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(index&lt;<span class="number">1</span> || index&gt;length())&#123;<span class="comment">//待删除结点不存在</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(index == <span class="number">1</span>)&#123;<span class="comment">//删除头结点</span></span><br><span class="line">        root = root.next;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Node preNode = root;</span><br><span class="line">    Node curNode = preNode.next;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(curNode != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i==index)&#123;<span class="comment">//寻找到待删除结点</span></span><br><span class="line">            preNode.next = curNode.next;<span class="comment">//待删除结点的前结点指向待删除结点的后结点</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当先结点和前结点同时向后移</span></span><br><span class="line">        preNode = preNode.next;</span><br><span class="line">        curNode = curNode.next;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="3">
+<li>求单链表的长度操作</li>
+</ol>
+<p>在顺序表中,线性表的长度是它的属性,数组定义时就已确定</p>
+<p>在单链表中,整个链表由“头指针”来表示,单链表的长度在从头到尾遍历的过程中统计计数得到</p>
+<p>【算法思路】采用“数”结点的方法求出单链表的长度。即从“头”开始“数”用指针p依次指向各个结点,一直“数”到最后一个结点(p-&gt;nextNUL),从而得到单链表的长度</p>
+<ul>
+<li>顺链头开始,计数器j初值为0</li>
+<li>当前指针ρ指向链表L的首元结点 p=L-&gt;next</li>
+<li>p依次往后(计数j+)直到表尾(p==NULL)</li>
+</ul>
+<p>求表长度的操作就是计算单链表中数据结点的个数，需要从第一个结点开始顺序访问表中的每一个结点，为此需要设置一个计数器变量，每访问一个结点，计数器加1，直到访问出空节点为止。</p>
+<p>java代码实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 求链表的长度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">    Node curNode = root;</span><br><span class="line">    <span class="keyword">while</span>(curNode != <span class="keyword">null</span>)&#123;</span><br><span class="line">        length++;</span><br><span class="line">        curNode = curNode.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>输出链表中的数据</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 打印结点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printLink</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Node curNode = root;</span><br><span class="line">    <span class="keyword">while</span>(curNode !=<span class="keyword">null</span>)&#123;</span><br><span class="line">        System.out.print(curNode.data+<span class="string">" "</span>);</span><br><span class="line">        curNode = curNode.next;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>反转链表</li>
+</ol>
+<p>在反转指针前一定要保存下个结点的指针</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 反转链表，在反转指针前一定要保存下个结点的指针</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reserveLink</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Node curNode = root;<span class="comment">//根结点</span></span><br><span class="line">        Node preNode = <span class="keyword">null</span>;<span class="comment">//前一个结点</span></span><br><span class="line">        <span class="keyword">while</span>(curNode != <span class="keyword">null</span>)&#123;</span><br><span class="line">            Node nextNode = curNode.next;<span class="comment">//保留下一个结点</span></span><br><span class="line">            curNode.next = preNode;<span class="comment">//指针反转</span></span><br><span class="line">            preNode = curNode;<span class="comment">//前结点后移</span></span><br><span class="line">            curNode = nextNode;<span class="comment">//当前结点后移</span></span><br><span class="line">        &#125;</span><br><span class="line">        root = preNode;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>反向输出链表</li>
+</ol>
+<p>反向输出链表有三种方式</p>
+<ul>
+<li>方式一：先反转链表，再输出链表，需要链表遍历两次</li>
+<li>方式二：把链表中的数字放入栈中再输出，需要维护额外的栈空间</li>
+<li>方式三：依据栈的思想，通过递归来实现，就是将先执行的数据压如栈中，再一次出栈</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//反转链表</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reservePrt</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(node != <span class="keyword">null</span>)&#123;</span><br><span class="line">           reservePrt(node.next);</span><br><span class="line">           System.out.print(node.data+<span class="string">" "</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>在不知道头结点的情况下删除指定结点</li>
+</ol>
+<p>删除结点的重点在于找出其前结点，使其前结点的指针指向其后结点，即跳过待删除结点，</p>
+<p>1、如果待删除的结点是尾结点，由于单链表不知道其前结点，没有办法删除<br>2、如果删除的结点不是尾结点，则将其该结点的值与下一结点交换，然后该结点的指针指向下一结点的后续结点</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">deleteSpecialNode</span><span class="params">(Node n)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(n.next == <span class="keyword">null</span>)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">//交换结点和其后续结点中的数据</span></span><br><span class="line"><span class="keyword">int</span> temp = n.data;</span><br><span class="line">n.data = n.next.data;</span><br><span class="line">n.next.data = temp;</span><br><span class="line"><span class="comment">//删除后续结点</span></span><br><span class="line">n.next = n.next.next;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>总结：</p>
+<ul>
+<li>1.单链表主要的有点是，不需要对数据元素的最大个数进行预设，可以无限量地存储数据元素。   </li>
+<li>2.单链表插入和删除时，不需要移动大量的数据元素，可提高效率。</li>
+</ul>
+<p>单链表主要的缺点是，每个节点中需要有一个指针，因此单链表的空间利用率略低于顺序表，</p>
+<h2 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h2><p>定义：即首尾相接的链表</p>
+<p>结构：尾结点的指针域指向头结点或表的首元结点。</p>
+<p>特点：表中所有结点都链接在一个环上</p>
+<p>循环单链表和单链表的区别在于，表中最后一个结点不是指向null ，而是改为指向头节点中，从而整个链表形成一个环。</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB基本配置</title>
+    <url>/2019/03/02/MongoDB%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<p>MongDB是一个文档型数据库，里面包含一些术语和概念，我们先来了解一下MongoDB的基本概念，再看一下中间的基本操作</p>
+<a id="more"></a>
+
+
+
+<h2 id="1-1-基础概念"><a href="#1-1-基础概念" class="headerlink" title="1.1 基础概念"></a>1.1 基础概念</h2><p>在mongoDB中是通过数据库、集合、文档、的方式来管理数据、先看一下mongoDB与关系型数据库的一些概念对比：</p>
+<table>
+<thead>
+<tr>
+<th>SQL术语/概念</th>
+<th>MongoDB术语/概念</th>
+<th>解释说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>database</td>
+<td>database</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>table</td>
+<td>collection</td>
+<td>数据库表/集合</td>
+</tr>
+<tr>
+<td>row</td>
+<td>document</td>
+<td>数据库行/文档</td>
+</tr>
+<tr>
+<td>column</td>
+<td>field</td>
+<td>数据字段/域</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index</td>
+<td>索引</td>
+</tr>
+<tr>
+<td>table joins</td>
+<td></td>
+<td>表连接（MongDB不支持表连接）</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>primary</td>
+<td>主键，MongoDB自动在每个集合中添加_id的主键</td>
+</tr>
+</tbody></table>
+<ul>
+<li><ol>
+<li>一个mongodb实例可以创建多个数据库</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>一个数据库可以创建多个集合</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>一个集合可以包含多个文档</li>
+</ol>
+</li>
+</ul>
+<h2 id="1-2-连接mongodb"><a href="#1-2-连接mongodb" class="headerlink" title="1.2 连接mongodb"></a>1.2 连接mongodb</h2><p>mongodb的使用方式是客户服务器模式，即使用一个客户端连接mongodb数据库（服务端）。</p>
+<ol>
+<li>命令模式<br>mongodb://[username:password@]host1[:port1][,host2[:port2],…[,hostN[:portN]]][/[database][? options]]</li>
+</ol>
+<p>mongodb:// 固定前缀<br>username：账号，可不填<br>password：密码，可不填<br>host：主机名或ip地址，只有host主机名为必填项。<br>port：端口，可不填，默认27017<br>/database：连接某一个数据库<br>?options：连接参数，key/value对</p>
+<p>例如：<br>    mongodb://localhost 连接本地数据库27017端口<br>    mongodb://root:123456@localhost 使用用户名root密码为123456连接本地数据库27017端口<br>    mongodb://localhost,localhost:27018,localhost:27019，连接三台主从服务器，端口为27017、27018、2701</p>
+<p>我们直接在命令行输入mongo  就可以使用输入命令来操作mongodb数据库了</p>
+<h2 id="1-3-数据库使用"><a href="#1-3-数据库使用" class="headerlink" title="1.3 数据库使用"></a>1.3 数据库使用</h2><ol>
+<li><p>查询数据库</p>
+<p> show dbs   查询全部的数据库<br> db     显示当前数据库</p>
+</li>
+<li><p>创建数据库<br>命令格式  </p>
+<p> use DATABASE_NAME</p>
+<p> 例子：<br> use  test02<br> 执行这一行命令之后，如果有test02数据库则切换到此数据库中，如果没有则创建<br> 这里我们需要注意的是，新创建的数据库不会显示，因为这个数据库中至少需要包含一种集合。</p>
+</li>
+<li><p>删除数据库</p>
+<p> 命令格式</p>
+<p> db.dropDatabase()</p>
+<p> eg：<br> 删除test02数据库<br> 先切换到数据库中  use  test02<br> 在执行删除  db.dropDatabase()  </p>
+</li>
+</ol>
+<h2 id="1-4-集合"><a href="#1-4-集合" class="headerlink" title="1.4 集合"></a>1.4 集合</h2><p>MongoDB中的集合相当于数据库中的表。一个数据库可以创建多个集合，一个集合是将相同类型的文档管理起来。</p>
+<ol>
+<li><p>创建集合</p>
+<p> db.createCollection(name,options)<br> name:新创建的集合名称<br> options：创建参数</p>
+</li>
+<li><p>删除集合</p>
+<p> db.collection.drop()<br> 例子：<br> db.student.drop() 删除student集合</p>
+</li>
+</ol>
+<h2 id="1-5-文档"><a href="#1-5-文档" class="headerlink" title="1.5 文档"></a>1.5 文档</h2><h3 id="1-5-1-插入文档"><a href="#1-5-1-插入文档" class="headerlink" title="1.5.1 插入文档"></a>1.5.1 插入文档</h3><pre><code>mongodb中的文档格式是json格式吗，下边就是一个文档，包括两个key：_id  主键和name
+
+{
+&quot;_id&quot; : ObjectId
+(&quot;5b2cc4bfa6a44812707739b5&quot;),      
+&quot;name&quot; : &quot;郑州大学&quot;
+}</code></pre><p>插入命令：</p>
+<pre><code>db.COLLECTION_NAME.insert(document)`</code></pre><p>每个文档默认以_id作为主键，主键默认类型为ObjectId（对象类型），mongodb会自动生成主键值。  </p>
+<p>例子  </p>
+<pre><code>db.student.insert({&quot;name&quot;:&quot;郑州大学&quot;,&quot;age&quot;:10})</code></pre><p>注意：同一个集合中的文档的key可以不相同！但是建议设置为相同的。 </p>
+<h3 id="1-5-2-更新文档"><a href="#1-5-2-更新文档" class="headerlink" title="1.5.2 更新文档"></a>1.5.2 更新文档</h3><p>命令格式：</p>
+<pre><code>db.collection.update(
+&lt;query&gt;,
+&lt;update&gt;,    
+&lt;options&gt; 
+) 
+
+query:查询条件，相当于sql语句的where  
+update：更新文档内容 
+options：选项</code></pre><ol>
+<li><p>替换文档</p>
+<p> 将符合条件  “name” “郑州大学” 的第一个文档替换为  {“name”：“郑州大学学生”，“age”：10}</p>
+<pre><code>db.student.update({&quot;name&quot;:&quot;郑州大学&quot;}，{“name”：“郑州大学学生”，“age”：10})</code></pre></li>
+</ol>
+<ol start="2">
+<li><p>$set修改器<br> 使用$set修改器指定要更新的key，key不存在则创建，存在则更新。 </p>
+<p> 将符合条件 “name”:”郑州大学”的所有文档更新name和age的值。</p>
+<pre><code>db.student.update({&quot;name&quot;:&quot;郑州大学&quot;},{$set:{&quot;name&quot;:&quot;郑州大学学生&quot;,&quot;age&quot;:10}},{multi:true})   
+multi：false表示更新第一个匹配的文档，true表示更新所有匹配的文档</code></pre></li>
+</ol>
+<h3 id="1-5-3-删除文档"><a href="#1-5-3-删除文档" class="headerlink" title="1.5.3 删除文档"></a>1.5.3 删除文档</h3><p>命令格式：</p>
+<pre><code>db.student.remove(&lt;query&gt;) 
+query：删除条件，相当于sql语句中的where</code></pre><ol>
+<li><p>删除所有文档</p>
+<pre><code>db.student.remove({})</code></pre></li>
+<li><p>删除符合条件的文档</p>
+<p> <code>db.student.remove({&quot;name&quot;:&quot; 郑州大学&quot;})</code></p>
+</li>
+</ol>
+<h3 id="1-5-4-查询文档"><a href="#1-5-4-查询文档" class="headerlink" title="1.5.4 查询文档"></a>1.5.4 查询文档</h3><p>命令格式：</p>
+<pre><code>db.collection.find(query, projection) 
+query：查询条件，可不填 
+projection：投影查询key，可不写</code></pre><ol>
+<li><p>查询全部</p>
+<p> db.student.find()</p>
+</li>
+<li><p>查询符合条件的记录<br> 查询name等于 “郑州大学”的文档</p>
+<pre><code>db.student.find({&quot;name&quot;,&quot;郑州大学&quot;})</code></pre></li>
+<li><p>投影查询</p>
+<p> 只显示name和age两个key，_id主键不显示</p>
+<p> db.student.find({“name”：“郑州大学”},{name：1，age：1，_id:0})</p>
+</li>
+</ol>
+<h2 id="1-6-用户"><a href="#1-6-用户" class="headerlink" title="1.6 用户"></a>1.6 用户</h2><h3 id="1-6-1-创建用户"><a href="#1-6-1-创建用户" class="headerlink" title="1.6.1 创建用户"></a>1.6.1 创建用户</h3><pre><code>mongo&gt;db.createUser( 
+{ 
+user: &quot;&lt;name&gt;&quot;,   
+pwd: &quot;&lt;cleartext password&gt;&quot;,   
+customData: { &lt;any information&gt; },  
+roles: [     
+    { role: &quot;&lt;role&gt;&quot;, db: &quot;&lt;database&gt;&quot; } | &quot;&lt;role&gt;&quot;,   
+      ...   
+ ]} 
+)</code></pre><p>例子：<br>创建root用户，角色为root</p>
+<pre><code>use admin 
+db.createUser(     
+{        
+user : &quot;root&quot;,
+pwd : &quot;123456&quot;,
+roles:[{role:&quot;root&quot;,db:&quot;admin&quot;}]      
+}   
+)</code></pre><p>内置角色如下：</p>
+<pre><code>1. 数据库用户角色：read、readWrite; 
+2. 数据库管理角色：dbAdmin、dbOwner、userAdmin
+3. 集群管理角色：clusterAdmin、clusterManager、clusterMonitor、hostManager； 
+4. 备份恢复角色：backup、restore； 
+5. 所有数据库角色：readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、 dbAdminAnyDatabase 
+6. 超级用户角色：root</code></pre><h3 id="1-6-2-认证登录"><a href="#1-6-2-认证登录" class="headerlink" title="1.6.2 认证登录"></a>1.6.2 认证登录</h3><pre><code>如果不配置认证， 我们登陆mongo数据库的时候，是不需要进行账号密码登陆的。   
+为了安全需要，Mongodb要打开认证开关，即用户连接Mongodb要进行认证。</code></pre><p>1、在mono.conf中设置 auth=true<br>2、重启Mongodb<br>3、使用账号和密码连接数据库</p>
+<p>1）mongo.exe连接</p>
+<p>mongo.exe ‐u root ‐p 123456 ‐‐authenticationDatabase admin</p>
+<p>2）Studio 3T连接</p>
+<pre><code>输入账号密码进行登陆。</code></pre><p>Windows下Mongodb最初未开启认证，如何开启authentication<br>博客分类： mongodb</p>
+<p>cmd-&gt; regedit-&gt; HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services-&gt;MongoDB</p>
+<p>（mongodb注册的名称，我的是MongoDB)</p>
+<p>在它的ImgPath中，我们修改一下，加入 –auth</p>
+<p>如下</p>
+<p>“E:\develop Software\Mongodb\mongodb-win32-x86_64-2.2.3\mongodb-win32-x86_64-2.2.3\bin\mongod.exe” -dbpath “E:\develop Software\Mongodb\mongodb-win32-x86_64-2.2.3\mongodb-win32-x86_64-2.2.3\data\db” –logpath “E:\develop Software\Mongodb\mongodb-win32-x86_64-2.2.3\mongodb-win32-x86_64-2.2.3\data\log\mongodb.log” –auth –service</p>
+<h3 id="1-6-3-查询所有用户"><a href="#1-6-3-查询所有用户" class="headerlink" title="1.6.3 查询所有用户"></a>1.6.3 查询所有用户</h3><p>查询当前库下的所有用户</p>
+<pre><code>show users</code></pre><h3 id="1-6-4-删除用户"><a href="#1-6-4-删除用户" class="headerlink" title="1.6.4 删除用户"></a>1.6.4 删除用户</h3><p>db.dropUser(“用户名”)   </p>
+<pre><code>例子：   
+删除 test1用户
+db.dropUser(&quot;test1&quot;)</code></pre><h3 id="1-6-5-修改用户"><a href="#1-6-5-修改用户" class="headerlink" title="1.6.5 修改用户"></a>1.6.5 修改用户</h3><pre><code>语法格式
+
+db.updateUser( 
+“&lt;username&gt;”
+{     
+customData : { &lt;any information&gt; },     
+roles : [              
+     { role: &quot;&lt;role&gt;&quot;, db: &quot;&lt;database&gt;&quot; } | &quot;&lt;role&gt;&quot;,            
+       ...             
+    ],     
+ pwd: &quot;&lt;cleartext password&gt;&quot;     
+  },     
+  writeConcern: { &lt;write concern&gt; })</code></pre><p>先创建test1用户</p>
+<pre><code>db.createUser(     
+ {        
+user:&quot;test1&quot;,        
+pwd:&quot;test1&quot;,        
+roles:[{role:&quot;root&quot;,db:&quot;admin&quot;}]      
+}   )</code></pre><p>修改test1用户的角色为readWriteAnyDatabase</p>
+<pre><code>use admin 
+db.updateUser(&quot;test1&quot;,{roles:[{role:&quot;readWriteAnyDatabase&quot;,db:&quot;admin&quot;}]})</code></pre><h3 id="1-6-6-修改密码"><a href="#1-6-6-修改密码" class="headerlink" title="1.6.6 修改密码"></a>1.6.6 修改密码</h3><pre><code>语法格式
+
+db.changeUserPassword(&quot;username&quot;,&quot;newPasswd&quot;)</code></pre><p>例子：<br>修改test1用户的密码为123</p>
+<pre><code>use admin  
+db.changeUserPassword(&quot;test1&quot;,&quot;123&quot;）</code></pre><p>每一个集合中的不同文档是可以有不同的域，这是比较灵活的，但是有时候为了保证性能，同一个集合中文档，域设置成一样的。</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MongoDB</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker容器化</title>
+    <url>/2019/01/02/Docker%E5%AE%B9%E5%99%A8%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="1-Docker简介"><a href="#1-Docker简介" class="headerlink" title="1. Docker简介"></a>1. Docker简介</h1><h2 id="1-1-什么是Docker"><a href="#1-1-什么是Docker" class="headerlink" title="1.1 什么是Docker"></a>1.1 什么是Docker</h2><ul>
+<li>从传统意思上来讲也是一种虚拟化技术。    </li>
+</ul>
+<ul>
+<li>Docker项目的目标是实现一种轻量级的操作系统解决方案。Docker的基础是Linux容器LXC等技术。Docker方便了环境的部署和安装。</li>
+</ul>
+<a id="more"></a>
+
+<p><strong>Docker的优点：</strong>  </p>
+<ul>
+<li>如果使用Docker 只需要把别人安装好的镜像拉去下来就可以直接使用，上手方便。</li>
+</ul>
+<ul>
+<li>鼓励使用面向服务的架构，绝大多数的微服务都是通过Docker来进行部署的。</li>
+</ul>
+<ul>
+<li>传统的虚拟机我们需要分配本机的硬件配置资源，在本机上配置虚拟机的数量是有限制的。</li>
+</ul>
+<ul>
+<li>但是使用Docker是共享我们主机的资源。</li>
+</ul>
+<h2 id="1-2-Docker组件"><a href="#1-2-Docker组件" class="headerlink" title="1.2 Docker组件"></a>1.2 Docker组件</h2><ol>
+<li>客户端和服务器端  </li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Docker是一个客服端服务器架构CS架构程序，Docker客户端只需要向Docker服务器或者是守护进程发出请求，服务器或者是守护进程将完成所有工作并返回结果。Docker提供了一套命令行工具以及RESTful API、你可以在任意一台宿主主机上运行Docker守护进程和客户端。<br>&nbsp;&nbsp;&nbsp;&nbsp;Docker守护进程就是Docker的服务端，主要是管理Docker容器的。Docker客户端主要是为了连接Docker的守护进程，通过客户端来进行操作Docker容器。</p>
+<ol start="2">
+<li>Docker镜像和容器</li>
+</ol>
+<p>镜像是构建Docker的基石，用户基于镜像来运行自己的容器。镜像也是Docker生命周期中的构建部分。例如我们可以通过一个MySQL镜像来创建多个MySQL容器。<br>镜像相当于我们创建的类，容器相当于我们通过类创建的对象。</p>
+<h1 id="2-安装docker"><a href="#2-安装docker" class="headerlink" title="2. 安装docker"></a>2. 安装docker</h1><p>在CentOS下安装Docker<br>（1）首先yum包更新到最新  </p>
+<pre><code>Sudo  yum  update</code></pre><p>（2）安装需要的软件包，<br>yum-util 提供 yum-config-，anager功能，另外两个是devicemapper驱动依赖的</p>
+<pre><code>Sudo  yum  install -y yum-utils  device-mapper-persistent-data  lvm2</code></pre><p>（3）设置yum源为阿里云</p>
+<pre><code>Sudo yum-config-manager  --add-repo  http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</code></pre><p>（4）安装docker</p>
+<pre><code>Sudo yum install  docker-ce</code></pre><p>（5）安装后查看docker的版本</p>
+<pre><code>Docker  -v</code></pre><p><strong>设置USTC的镜像</strong><br> USTC是老牌的Linux镜像服务的提供者了。USTC docker mirror 的优势之一就是不需要注册，值真正的公共服务。<br>编辑该文件：</p>
+<pre><code>Vi /etc/docker/daemon.json</code></pre><p>在该文件中输入如下内容：</p>
+<pre><code>{
+“registry-mirrors”:[“https://docker.mirror.ustc.edu.cn”]
+}</code></pre><p>启动Docker</p>
+<pre><code>Systemctl start docker</code></pre><p>停止Docker</p>
+<pre><code>Systemctl stop docker</code></pre><p>重启docker</p>
+<pre><code>Systemctl  restart docker</code></pre><p>查看docker的状态</p>
+<pre><code>systemctl status docker</code></pre><p>设置开机自启动</p>
+<pre><code>Systemctl  enable  docker</code></pre><h1 id="3-镜像相关的命令"><a href="#3-镜像相关的命令" class="headerlink" title="3. 镜像相关的命令"></a>3. 镜像相关的命令</h1><p>查看镜像   docker  images 可以查看我们已经安装好的镜像</p>
+<p>搜索镜像  docker search centos    我们可以基于搜索的结果进行镜像的下载</p>
+<p>针对搜索的结果各个属性的名称进行说明<br>Name是仓库名称，<br>DESCRIPTION:镜像描述<br>STARS:用户的评价<br>OFFICIAL：是否是官方提供的镜像。<br>ATTOMATED  是否是docker hub 自动创建流程所创建的</p>
+<p><strong>拉取镜像：</strong><br>拉取镜像就是从中央仓库中下载镜像到本地</p>
+<pre><code>docker pull 镜像名称</code></pre><p>例如需要下载centos7镜像 </p>
+<pre><code>docker pull centos：7</code></pre><p>删除镜像：</p>
+<p>按照镜像id进行删除镜像</p>
+<pre><code>Docker rmi 镜像ID</code></pre><p>删除所有的镜像</p>
+<pre><code>Docker rmi  `docker images -q`  (注意这里不是单引号)</code></pre><p>#4. 容器相关的命令</p>
+<pre><code>[root@iZwz92dpr9gpgasbo4gg15Z lib]# docker ps</code></pre><p>可以查看运行中的容器</p>
+<p>创建与启动容器</p>
+<pre><code>创建容器命令  docker run
+-i ：表示运行容器
+-t ：表示容器启动后会进入命令行。加入这两个参数后，容器创建就能登录进去，即分配一个伪终端。
+--name   ：为创建的容器命名
+-v ：表示目录映射</code></pre><p>（1）交互式方式创建容器</p>
+<pre><code>Docker run -it --name=容器名称  镜像名称：标签/bin/bash</code></pre><p>创建好后我们可以通过ps命令查看，可以看到启动的容器。</p>
+<pre><code>Docker run -i -t --name=mycentos centos:7 /bin/bash
+
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# docker  run -i -t --name=mycentos centos /bin/bash
+[root@e4202738a947 /]# ^C
+[root@e4202738a947 /]# </code></pre><p>这个时候我们可以发现，前面的名称不一样了，说明我们现在已经进入centos这个容器中了</p>
+<p>我们查看目录，也可以发现和宿主机的目录结构一样，说明我们是在宿主机的基础上又虚拟了一台服务器。<br>我们重新打开窗口可以看到</p>
+<pre><code>Docker ps 命令
+[root@iZwz92dpr9gpgasbo4gg15Z lib]# docker ps
+CONTAINER IDIMAGE   COMMAND CREATED STATUS  PORTS   NAMES
+e4202738a947centos  &quot;/bin/bash&quot; 4 minutes ago   Up 4 minutesmycentos</code></pre><p>可以对docker的运行状态进行查看。<br>我们在docker虚拟机上运行exit 然后我们就退回到宿主机上了<br>退出宿主机之后，docker是运行还是关着的？然后我们通过ps命令查看，发现容器处于关闭状态。<br>*<em>结论：如果我们通过交互式的命令来创建容器，当我们使用exit命令退出之后，随之的容器也进行自动关闭状态。  *</em></p>
+<p>（2）以守护式方式来创建容器</p>
+<pre><code>docker run -di --name=容器名称  镜像名称：标签</code></pre><p>登录守护式容器方式：</p>
+<pre><code>Docker exec -it 容器名称（或者是容器ID） /bin/bash
+
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# docker run -di --name=mycentos2 centos
+4a7d23fda453c40b61138e63753e84833069fd79a9af82de03f6ceab52d50e16
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# </code></pre><p>出现字符串说明容器创建成功。<br>我们的命令行还是处于宿主机的状态，这个时候我们通过docker ps命令来查看容器状态</p>
+<p><strong>如何进入容器呢？</strong>  </p>
+<pre><code>ocker exec -it 容器名称 /bin/bash
+
+Docker exec -it mycentos2  /bin/bash
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# docker exec -it mycentos2 /bin/bash
+[root@4a7d23fda453 /]# ^C</code></pre><p>这个时候如果我们通过exit命令退出容器之后，然后通过docker ps命令查看所有运行的容器，我们可以发现，容器还是处于运行状态。</p>
+<p>这就是两种创建方式的区别</p>
+<h2 id="4-1停止与启动容器"><a href="#4-1停止与启动容器" class="headerlink" title="4.1停止与启动容器"></a>4.1停止与启动容器</h2><p>停止容器：</p>
+<pre><code>Docker stop 容器名称（或者容器ID）</code></pre><p>启动容器：</p>
+<pre><code>docker start 容器名称（或者容器ID） 
+
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# docker ps -a
+CONTAINER IDIMAGE   COMMAND CREATED STATUS  PORTS   NAMES
+4a7d23fda453centos  &quot;/bin/bash&quot; 8 minutes ago   Up 8 minutesmycentos2
+e4202738a947centos  &quot;/bin/bash&quot; 21 minutes ago  Exited (1) 15 minutes ago   mycentos
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# docker stop 4a7d23fda453 </code></pre><h2 id="4-2-文件拷贝"><a href="#4-2-文件拷贝" class="headerlink" title="4.2 文件拷贝"></a>4.2 文件拷贝</h2><p>有时候我们需要把文件或者是目录拷贝进容器中，或者是把容器中的文件拷贝出来。<br>文件拷贝进容器命令cp  </p>
+<pre><code>docker cp 需要拷贝的文件或者目录  容器名称：容器目录</code></pre><p>也可以将文件从容器中拷贝出来</p>
+<pre><code>docker cp 容器名称：容器目录  需要拷贝的文件或目录</code></pre><p>都是在宿主机上户进行操作</p>
+<h2 id="4-3-目录挂载"><a href="#4-3-目录挂载" class="headerlink" title="4.3 目录挂载"></a>4.3 目录挂载</h2><p>我们进行上面文件拷贝的时候操作容器中的或者是宿主机中的内容时，有事不是很方便的操作，这个时候我们可以通过目录挂载的方式进行操作。  </p>
+<p>我们可以在创建容器的时候，将宿主机的目录与容器内的目录进行映射，这样我们就可以通过修改宿主机中的某个目录文件从而去影响容器。<br>创建容器  添加-v参数  后边为宿主机目录：容器目录  例如  </p>
+<pre><code>Docker run -di -v /usr/local/myhtml :/usr/local/myhtml --name=mycentos3 centos</code></pre><p>注意：如果你共享的是多级目录，可能会出现权限不足的提示<br>这是因为centos中的安全模式selinux把权限禁掉了，我们需要添加参数 –privileged=true 来解决挂载的目录没有权限的问题。</p>
+<h2 id="4-4-查看容器IP地址"><a href="#4-4-查看容器IP地址" class="headerlink" title="4.4 查看容器IP地址"></a>4.4 查看容器IP地址</h2><p>我们可以通过以下命令来查看容器运行中的各种数据</p>
+<p><code>Docker inspect 容器名称 （容器ID）</code>  </p>
+<p>也可以直接执行下面的命令直接输出IP地址</p>
+<pre><code>Docker  inspect --format=’{{.NetworkSettings.IPAddress}}’ 容器名称 （容器ID）</code></pre><h2 id="4-5-删除容器"><a href="#4-5-删除容器" class="headerlink" title="4.5 删除容器"></a>4.5 删除容器</h2><p>Docker   rm 容器名称（容器ID）  </p>
+<p>如果容器是正在运行中无法进行删除。</p>
+<h1 id="5-应用部署"><a href="#5-应用部署" class="headerlink" title="5. 应用部署"></a>5. 应用部署</h1><p>##5.1 MySQL部署<br>（1）拉取MySQL镜像  </p>
+<pre><code>Docker pull  centos/mysql-57-centos7</code></pre><p>（2）创建容器</p>
+<pre><code>Docker run -di --name=tensquare_mysql -p 33306:3306  -e  MYSQL_ROOT_PASSWORD=123456 mysql</code></pre><ul>
+<li>-p ：代表端口映射吗，格式为宿主机映射端口：容器运行端口  </li>
+<li>-e ：代表添加环境变量，MYSQL_ROOT_PASSWORD是root用户的登录数据库的密码  </li>
+</ul>
+<p>（3）进入mysql容器  </p>
+<pre><code>Docker exec -it tensquare_mysql /bin/bash</code></pre><p>（4）登录mysql  </p>
+<pre><code>Mysql -u root -p</code></pre><p>创建mysql容器：  </p>
+<pre><code>[root@iZwz92dpr9gpgasbo4gg15Z local]# docker run -di --name=tensquare_mysql -p 33306:3306  -e  MYSQL_ROOT_PASSWORD=123456 centos/mysql-57-centos7
+0babaf900514d06b02ffdec0a51ca1ad32d7e2cb7f8753b804740502ad95c764
+[root@iZwz92dpr9gpgasbo4gg15Z local]# docker ps -a</code></pre><p>我们可以通过宿主机的端口映射，通过访问宿主机的方式来进行访问容器</p>
+<h2 id="5-2-Tomacat部署"><a href="#5-2-Tomacat部署" class="headerlink" title="5.2 Tomacat部署"></a>5.2 Tomacat部署</h2><p>（1）拉取镜像  </p>
+<pre><code>Docker pull tomcat：7-jre7</code></pre><p>（2）创建容器<br>创建容器  -p表示地址映射</p>
+<pre><code>Docker run  -di --name=mytomcat  -p 9000:8080
+-v /usr/local/webapps:/usr/local/tomcat/webapps  tomcat:7-jre7</code></pre><p>这里为了项目很好的部署我们可以做一个项目映射主机usr/local/webapps映射容器内的usr/local/tomcat/webapps   如果没有文件会自动创建</p>
+<h2 id="5-3-Nginx部署"><a href="#5-3-Nginx部署" class="headerlink" title="5.3 Nginx部署"></a>5.3 Nginx部署</h2><p>（1）拉取镜像  </p>
+<pre><code>Docker pull nginx</code></pre><p>（3）创建nginx容器</p>
+<pre><code>Docker run -di --name=mynginx -p 80:80 nginx</code></pre><h2 id="5-4-Redis部署"><a href="#5-4-Redis部署" class="headerlink" title="5.4  Redis部署"></a>5.4  Redis部署</h2><p>（1）拉取镜像  </p>
+<pre><code>Docker pull redis</code></pre><p>（2）创建容器</p>
+<pre><code>Docker run -di --name=myredis -p 6379:6379  redis</code></pre><h1 id="6-迁移和备份"><a href="#6-迁移和备份" class="headerlink" title="6. 迁移和备份"></a>6. 迁移和备份</h1><h2 id="6-1-容器保存为镜像"><a href="#6-1-容器保存为镜像" class="headerlink" title="6.1 容器保存为镜像"></a>6.1 容器保存为镜像</h2><p>我们可以通过以下命令将容器保存为镜像</p>
+<pre><code>Docker commit mynginx mynginx_i
+mynginx是容器名称 mynginx_i表示镜像名称要保存为的镜像。</code></pre><h2 id="6-2-镜像备份"><a href="#6-2-镜像备份" class="headerlink" title="6.2 镜像备份"></a>6.2 镜像备份</h2><p>我们可以通过以下命令将镜像保存为tar文件。可以在另一台机器上进行部署</p>
+<pre><code>Docker save -o  mynginx.tar  mynginx_i  
+mynginx_i  表示镜像的名称</code></pre><p>我们在另一台机器上可以进行压缩文件转化为镜像</p>
+<pre><code>Docker  load -i mynginx.tar文件名称   这个时候就可以把文件恢复成镜像</code></pre><h1 id="6-Dockerfile"><a href="#6-Dockerfile" class="headerlink" title="6. Dockerfile"></a>6. Dockerfile</h1><p>Dockerfile是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。基础镜像一般是系统级的镜像，比如我们可以在centos镜像的基础上再配置其他的镜像。我们构建镜像一般是在一个镜像的基础上创建另一个镜像。</p>
+<ol>
+<li>对于开发人员：可以为开发团队提供一个完全一致的开发环境</li>
+<li>对于测试人员：可以直接拿开发时所构建的镜像或者通过dockerfile文件构建一个新的镜像开始工作了</li>
+<li>对于运维人员：在部署时，可以实现应用的无缝移植</li>
+</ol>
+<h2 id="6-1-常用命令"><a href="#6-1-常用命令" class="headerlink" title="6.1 常用命令"></a>6.1 常用命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FROM image_name.tag</td>
+<td>定义了使用哪个基础镜像构建流程</td>
+</tr>
+<tr>
+<td>MAINTAINER  user_name</td>
+<td>声明镜像的创建者</td>
+</tr>
+<tr>
+<td>ENV key value</td>
+<td>设置环境变量（可以写多条）</td>
+</tr>
+<tr>
+<td>RUN command</td>
+<td>是Dikerfile的核心部分（可以写多条）</td>
+</tr>
+<tr>
+<td>ADD source_dir/file dest_dir/file</td>
+<td>将宿主机的文件复制到容器内，如果是一个压缩文件，将会在复制后自动解压</td>
+</tr>
+<tr>
+<td>COPY source_dir/file dest_dir/file</td>
+<td>和ADD相似，但是如果有压缩文件并不能进行压缩</td>
+</tr>
+<tr>
+<td>WORKDIR path_dir</td>
+<td>设置工作目录</td>
+</tr>
+</tbody></table>
+<p>下面我们通过dockerfile来构建一个镜像，jdk的镜像 使用的基础镜像是centos7镜像  </p>
+<pre><code>首先创建一个文件
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# mkdir -p /usr/local/dockerjdk8</code></pre><p> 我们在这个文件下进行dockerfile 来创建一个镜像，并把jdk8的压缩包也放进这个文件下<br>使用ftp上传工具把jdk压缩包放进这个文件夹下</p>
+<pre><code>sftp:/usr/local/mytestdocker&gt; put E:\CHDEvaluation.war
+然后把jdk压缩包放进dockerjdk8这个文件下</code></pre><p>然后创建文件，这个名称必须是Dockerfile  D是大写的<br>    [root@iZwz92dpr9gpgasbo4gg15Z dockerjdk8]# vi Dockerfile<br>    Dockerfile</p>
+<p>我们可以在Dockerfile文件中增加以下内容：</p>
+<pre><code>FROM centos:7           #基础镜像
+MAINTAINER leikaibo     #作者名称
+WORKDIR /usr            
+RUN mkdir /usr/local/javatest
+ADD jdk-8u191-linux-i586.tar.gz /usr/local/javatest  #把我们上传的文件添加到目录中
+# 以下是设置环境变量
+ENV JAVA_HOME=/usr/local/javatest/jdk1.8.0_191
+ENV JRE_HOME=$JAVA_HOME/jre
+ENV CLASSPATH $JAVA_HOME/bin/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib:$CLASSPATH
+ENV PATH $JAVA_HOME/bin:$PATH
+~   </code></pre><p>然后执行命令</p>
+<pre><code>docker build -t=&apos;jdk1.8&apos; .   -t代表指定镜像的名称   .代表去当前目录中去找Dockerfile文件</code></pre><p>执行完之后，我们可以通过docker images来查看镜像</p>
+<pre><code>[root@iZwz92dpr9gpgasbo4gg15Z dockerjdk8]# docker images</code></pre><p>REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE<br>jdk1.8                    latest              baa98f17d615        16 seconds ago      599MB<br>nginx                     latest              e445ab08b2be        2 weeks ago         126MB<br>tomcat                    7-jre7              47c156f4d4e3        2 months ago        359MB<br>centos/mysql-57-centos7   latest              e35b3f7a4ea0        4 months ago        452MB<br>centos                    7                   9f38484d220f        4 months ago        202MB<br>centos                    latest              9f38484d220f        4 months ago        202MB</p>
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>Docker容器化</tag>
+        <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Shell编程</title>
+    <url>/2018/06/01/Shell%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<p> <font size=6 face="">Shell编程</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell是一个命令行解释器,它为用户提供了一个向 Linux内核发送请求以便运行程序的界面系统级程序,用户可以用Shl来启动、挂起、停止甚至是编写一些程序。  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell还是一个功能相当强大的编程语言,易编写,易调试,灵活性较强。Shel是解释执行的脚本语言,在Shel中可以直接调用 Linux系统命令。</p>
+<a id="more"></a>
+
+
+<h1 id="一、Shell基础"><a href="#一、Shell基础" class="headerlink" title="一、Shell基础"></a>一、Shell基础</h1><h2 id="1-第一个脚本"><a href="#1-第一个脚本" class="headerlink" title="1. 第一个脚本"></a>1. 第一个脚本</h2><h3 id="1-输出命令："><a href="#1-输出命令：" class="headerlink" title="1. 输出命令："></a>1. 输出命令：</h3><pre><code>echo 【选项】 【输出内容】  
+选项   -e  加上-e表示支持反斜线控制的字符转换</code></pre><h3 id="2-第一个脚本"><a href="#2-第一个脚本" class="headerlink" title="2. 第一个脚本"></a>2. 第一个脚本</h3><pre><code>vi hello.sh  
+\#!/bin/Bash  表示写的脚本是shell脚本--主要是声明作用在这里#不是注释
+\#leikaibi   这里的#表示注释功能  
+echo  -e     “这里写需要打印的内容”  
+保存退出</code></pre><h3 id="3-执行脚本"><a href="#3-执行脚本" class="headerlink" title="3. 执行脚本"></a>3. 执行脚本</h3><pre><code>1. 赋予执行权限，chmod 755 hello.sh 命令 赋予脚本hello.sh脚本执行权限。然后通过路径/hello.sh来执行
+2. 第二种方式。通过 bash hello.sh 来执行。</code></pre><p>注意：如果运行在Windows下编写的脚本，会提示文件格式错误，这个时候我们就需要对文本中出现的特殊字符进行格式转换，直接在Linux命令行运行<br>dos2unix  【文件名】  这个时候就可以对该文件进行格式转换（如果这个命令没有安装，使用yum -y install dos2unix  进行安装就可以）</p>
+<h2 id="2-base的基本功能"><a href="#2-base的基本功能" class="headerlink" title="2. base的基本功能"></a>2. base的基本功能</h2><h3 id="1-历史命令和命令补全功能"><a href="#1-历史命令和命令补全功能" class="headerlink" title="1. 历史命令和命令补全功能"></a>1. 历史命令和命令补全功能</h3><pre><code>history 可以查询所有的历史命令  
+history 【选项】【历史命令保存文件】  
+vi  .bash_history   可以查看所有的历史命令保存文件  
+按一下tab 键进行代码的补全    按两下tab键  可以对所有需要补全的代码进行罗列展示</code></pre><h3 id="2-命令别名与快捷键"><a href="#2-命令别名与快捷键" class="headerlink" title="2. 命令别名与快捷键"></a>2. 命令别名与快捷键</h3><pre><code>alias  别名 =&apos;原命令&apos;   # 设置命令别名  
+alias  vi =‘vim’  
+这种别名只会临时生效，如果想要别名永久生效  需要更改配置文件
+
+**快捷键**  
+
+Ctrl  + C 强制终止当前的命令  
+Ctrl  + L 清屏，相当于clear命令  
+Ctrl  + U 删除或者剪切光标之前的命令。如果是输入了一个很长的命令不需要使用退格键一个一个的删除，使用这个快捷键更加的方便。  
+Ctrl  + K 删除或者剪切光标之后的内容  
+Ctrl  + Y 粘贴Ctrl  + U 或者Ctrl  + K 剪切的内容  
+Ctrl  + D 退出当前终端    </code></pre><h3 id="3-输入输出与重定向"><a href="#3-输入输出与重定向" class="headerlink" title="3. 输入输出与重定向"></a>3. 输入输出与重定向</h3><pre><code>输出重定向  
+
+    就是把原本应该输出到屏幕上内容输出到文件保存在文件中</code></pre><p>​<br>​    | 动作        | 命令    |说明|<br>​    | —— |:——–:| :—–:|<br>​    | 标准输出重定向 | 命令 &gt; 文件名 | 以覆盖的方式，把命令的正确输出，输出到制定的文件或者是设备中 |<br>​    |    标准输出重定向  | 命令 &gt;&gt; 文件名     |   以追加的方式，把命令的正确输出，输出到指定的文件或者是设备中 |<br>​    | 标准错误输出重定向 |错误命令 2&gt; 文件名 |    以覆盖的方式，把命令的错误输出，输出到指定的文件或者是设备中。 |<br>​    | 标准错误输出重定向 | 错误命令 2&gt;&gt;文件名     | 以追加的方式，把命令的错误输出，输出到指定的文件或者是设备中。|</p>
+<p>​<br>​    例如：执行  ls命令，我们就可以对ls命令输出的内容进行保存。ls &gt;abc  就代表把ls要输出的内容保存到文件abc中，如果是 ls&gt;&gt; abc 就会把输出的内容追加到文件abc中。<br>​     注意：如果命令格式错误，就需要在&gt;前加上2  例如 lst  2&gt; abc<br>​<br>    但是在实际的使用过程中，我们不会提前知道命令格式是正确的还是错误的，所以以上两种命令的用处不大。<br>    ===通常使用的是以下命令，把正确命令和错误命令都可以同时的保存：</p>
+<pre><code>| 动作        | 命令    |说明|
+| ------ |:--------:| :-----:|
+| 正确输出和错误输出同时保存 | 命令 &gt; 文件名 | 以覆盖的方式，把命令的正确输出，输出到制定的文件或者是设备中 |
+|    正确输出和错误输出同时保存  | 命令 &gt;&gt; 文件名     |   以追加的方式，把命令的正确输出，输出到指定的文件或者是设备中 |</code></pre><p>​<br>​    <strong>输入重定向</strong><br>​<br>    本来的输入是通过键盘直接输入的，现在我们通过文件的方式来输入，这就是输入重定向。<br>    命令格式：  </p>
+<pre><code>wc 【选项】【文件名】  
+选项：    -c 统计字节数  
+-w 统计单词数  
+-l 统计行数  </code></pre><h3 id="4-多命令顺序执行与管道符"><a href="#4-多命令顺序执行与管道符" class="headerlink" title="4. 多命令顺序执行与管道符"></a>4. 多命令顺序执行与管道符</h3><pre><code>命令；命令   多个命令顺序执行，命令之间没有逻辑联系 
+命令1  &amp;&amp; 命令2  逻辑与  命令1执行完之后，命令2才会继续往下执行
+
+**管道符**  
+命令1 |  命令2   命令1的正确输出作为命令2的操作对象</code></pre><h3 id="5-通配符和特殊符号"><a href="#5-通配符和特殊符号" class="headerlink" title="5. 通配符和特殊符号"></a>5. 通配符和特殊符号</h3><pre><code>？  匹配一个任意字符  
+\*   匹配0个或者多个任意字符，也就是 可以匹配任何内容
+
+[ ]  匹配中括号中任意一个字符，例如：[abc] 代表一定匹配一个字符，或者是a，或者是b，或者是c。  
+[ - ] 匹配 括号中任意一个字符，- 代表一个范围，例如 [a-z] 代表匹配一个小写的字母  
+
+**Bash中的其他特殊符号**
+
+‘ ’ 单引号，在单引号中的所有的特殊符号   如 “$” “\” 都是没有特殊含义的  
+“ ” 双引号  在双引号中特殊符号都是没有特殊含义。但是”$” “\”  是例外的。拥有调用变量的值。    
+
+  例如给变量赋值  name = sc
+
+‘ ’  反引号的作用，反引号括起来的是系统命令。在bash中会优先的执行它。它的作用和$() 作用是一样的，不过推荐使用的是$() ，因为反引号在使用的过程中容易看错。  
+
+
+\#  在bash中  #开头的代表注释
+
+$  在调用变量的值，如果需要调用变量的的值的时候，需要使用$加变量名  的方式来获取到变量的值。</code></pre><h2 id="3-Bash的变量"><a href="#3-Bash的变量" class="headerlink" title="3. Bash的变量"></a>3. Bash的变量</h2><h3 id="1-用户自定义变量"><a href="#1-用户自定义变量" class="headerlink" title="1. 用户自定义变量"></a>1. 用户自定义变量</h3><pre><code>&amp;emsp;&amp;emsp;在bash中，变量的默认类型都是字符串类型的，如果要进行数值运算，就需要指定变量 类型为数值型。  
+
+**注意：**
+
+
+
+- 变量是用等号连接，而且等号左右两端不能有空格
+- 变量的值如果有空格，需要使用单引号或者是双引号包括
+- 在变量的值中，可以使用  \  转义符
+- 如果是把命令的结果作为变量赋值给变量，则需要使用单引号或者是$() 包括命令  
+
+变量的定义：
+
+比如定义一个变量名为name的变量  name =” hello bianliang”,调用的时候，我们可以使用echo来调用   
+  echo $name  
+
+![](https://i.imgur.com/VcpmtBC.jpg)
+
+    name=&quot;hello bianliang&quot;
+    echo $name
+    输出结果：hello bianliang
+
+调用的时候只需要记住，在变量名之前加$符号  
+变量查看   set  
+变量删除  unset  name  </code></pre><h3 id="2-环境变量"><a href="#2-环境变量" class="headerlink" title="2. 环境变量"></a>2. 环境变量</h3><pre><code>主要保存的是和系统操作环境相关的数据。  
+
+用户自定义变量只在当前的shell中生效，而环境变量会在当前shell和这个shell的所有子shell中生效，如果把环境变量写入相应的 配置文件中那么这个环境变量就会在所有的shell中生效。
+
+**设置环境变量**
+
+Export 变量名=变量值    #申明变量  
+
+例如我们定义两个变量    
+name=lei  
+export sex =nan
+我们通过set命令查看变量就会查看到两个已经定义好的变量，但是这个时候如果我们再进入一个bash（通过命令bash 进入， 我们可以通过pstree来查看进程数）
+
+env  # 专门的用来查看变量的命令  
+Unset  变量名  #  删除环境变量</code></pre><h3 id="3-位置参数变量"><a href="#3-位置参数变量" class="headerlink" title="3. 位置参数变量"></a>3. 位置参数变量</h3><p>这种变量只要是用来向脚本当中传递参数或者是数据的，变量名不能自己定义，变量的作用是固定的，只能更改里面的值</p>
+<pre><code>| 位置参数变量        | 作用    |
+| ------ |:--------:|
+| $n | n在这里代表的是数字，$0 代表命令本身，$1--$9 代表的是第一到第九个参数，十个以上的参数需要用大括号 例如${10} 
+| $*   | 这个命令代表命令行中所有的参数，$* 把所有的参数看成一个整体   
+| $@  |这个命令也代表的是命令行中所有的参数，不过不同的是$@ 把每个参数区别对待
+| $# | 这个命令代表命令行中所有参数的 个数</code></pre><p>我们通过一个简单的例子来查看一个使用方法，我们写一个bash<br>&nbsp;Canshu.sh定义两个参数，然后输出两个参数的和<br>    #!/bin/bash<br>    sum1=$1<br>    sum2=$2<br>    sum=$(($sum1+$sum2))<br>    echo “sum is : $sum”  </p>
+<pre><code>然后使用命令echo 给这个sh 赋予执行权限
+Chmod  755 canshu.sh</code></pre><p>执行canshu.sh  并向这个sh传入两个参数 11  22  求和<br>[root@iZwz92dpr9gpgasbo4gg15Z sh]# ./canshu.sh 11 22<br><strong>下面通过一个简单的sh来看一个几个位置参数的区别。</strong><br>Canshu2.sh</p>
+<pre><code>\#!/bin/bash
+echo $#
+echo $*
+echo $@
+赋予执行权限 [root@iZwz92dpr9gpgasbo4gg15Z sh]# chmod 755 canshu2.sh
+输出结果：
+[root@iZwz92dpr9gpgasbo4gg15Z sh]# ./canshu2.sh 11 22 33 44 55 66
+6
+11 22 33 44 55 66
+11 22 33 44 55 66</code></pre><p> 注意：$* 和$@的区别，具体的区别可以在for  循环中看出<br>$*中的所有参数看成是一个整体，所有在for循环中只会循环一次<br>$@ 中的每个参数都看成是相互独立的，所以$@ 中有几个参数，就会循环几次</p>
+<p>例如：<br>    #!/bin/bash</p>
+<pre><code>for x in &quot;$*&quot;
+do
+echo $x
+done
+
+for y in &quot;$@&quot;
+do
+echo $y 
+done</code></pre><p>运行结果：<br>    [root@iZwz92dpr9gpgasbo4gg15Z sh]# chmod 755 canshu3.sh<br>    [root@iZwz92dpr9gpgasbo4gg15Z sh]# ./canshu3.sh 1 2 3 4 5<br>    1 2 3 4 5<br>    1<br>    2<br>    3<br>    4<br>    5</p>
+<p>###4.预定义变量</p>
+<pre><code>| 预定义变量       | 作用    |
+| ------ |:--------:|
+| $?| 最后一次执行的命令的返回状态。如果这个变量的值为0，证明上一个命令是正确的；如果这个变量的值是非0（具体是哪一个数，由命令自己决定），则证明上一个命令执行不正确了。|
+| $$  | 当前进程的进程号|    
+| $!  | 后台运行的最后一个进程的进程号(PID)|   </code></pre><p>例如使用echo $?  我们就可以打印出  来看看上一条命令是否正确执行<br>Echo $$  查看当前进程号pid</p>
+<p><strong>接受键盘输入</strong><br>Read【选项】【变量名】<br>选项：-p   提示信息—在等待read输入时，输出提示信息<br>-t 秒数   read命令会一直等待用户输入，使用此选项可以指定等待时间<br>-n 字符数： read命令只接受指定的字符数， 就会在执行<br>-s   隐藏输入的数据，适用于机密信息的输入  </p>
+<h2 id="4-base的运算符"><a href="#4-base的运算符" class="headerlink" title="4.base的运算符"></a>4.base的运算符</h2><h3 id="1-数值运算和运算符"><a href="#1-数值运算和运算符" class="headerlink" title="1. 数值运算和运算符"></a>1. 数值运算和运算符</h3><p>Declare 声明变量类型<br>    declare 【+/-】【选项】【变量名】<br>    - 给变量设定类型属性<br>    + 取消变量的类型属性<br>    -i 将变量声明为整数型（integer）<br>    -x 将变量声明为环境变量<br>    -p 显示指定变量的被生命的类型  </p>
+<p><strong>数值运算：</strong><br>方法一：<br>       aa=11<br>    bb=22<br>    declare -i cc=$aa+$bb  #将变量aa和bb 进行数值运算、<br>方法二：使用expr或者let数值运算工具<br>方法三：使用 $（（运算式）） 或者是 $[运算式]<br>ff =$(($aa+$bb))<br>推荐 使用方法三</p>
+<h3 id="2-变量测试和内容替换"><a href="#2-变量测试和内容替换" class="headerlink" title="2.变量测试和内容替换"></a>2.变量测试和内容替换</h3><p>主要的作用是通过判断x的值来判断y是否有值</p>
+<p>##5. 环境变量配置文件<br>1.环境变量配置文件简介<br>Source命令<br>Source 配置文件或者  .配置文件  </p>
+<p>环境变量配置文件中主要是定义对系统的操作环境生效的系统默认环境变量，<br>比如PATH HISTZIZE  PSI  HOSTNAME等默认环境变量<br>2.环境变量配置文件作用</p>
+<pre><code> /etc/下的环境变量对所有的用户都是生效的  
+/etc/profile  
+/etc/profile.d/*.sh  </code></pre><h1 id="二、Shell编程"><a href="#二、Shell编程" class="headerlink" title="二、Shell编程"></a>二、Shell编程</h1><h2 id="1-基础正则表达式"><a href="#1-基础正则表达式" class="headerlink" title="1. 基础正则表达式"></a>1. 基础正则表达式</h2><p>正则表达式和通配符</p>
+<ul>
+<li>正则表达式用来在文件中匹配符合条件的字符串,正则是包含匹配。grep、awk、sed等命令可以支持正则表达式。</li>
+</ul>
+<ul>
+<li>通配符用来匹配符合条件的文件名，通配符是完全匹配。ls、find、cp这些命令不支持正则表达式,所以只能使用shell自己的通配符来进行匹配了。  </li>
+</ul>
+<ul>
+<li>通配符匹配的是文件名，正则表达式是指在一个文件中搜索符合要求的字符串</li>
+</ul>
+<p><strong>基础正则表达式</strong>   </p>
+<ul>
+<li>前一个字符匹配0次或任意多次<br>. 匹配除了换行符外的任意一个字符<br>^  匹配行首   ^hell 匹配以hello开头的行  </li>
+</ul>
+<p>在搜索文件时， 我们可以通过grep命令来进行匹配</p>
+<pre><code>grep  “aa*” 文件名   # 匹配至少包含一个a的行
+grep “s..d” 文件名  # 会匹配在字母s和d之间一定有两个字符的单词</code></pre><h2 id="2-字符截取命令"><a href="#2-字符截取命令" class="headerlink" title="2.字符截取命令"></a>2.字符截取命令</h2><p><strong>Cut字段提取命令</strong><br>cut 【选项】 文件名  </p>
+<pre><code>选项：
+-f  列号   提取第几列  
+-d 分隔符 按照指定分隔符分割列  
+
+注意：一般cut命令不独立使用，都是跟管道符grep命令配合使用  
+命令  df -h 查看分区使用率</code></pre><p><strong>Printf命令</strong></p>
+<p>格式化打印命令，如果想要学习awk命令  需要先学习printf命令  </p>
+<pre><code>输出类型
+%ns ：输出字符串  n是数字代表输出几个字符
+%ni  输出整数，n是数字指输出几个字符
+%m.nf   输出浮点数</code></pre><p>在awk命令输出中支持print和printf命令<br>Print： print命令会在每个输出之后自动加入一个换行符（Linux默认是没有print命令的，只能在awk中使用）<br> Printf命令是标准格式输出命令，并不会自动增加换行符，如果需要换行，需要手动增加换行符。</p>
+<p><strong>Awk命令</strong></p>
+<p>命令格式</p>
+<pre><code>Awk ‘条件1{动作1} 条件2{动作2}...’  文件名</code></pre><p>条件：一般使用条件关系表达式作为条件</p>
+<pre><code>X&gt;10  判断变量x是否大于10
+X&gt;=10 大于等于
+X&lt;=10 小于等于</code></pre><p>动作：<br>    格式化输出<br>    流程控制语句、</p>
+<p>例如：</p>
+<pre><code>使用awk 命令输出df -h磁盘信息的第一列和第五列第六列
+awk &apos;{print $1 &quot;\t&quot; $5 &quot;\t&quot; $6}&apos;
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# df -h | awk &apos;{print $1 &quot;\t&quot; $5 &quot;\t&quot; $6}&apos;
+Filesystem    Use%    Mounted
+/dev/vda1    27%    /
+devtmpfs    0%    /dev
+tmpfs    0%    /dev/shm
+tmpfs    1%    /run
+tmpfs    0%    /sys/fs/cgroup
+tmpfs    1%    /run/user/0
+[root@iZwz92dpr9gpgasbo4gg15Z ~]# </code></pre><p>*<em>BEGIN 命令 *</em></p>
+<pre><code>[root@iZwz92dpr9gpgasbo4gg15Z ~]# awk &apos;BEGIN{print{&quot;zhe shi yi ge begin &quot;} {print $1}&apos;
+在所有的命令执行之前先执行begin命令</code></pre><p><strong>Sed命令</strong></p>
+<ul>
+<li>sed命令是一种流编辑器，它是文本处理中非常中的工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</li>
+</ul>
+<ul>
+<li>Sed是几乎包括在所有的UNIX平台当然也包括Linux的轻量级流编辑器。Sed主要是用来将数据进行选取、替换、删除、新增的命令。  </li>
+</ul>
+<ul>
+<li>和vi的区别，vi只能用来修改文件中的内容。Sed不仅能修改文件而且还可以直接修改命令的结果。在shell脚本中sed是一个非常重要的编辑器</li>
+</ul>
+<p><strong>命令格式:</strong><br>Sed  【选项】 ‘ 【动作】’ 文件名</p>
+<pre><code>选项：
+-n ：一般sed命令会把所有数据都输出到屏幕上，如果加上这个选项，则只会把sed命令处理过的行输出到屏幕上
+-e ：允许对输入数据应用多条sed命令编辑
+-i  ：用sed修改结果直接修改读取数据的文件，而不是由屏幕直接输出</code></pre><p><strong>动作：</strong></p>
+<pre><code>a\: 追加，在当前行后添加一行或者多行。添加多行时，除最后一行外，每行末尾都需要用\ 代表数据完结
+Sed ‘2a  zhuijia de neirong’ 文件名    这样我们就在文件中的第二行的后面追加了我们输出的内容
+c\ : 行替换
+i\: 行插入
+Sed ‘2i  charu’ 文件名  在第二行之前插入了一个内容为charu的内容
+d\: 删除，删除指定的行
+P: 打印，打印指定的行
+h 拷贝模板块的内容到内存中的缓冲区。
+H 追加模板块的内容到内存中的缓冲区。
+g 获得内存缓冲区的内容，并替代当前模板块中的文本。
+G 获得内存缓冲区的内容，并追加到当前模板块文本的后面。
+l 列表不能打印字符的清单。
+n 读取下一个输入行，用下一个命令处理新的行而不是用第一个命令。
+N 追加下一个输入行到模板块后面并在二者间嵌入一个新行，改变当前行号码。
+p 打印模板块的行。
+P(大写) 打印模板块的第一行。
+q 退出Sed。</code></pre><h2 id="3-字符处理命令"><a href="#3-字符处理命令" class="headerlink" title="3.字符处理命令"></a>3.字符处理命令</h2><p>排序命令</p>
+<p>Sort  【选项】 文件名</p>
+<pre><code>选项
+-f ：忽略大小写
+-n ：以数值型进行排序，默认的是使用的字符串型进行排序
+-r ：反向排序
+-t ：指定分隔符，默认的分隔符是制表符
+-k n[,m] : 按照指定的字段范围排序，从第n个字段开始，m字段结束，默认是到行尾。</code></pre><p>统计命令wc</p>
+<pre><code>Wc 【选项】文件名
+选项：
+-l  只统计行数
+-w 只统计单词数
+-m 只统计字符数</code></pre><h2 id="4-条件判断"><a href="#4-条件判断" class="headerlink" title="4.条件判断"></a>4.条件判断</h2><p>按照文件类型进行判断</p>
+<pre><code>-b：判断文件是否存在，并且是否为块设备文件
+-c：判断该文件是否存在，并且是否是字符设备文件
+-d：判断该文件是否存在，并且是否是目录文件
+-e：判断该文件是否存在
+-f：判断该文件是否存在。并且是否是普通文件</code></pre><p>判断格式： test  -e /root/install.log    可以判断root目录下install.log文件是否存在<br>或者 [ -e /root/install.log] 也可以进行判断</p>
+<p>两个文件之间进行比较</p>
+<pre><code>文件1 -nt 文件2  ：判断文件1的修改时间是否比文件2的新
+文件1 -ot 文件2: ：判断文件1的修改时间是否比文件2的旧
+文件1 -ef 文件2  ： 判断文件1是否和文件2的inode号是否一致，可以理解为两个文件                是否是同一个文件。这个判断用于判断硬链接是很好的方法。</code></pre><p><strong>两个整数之间的比较</strong></p>
+<pre><code>整数1 -eq 整数2 ：判断整数1是否和整数2相等
+整数1 -ne 整数2 ：判断整数2是否和整数2不相等
+整数1 -gt 整数2 ：判断整数1是否大于整数2
+整数1 -lt 整数2 ：判断整数1是否小于整数2
+整数1 -ge 整数2 ：判断整数1是否大于等于整数2
+整数1 -le 整数2 ：判断整数1是否小于等于整数2</code></pre><p><strong>字符串的判断</strong></p>
+<pre><code>-z 字符串  ：判断字符串是否为空
+-n 字符串  ：判断字符串是否为非空
+字符串1==字符串2 ：判断字符串1是否和字符串2相等
+字符串1！=字符串2：判断字符串1是否和字符串2不相等</code></pre><p><strong>多重条件判断</strong></p>
+<pre><code>判断1 -a 判断2 ：逻辑与，判断1和判断2都成立，最终的结果才为真
+判断1 -o 判断2 ：逻辑或，判断1和判断2有一个成立，最终的结果就为真
+！判断 ： 逻辑非，使原始的判断式取反</code></pre><h2 id="5-流程控制"><a href="#5-流程控制" class="headerlink" title="5.流程控制"></a>5.流程控制</h2><h3 id="1-if语句"><a href="#1-if语句" class="headerlink" title="1.if语句"></a>1.if语句</h3><p>我们在进行判断的时候；<br>[-e /root] 判断root文件是否存在，如果存在我们可以通过命令行 echo $? 返回0 就说明存在，如果返回的是非0，就说明不存在。<br>或者[-e /root] &amp;&amp;echo yes || echo no  </p>
+<p><strong>单分支if条件语句</strong><br>    If [条件判断式] ; then<br>    程序<br>    fi</p>
+<pre><code>或者
+If [ 条件判断式]
+then
+程序
+fi</code></pre><p><strong>注意：</strong><br>是以if 开头 以fi 结尾<br>条件判断式中就是使用test命令判断，所以中括号和条件判断式之间必须有空格<br>then后面跟的是符合条件之后执行的程序，可以放在[] 之后，用；分割，也可以换行写入，就不需要了  </p>
+<p><strong>双分支if条件语句</strong></p>
+<pre><code>If  [条件判断式]
+then
+条件成立时，执行的程序
+else
+条件不成立时，执行的另一个程序
+Fi</code></pre><p><strong>多分支if条件语句</strong></p>
+<pre><code>If [条件判断1]
+then
+条件成立时，执行的程序
+elif
+条件判断2成立时，执行程序2
+
+else
+当所有条件都不成立时，最后执行此程序
+Fi  </code></pre><h3 id="2-case语句"><a href="#2-case语句" class="headerlink" title="2.case语句"></a>2.case语句</h3><p>case只能判断一种条件关系，而if语句可以判断多种条件关系、  </p>
+<pre><code>Case $变量名  in 
+“值1”) 
+“执行语句”
+：：
+“值2”)
+“执行语句”
+...
+Esac</code></pre><h3 id="3-for循环"><a href="#3-for循环" class="headerlink" title="3.for循环"></a>3.for循环</h3><pre><code>语法格式：
+For 变量  in 值1  值2 值3 ...
+
+Do 
+程序
+Done</code></pre>]]></content>
+      <categories>
+        <category>Linux与Shell编程</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux常用命令</title>
+    <url>/2018/05/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><a id="more"></a>
+
+<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><pre><code>mkdir 创建目录  
+mkdir -p  可以递归创建  
+pwd 显示当前目录  
+cd ..  回到上一级目录  
+rmdir  删除空目录  
+cp -rp  源文件或者是目录  目标目录----复制文件  
+touch 创建空文件  
+cat  查看文件  
+more  分页显示文件内容 -- 按空格或者是f可以一页一页往下翻，按回车一行一行往下翻，按q退出 ，按b返回上一屏  
+ less  分页显示内容 , 可以上下翻页。而且输入/  可以进行搜索，搜索完可以进行标记  
+ln -s 源文件  目标文件  为文件创建连接，连接类型分为软连接和硬链接</code></pre><h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><p>find   搜索范围 匹配条件否<br>例如  find /etc -name init 在etc文件夹下搜索init名称的文件</p>
+<h2 id="文件压缩和解压缩命令"><a href="#文件压缩和解压缩命令" class="headerlink" title="文件压缩和解压缩命令"></a>文件压缩和解压缩命令</h2><p>gzip 文件 就可以对该文件进行压缩<br>gzip只能压缩文件不能压缩文件夹，而且是不保留源文件的  </p>
+<p>打包文件夹：使用  tar -cvf 【压缩后文件名】【目录文件名】<br>.tar.gz 一般是先打包在压缩后的文件名  </p>
+<p>我们可以直接使用命令 【】tar -zcf 123.tar.gz 123 直接对文件夹123进行打包并进行压缩  </p>
+<p>解压缩：-x 解包 -v显示详细信息 -f 指定解压文件  -z解压缩<br>例如; <strong>tar -zxvf 123.tar.gz</strong></p>
+<p><strong>命令详解</strong></p>
+<p><strong>tar</strong><br>-c: 建立压缩档案<br>-x：解压<br>-t：查看内容<br>-r：向压缩归档文件末尾追加文件<br>-u：更新原压缩包中的文件<br>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
+<p>-z：有gzip属性的<br>-j：有bz2属性的<br>-Z：有compress属性的<br>-v：显示所有过程<br>-O：将文件解开到标准输出<br>下面的参数-f是必须的<br>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。<br>    <code>tar -cf all.tar *.jpg</code></p>
+<p>这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。</p>
+<pre><code>tar -rf all.tar *.gif</code></pre><p>这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</p>
+<pre><code>tar -uf all.tar logo.gif</code></pre><p>这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</p>
+<pre><code>tar -tf all.tar</code></pre><p>这条命令是列出all.tar包中所有文件，-t是列出文件的意思</p>
+<pre><code>tar -xf all.tar</code></pre><p>这条命令是解出all.tar包中所有文件，-t是解开的意思  </p>
+<h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><p>tar -cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg   </p>
+<p>tar -czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz  </p>
+<p> tar -cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2  </p>
+<p>tar -cZf jpg.tar.Z *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z  </p>
+<p>rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for linux<br>zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux  </p>
+<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><p>tar -xvf file.tar //解压 tar包<br>tar -xzvf file.tar.gz //解压tar.gz<br>tar -xjvf file.tar.bz2   //解压 tar.bz2<br>tar -xZvf file.tar.Z   //解压tar.Z<br>unrar e file.rar //解压rar<br>unzip file.zip //解压zip  </p>
+<p><strong>总结</strong><br>1、<em>.tar 用 tar -xvf 解压<br>2、</em>.gz 用 gzip -d或者gunzip 解压<br>3、<em>.tar.gz和</em>.tgz 用 tar -xzf 解压<br>4、<em>.bz2 用 bzip2 -d或者用bunzip2 解压<br>5、</em>.tar.bz2用tar -xjf 解压<br>6、<em>.Z 用 uncompress 解压<br>7、</em>.tar.Z 用tar -xZf 解压<br>8、<em>.rar 用 unrar e解压<br>9、</em>.zip 用 unzip 解压  </p>
+]]></content>
+      <categories>
+        <category>Linux与Shell编程</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+</search>
