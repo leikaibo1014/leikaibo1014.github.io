@@ -2023,7 +2023,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffad4d;
+  background: #58ab6e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3320,4 +3320,11 @@ pre .javascript .function {
   .pagination {
     margin: 8px 0 0;
   }
+}
+body {
+  background: url("https://img-blog.csdnimg.cn/20191114213755958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-size: cover;
 }
