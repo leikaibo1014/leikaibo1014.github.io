@@ -317,6 +317,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="雷凯博">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雷凯博的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">Oracle数据库 sqlplus常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T13:56:32+08:00">
+                2018-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
+                    <span itemprop="name">Oracle数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="leancloud_visitors" data-flag-title="Oracle数据库 sqlplus常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  239 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+<h2 id="Oracle学习思维导图"><a href="#Oracle学习思维导图" class="headerlink" title="Oracle学习思维导图"></a>Oracle学习思维导图</h2><p><img src="https://img-blog.csdnimg.cn/20191030164918181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="sql-plus常用命令"><a href="#sql-plus常用命令" class="headerlink" title="sql*plus常用命令"></a>sql*plus常用命令</h2><p>（1）conn[ect]:切换用户<br>（2）disc[onnect]:断开某个用户和数据库的连接<br>（3）passw[ord]:修改用户密码<br>（4）show user:查看当前用户<br>（5）exit:退出数据库<br>（6）desc[ribe] 表名：查看表结构</p>
+<h3 id="交互式命令："><a href="#交互式命令：" class="headerlink" title="交互式命令："></a>交互式命令：</h3><p>（1）&amp;:可以替代变量，而在变量执行的时候，需要用户输入<br>                   Select * from emp where deptno=’&amp;deptno’;<br>                   注意：Oracle中字符串用单引号<br>         （2）ed[it]:编辑指定的.sql文件的   edit C:\a.sql<br>         （3）spool:可以将sqlplus屏幕上的内容输出到指定的文件中<br>                    Spool d:\a.sql<br>                    Select * from emp;<br> 。。。查询结果<br>Spool off</p>
+<p><strong>解锁用户和修改密码：</strong><br>（1）sqlplus连接到数据库：sqlplus sys/123456 as sysdba<br>（2）输入解锁语句：alter user scott account unlock;<br>（3）修改密码：alter user scott identified by 654321;<br>        passw【ord】用户名:可以去修改其他用户的密码。<br>         passw:表示修改自己的密码。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    	
+
+    <div>
+		  
+	</div>
+	
+	
+
+    
+
+    
+
+	<div>
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -455,202 +652,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    	
-
-    <div>
-		  
-	</div>
-	
-	
-
-    
-
-    
-
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="雷凯博">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雷凯博的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">plsql中如何创建函数，触发器以及包和变量的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T13:56:32+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" class="leancloud_visitors" data-flag-title="plsql中如何创建函数，触发器以及包和变量的使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.9k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  12 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在数据库的操作中，在编写sql语句的时候，我们可能会用到函数以及触发器等的操作来简化我们的工作。<br>在这片文章中，也和我以前的博文一样，不是纯粹的理论讲解，而是采用的是案例的方式进行笔记的记录说明。还是用到的以前博文中的员工表emp</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -905,202 +906,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C--%E6%B7%BB%E5%8A%A0%E4%BF%AE%E6%94%B9%E7%BA%A6%E6%9D%9F%E4%BB%A5%E5%8F%8A%E8%A1%A8%E7%BB%93%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9&%E5%BA%8F%E5%88%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="雷凯博">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雷凯博的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C--%E6%B7%BB%E5%8A%A0%E4%BF%AE%E6%94%B9%E7%BA%A6%E6%9D%9F%E4%BB%A5%E5%8F%8A%E8%A1%A8%E7%BB%93%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9&%E5%BA%8F%E5%88%97/" itemprop="url">Oracle数据库的基本操作--添加/修改约束以及表结构的修改&序列</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T13:56:32+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C--%E6%B7%BB%E5%8A%A0%E4%BF%AE%E6%94%B9%E7%BA%A6%E6%9D%9F%E4%BB%A5%E5%8F%8A%E8%A1%A8%E7%BB%93%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9&%E5%BA%8F%E5%88%97/" class="leancloud_visitors" data-flag-title="Oracle数据库的基本操作--添加/修改约束以及表结构的修改&序列">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.9k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  12 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="1-约束"><a href="#1-约束" class="headerlink" title="1.约束"></a>1.约束</h1><h3 id="表的约束"><a href="#表的约束" class="headerlink" title="表的约束"></a>表的约束</h3><p>往表中插入数据的时候，可能出现一些问题，比如：重复插入数据，内容不对（性别）<br>——-如何保证数据库表中数据的完整性和一致性呢？约束<br><strong>常见的约束：</strong><br>主键（primary key），外键（foreign key）,唯一（unique）,非空（not null）,默认（default）,用户自定义（check）</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C--%E6%B7%BB%E5%8A%A0%E4%BF%AE%E6%94%B9%E7%BA%A6%E6%9D%9F%E4%BB%A5%E5%8F%8A%E8%A1%A8%E7%BB%93%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9&%E5%BA%8F%E5%88%97/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    	
-
-    <div>
-		  
-	</div>
-	
-	
-
-    
-
-    
-
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Servlet%E4%B8%AD%E8%AF%BB%E5%8F%96txt%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1243,203 +1048,6 @@
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    	
-
-    <div>
-		  
-	</div>
-	
-	
-
-    
-
-    
-
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="雷凯博">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雷凯博的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">Oracle数据库 sql*plus常用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T13:56:32+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="leancloud_visitors" data-flag-title="Oracle数据库 sql*plus常用命令">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  239 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-
-<h2 id="Oracle学习思维导图"><a href="#Oracle学习思维导图" class="headerlink" title="Oracle学习思维导图"></a>Oracle学习思维导图</h2><p><img src="https://img-blog.csdnimg.cn/20191030164918181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="sql-plus常用命令"><a href="#sql-plus常用命令" class="headerlink" title="sql*plus常用命令"></a>sql*plus常用命令</h2><p>（1）conn[ect]:切换用户<br>（2）disc[onnect]:断开某个用户和数据库的连接<br>（3）passw[ord]:修改用户密码<br>（4）show user:查看当前用户<br>（5）exit:退出数据库<br>（6）desc[ribe] 表名：查看表结构</p>
-<h3 id="交互式命令："><a href="#交互式命令：" class="headerlink" title="交互式命令："></a>交互式命令：</h3><p>（1）&amp;:可以替代变量，而在变量执行的时候，需要用户输入<br>                   Select * from emp where deptno=’&amp;deptno’;<br>                   注意：Oracle中字符串用单引号<br>         （2）ed[it]:编辑指定的.sql文件的   edit C:\a.sql<br>         （3）spool:可以将sqlplus屏幕上的内容输出到指定的文件中<br>                    Spool d:\a.sql<br>                    Select * from emp;<br> 。。。查询结果<br>Spool off</p>
-<p><strong>解锁用户和修改密码：</strong><br>（1）sqlplus连接到数据库：sqlplus sys/123456 as sysdba<br>（2）输入解锁语句：alter user scott account unlock;<br>（3）修改密码：alter user scott identified by 654321;<br>        passw【ord】用户名:可以去修改其他用户的密码。<br>         passw:表示修改自己的密码。</p>
-
-          
         
       
     </div>
@@ -1731,7 +1339,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1742,7 +1350,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1753,7 +1361,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1845,7 +1453,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72.3k</span>
+    <span title="Site words total count">64.3k</span>
   
 </div>
 
