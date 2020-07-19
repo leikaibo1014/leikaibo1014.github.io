@@ -1887,7 +1887,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Oracle%E4%B8%AD%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="雷凯博">
@@ -1906,7 +1906,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/10/2018-02-10-Oracle%E4%B8%AD%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA/" itemprop="url">Oracle中用户权限管理 数据类型和表的创建</a></h1>
+                <a class="post-title-link" href="/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">plsql中如何创建函数，触发器以及包和变量的使用</a></h1>
         
 
         <div class="post-meta">
@@ -1958,7 +1958,7 @@
 
           
           
-             <span id="/2018/02/10/2018-02-10-Oracle%E4%B8%AD%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA/" class="leancloud_visitors" data-flag-title="Oracle中用户权限管理 数据类型和表的创建">
+             <span id="/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" class="leancloud_visitors" data-flag-title="plsql中如何创建函数，触发器以及包和变量的使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1983,7 +1983,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.7k 字
+                  2.9k 字
                 </span>
               
 
@@ -1999,7 +1999,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10 分钟
+                  12 分钟
                 </span>
               
             </div>
@@ -2021,10 +2021,10 @@
 
       
         
-          <h1 id="一，Oracle的用户管理"><a href="#一，Oracle的用户管理" class="headerlink" title="一，Oracle的用户管理"></a>一，Oracle的用户管理</h1><h2 id="1-创建用户"><a href="#1-创建用户" class="headerlink" title="1. 创建用户"></a>1. 创建用户</h2><p>在 oracle 中要创建一个新的用户使用 create user 语句，一般是具有 <strong>dba(数据库管理员)的权限才能使用。</strong></p>
+          <p>在数据库的操作中，在编写sql语句的时候，我们可能会用到函数以及触发器等的操作来简化我们的工作。<br>在这片文章中，也和我以前的博文一样，不是纯粹的理论讲解，而是采用的是案例的方式进行笔记的记录说明。还是用到的以前博文中的员工表emp</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/2018-02-10-Oracle%E4%B8%AD%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA/#more" rel="contents">
+            <a class="btn" href="/2018/02/10/2018-02-10-plsql%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%8C%85%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2083,7 +2083,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="雷凯博">
@@ -2102,7 +2102,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">Oracle数据库 sqlplus常用命令</a></h1>
+                <a class="post-title-link" href="/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/" itemprop="url">Oracle 11g安装步骤与卸载步骤</a></h1>
         
 
         <div class="post-meta">
@@ -2154,7 +2154,7 @@
 
           
           
-             <span id="/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="leancloud_visitors" data-flag-title="Oracle数据库 sqlplus常用命令">
+             <span id="/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/" class="leancloud_visitors" data-flag-title="Oracle 11g安装步骤与卸载步骤">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2179,7 +2179,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  239 字
+                  1.6k 字
                 </span>
               
 
@@ -2195,7 +2195,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -2217,15 +2217,14 @@
 
       
         
-          
-            <a id="more"></a>
-
-<h2 id="Oracle学习思维导图"><a href="#Oracle学习思维导图" class="headerlink" title="Oracle学习思维导图"></a>Oracle学习思维导图</h2><p><img src="https://img-blog.csdnimg.cn/20191030164918181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="sql-plus常用命令"><a href="#sql-plus常用命令" class="headerlink" title="sql*plus常用命令"></a>sql*plus常用命令</h2><p>（1）conn[ect]:切换用户<br>（2）disc[onnect]:断开某个用户和数据库的连接<br>（3）passw[ord]:修改用户密码<br>（4）show user:查看当前用户<br>（5）exit:退出数据库<br>（6）desc[ribe] 表名：查看表结构</p>
-<h3 id="交互式命令："><a href="#交互式命令：" class="headerlink" title="交互式命令："></a>交互式命令：</h3><p>（1）&amp;:可以替代变量，而在变量执行的时候，需要用户输入<br>                   Select * from emp where deptno=’&amp;deptno’;<br>                   注意：Oracle中字符串用单引号<br>         （2）ed[it]:编辑指定的.sql文件的   edit C:\a.sql<br>         （3）spool:可以将sqlplus屏幕上的内容输出到指定的文件中<br>                    Spool d:\a.sql<br>                    Select * from emp;<br> 。。。查询结果<br>Spool off</p>
-<p><strong>解锁用户和修改密码：</strong><br>（1）sqlplus连接到数据库：sqlplus sys/123456 as sysdba<br>（2）输入解锁语句：alter user scott account unlock;<br>（3）修改密码：alter user scott identified by 654321;<br>        passw【ord】用户名:可以去修改其他用户的密码。<br>         passw:表示修改自己的密码。</p>
-
-          
+          <h2 id="1-安装步骤"><a href="#1-安装步骤" class="headerlink" title="1.安装步骤"></a>1.安装步骤</h2><p>首先先下载好Oracle安装包（这个就不用说了，上Oracle官网自己找下载入口），将下载好后的两个压缩文件解压至同一文件夹下，</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
