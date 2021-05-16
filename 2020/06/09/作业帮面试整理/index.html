@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,面试，作业帮," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="雷凯博的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Linux常用命令">
+<meta name="keywords" content="java,面试，作业帮">
+<meta property="og:type" content="article">
+<meta property="og:title" content="作业帮面试整理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;09&#x2F;%E4%BD%9C%E4%B8%9A%E5%B8%AE%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="雷凯博的博客">
+<meta property="og:description" content="Linux常用命令">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-05-16T11:04:06.712Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/09/作业帮面试整理/"/>
+
+
+
+
+
+  <title>作业帮面试整理 | 雷凯博的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+<a href="https://github.com/leikaibo1014" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雷凯博的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录学习中的点点滴滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resume">
+          <a href="/resume" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/%E4%BD%9C%E4%B8%9A%E5%B8%AE%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="雷凯博">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雷凯博的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">作业帮面试整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-09T22:26:32+08:00">
+                2020-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">面试整理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/06/09/%E4%BD%9C%E4%B8%9A%E5%B8%AE%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" class="leancloud_visitors" data-flag-title="作业帮面试整理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  11.9k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  44 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2>  <a id="more"></a>
+
+
+
+<h2 id="一面："><a href="#一面：" class="headerlink" title="一面："></a>一面：</h2><ul>
+<li><p>1.自我介绍 </p>
+</li>
+<li><p>2.讲讲之前实习是做了什么工作 </p>
+</li>
+<li><p>3.项目做了什么，为什么做这个项目，有什么困难，如何解决，结果是什么。 </p>
+</li>
+<li><p>看你项目中遇到的困难在缓存和数据库，那你项目的后端框架用的是什么，数据库的底层数据结构是什么，磁盘的数据结构是什么？ </p>
+</li>
+<li><p>. B+树的结构是什么，和B树有什么区别，红黑树结构是什么？</p>
+</li>
+<li><p>红黑树的应用有哪些？AVL树是什么，平衡二叉树的条件是什么？ </p>
+</li>
+</ul>
+<h4 id="一、B树的应用"><a href="#一、B树的应用" class="headerlink" title="一、B树的应用"></a>一、B树的应用</h4><h3 id="1、B树大量应用在数据库和文件系统当中。"><a href="#1、B树大量应用在数据库和文件系统当中。" class="headerlink" title="1、B树大量应用在数据库和文件系统当中。"></a>1、B树大量应用在数据库和文件系统当中。</h3><p>它的设计思想是，将相关数据尽量集中在一起，以便一次读取多个数据，减少硬盘操作次数。B树算法减少定位记录时所经历的中间过程，从而加快存取速度。</p>
+<p>假定一个节点可以容纳100个值，那么3层的B树可以容纳100万个数据，如果换成二叉查找树，则需要20层！假定操作系统一次读取一个节点，并且根节点保留在内存中，那么B树在100万个数据中查找目标值，只需要读取两次硬盘。</p>
+<p>如mongoDB数据库使用，单次查询平均快于Mysql（但侧面来看Mysql至少平均查询耗时差不多）</p>
+<h4 id="二、B-树的应用"><a href="#二、B-树的应用" class="headerlink" title="二、B+树的应用"></a>二、B+树的应用</h4><p>mysql使用B+树作为索引：</p>
+<p>B+树相对B树的优点：</p>
+<p>①B+树的所有Data域在叶子节点，一般来说都会进行一个优化，就是将所有的叶子节点用指针串联起来，遍历叶子节点就能获取全部数据，这样就能进行区间访问了。</p>
+<p>②IO一次读数据是从磁盘上读的，磁盘容量是固定的，取数据量大小是固定的，非叶子节点不存储数据，节点小，磁盘IO次数就少。</p>
+<p>InnoDB索引和MyISAM最大的区别是它只有一个数据文件，在InnoDB中，表数据文件本身就是按B+Tree组织的一个索引结构，这棵树的叶节点数据域保存了完整的数据记录。所以我们又把它的主索引叫做聚集索引。而它的辅助索引和MyISAM也会有所不同，它的辅助索引都是将主键作为数据域。所以，这样当我们查找的时候通过辅助索引要先找到主键，然后通过主索引再找到对于的主键，得到信息。</p>
+<p>MyISAM表索引在处理文本索引时更具优势，而INNODB表索引在其它类型上更具效率优势，同时MySQL高并发需要事务场景时，只能使用INNODB表</p>
+<h3 id="三、红黑树"><a href="#三、红黑树" class="headerlink" title="三、红黑树"></a>三、红黑树</h3><p>红黑树往往出现由于树的深度过大而造成磁盘IO读写过于频繁，进而导致效率低下的情况在数据较小，可以完全放到内存中时，红黑树的时间复杂度比B树低。</p>
+<p>如linux中进程的调度用的是红黑树。</p>
+<p>反之，数据量较大，外存中占主要部分时，B树因其读磁盘次数少，而具有更快的速度。</p>
+<h3 id="哈希表用什么解决冲突的？"><a href="#哈希表用什么解决冲突的？" class="headerlink" title="哈希表用什么解决冲突的？"></a>哈希表用什么解决冲突的？</h3><p>拉链法</p>
+<ol start="8">
+<li><ul>
+<li>拉链法解决冲突可以，但是如果链表变长，如何优化呢？</li>
+</ul>
+</li>
+</ol>
+<p>HashMap采用位桶+链表+红黑树实现，当链表长度超过阈值（8）,时，将链表转换为红黑树，这样大大减少了查找时间。</p>
+<p>一直到JDK7为止，HashMap的结构都是这么简单，基于一个数组以及多个链表的实现，hash值冲突的时候，就将对应节点以链表的形式存储。</p>
+<p>这样子的HashMap性能上就抱有一定疑问，如果说成百上千个节点在hash时发生碰撞，存储一个链表中，那么如果要查找其中一个节点，那就不可避免的花费O(N)的查找时间，这将是多么大的性能损失。这个问题终于在JDK8中得到了解决。再最坏的情况下，链表查找的时间复杂度为O(n),而红黑树一直是O(logn),这样会提高HashMap的效率。</p>
+<h2 id="如果优化为树结构，数据量依旧很大，如何进一步优化？"><a href="#如果优化为树结构，数据量依旧很大，如何进一步优化？" class="headerlink" title="如果优化为树结构，数据量依旧很大，如何进一步优化？"></a>如果优化为树结构，数据量依旧很大，如何进一步优化？</h2><h3 id="10-数据库读写分离机制，如何做分库分表的？用的什么中间件去分库分表？"><a href="#10-数据库读写分离机制，如何做分库分表的？用的什么中间件去分库分表？" class="headerlink" title="10 数据库读写分离机制，如何做分库分表的？用的什么中间件去分库分表？"></a>10 数据库读写分离机制，如何做分库分表的？用的什么中间件去分库分表？</h3><p>11.如何确保数据库的稳定性 </p>
+<p>12.算法：链表反转 </p>
+<p>13.有什么要问我的？</p>
+<h3 id="1-自我介绍"><a href="#1-自我介绍" class="headerlink" title="1.自我介绍"></a>1.自我介绍</h3><h3 id="2-做过哪些项目，给自己印象最深的项目是什么"><a href="#2-做过哪些项目，给自己印象最深的项目是什么" class="headerlink" title="2.做过哪些项目，给自己印象最深的项目是什么"></a>2.做过哪些项目，给自己印象最深的项目是什么</h3><h3 id="3-用redis做二级缓存的时候如何确保高并发数据的一致性，如果有一张订单表，我要你找到对应用户所拥有的订单，怎么找？"><a href="#3-用redis做二级缓存的时候如何确保高并发数据的一致性，如果有一张订单表，我要你找到对应用户所拥有的订单，怎么找？" class="headerlink" title="3.用redis做二级缓存的时候如何确保高并发数据的一致性，如果有一张订单表，我要你找到对应用户所拥有的订单，怎么找？"></a>3.用redis做二级缓存的时候如何确保高并发数据的一致性，如果有一张订单表，我要你找到对应用户所拥有的订单，怎么找？</h3><p>数据库的几种事务隔离机制是什么，有哪些？有什么用？ </p>
+<p>mysql支持事务的常用引擎是InnoDB</p>
+<p>第一种：读未提交（read uncommitted）</p>
+<p>　　　　　　第一个事务未提交更新的数据，第二个事务可以读到，这是读未提                交。</p>
+<p>　　　　　　第一个事务未提交更新的数据回滚，第二个事务读到回滚的数据，                这是脏读。故读未提交，可能会出现脏读。</p>
+<p>第二种：读已提交（read committed），也称不可重复读</p>
+<p>　　　　　　第一个事务未提交更新的数据，第二个事务读不到；</p>
+<p>　　　　　　第一个事务提交更新的数据，第二个事务可以读到；这是读已提交。</p>
+<p>　　　　　　第一个事务提交更新小明同学年龄12岁，第二个事务读到小明12                岁；</p>
+<p>第三个事务再次提交更新小明同学年龄14岁，第二个事务再读到小明14岁；这是不可重复读（同一个事务内读取的数据结果不一致）。</p>
+<p>　　　　　　故读已提交，会出现不可重复读（同一个事务内读取的数据结果不            一致），不可重复读也会造成幻读（同一个事务内读取的数据结果            不一致）。</p>
+<p>第三种：可重复读（repeatable read），mysql默认事务隔离级别</p>
+<p>第一个事务提交更新小明同学年龄12岁，第二个事务读到小明12岁；</p>
+<p>第三个事务再次提交更新小明同学年龄14岁，第二个事务再读到小明12岁；这是可重复读（同一个事务内读取的数据结果一致）。</p>
+<p>第四个事务提交插入同学小马数据记录，第二个事务再读不仅读到小明12    岁数据，还会读到小马同学数据，这是幻读。</p>
+<p>故可重复读，会出现幻读（同一个事务内读取的数据结果不一致）。</p>
+<p>第四种：串行化（serializable）</p>
+<p>隔离级别最高，解决了脏读、不可重复无、幻读问题。</p>
+<p>　　　　　　同一个事务内，不管读取多少次，结果集永远一致。</p>
+<h3 id="Str1-“a”-str2-new-string-“a”-区别，虚拟机内存空间上如何体现这两个区别，这区别具体在开发中会造成什么问题，如何解决？"><a href="#Str1-“a”-str2-new-string-“a”-区别，虚拟机内存空间上如何体现这两个区别，这区别具体在开发中会造成什么问题，如何解决？" class="headerlink" title="Str1=“a” str2=new string(“a”)区别，虚拟机内存空间上如何体现这两个区别，这区别具体在开发中会造成什么问题，如何解决？"></a>Str1=“a” str2=new string(“a”)区别，虚拟机内存空间上如何体现这两个区别，这区别具体在开发中会造成什么问题，如何解决？</h3><ul>
+<li><p>==:比较引用类型比较的是地址值是否相同</p>
+</li>
+<li><p>equals:比较引用类型默认也是比较地址值是否相同，注意:<strong><em>\</em>String类重写了equals()方法**</strong>，比较的是内容是否相同。</p>
+</li>
+</ul>
+<p>String A = “ABC”;内存会去查找永久代(常量池) ，如果没有的话，在永久代中中开辟一块儿内存空间，把地址付给栈指针，如果已经有了”ABC”的内存，直接把地址赋给栈指针；****</p>
+<p><strong><em>\</em>而String str = new String(“a”);是根据”a”这个String对象再次构造一个String对象;在堆中从新new一块儿内存，把指针赋给栈，**</strong></p>
+<p>堆  栈  变量的存放位置</p>
+<h3 id="Java和C-在内存处理上有什么区别？虚拟机的常用垃圾回收机制有什么？"><a href="#Java和C-在内存处理上有什么区别？虚拟机的常用垃圾回收机制有什么？" class="headerlink" title="Java和C++在内存处理上有什么区别？虚拟机的常用垃圾回收机制有什么？"></a>Java和C++在内存处理上有什么区别？虚拟机的常用垃圾回收机制有什么？</h3><h3 id="什么时候会发生OOM错误（内存溢出错误）"><a href="#什么时候会发生OOM错误（内存溢出错误）" class="headerlink" title="什么时候会发生OOM错误（内存溢出错误）"></a>什么时候会发生OOM错误（内存溢出错误）</h3><p>栈溢出，堆溢出</p>
+<p>栈是线程私有的，他的生命周期与线程相同，每个方法在执行的时候都会创建一个栈帧，用来存储局部变量表，操作数栈，动态链接，方法出口灯信息。局部变量表又包含基本数据类型，对象引用类型（局部变量表编译器完成，运行期间不会变化）</p>
+<p>所以我们可以理解为栈溢出就是方法执行是创建的栈帧超过了栈的深度。那么最有可能的就是方法递归调用产生这种结果。</p>
+<p>heap space表示堆空间，堆中主要存储的是对象。如果不断的new对象则会导致堆中的空间溢出</p>
+<h3 id="Redis的基本数据结构是什么？"><a href="#Redis的基本数据结构是什么？" class="headerlink" title="Redis的基本数据结构是什么？"></a>Redis的基本数据结构是什么？</h3><h3 id="redis如何做持久化的？"><a href="#redis如何做持久化的？" class="headerlink" title="redis如何做持久化的？"></a>redis如何做持久化的？</h3><h3 id="给你一个场景，设计秒杀系统，假设有10件商品，-先用redis去get数量，数量-1，然后用set更新redis的数据，如果get数据为0就表示商品卖完了，这种情况安全么，有问题的话如何解决"><a href="#给你一个场景，设计秒杀系统，假设有10件商品，-先用redis去get数量，数量-1，然后用set更新redis的数据，如果get数据为0就表示商品卖完了，这种情况安全么，有问题的话如何解决" class="headerlink" title="给你一个场景，设计秒杀系统，假设有10件商品， 先用redis去get数量，数量-1，然后用set更新redis的数据，如果get数据为0就表示商品卖完了，这种情况安全么，有问题的话如何解决"></a>给你一个场景，设计秒杀系统，假设有10件商品， 先用redis去get数量，数量-1，然后用set更新redis的数据，如果get数据为0就表示商品卖完了，这种情况安全么，有问题的话如何解决</h3><h3 id="redis加锁上锁的命令是什么"><a href="#redis加锁上锁的命令是什么" class="headerlink" title="redis加锁上锁的命令是什么"></a>redis加锁上锁的命令是什么</h3><h4 id="Linux-awk-grep命令是什么，如何用正则表达式匹配AxxxxAxxx？（正则还是用的比较少-生疏了。。。）"><a href="#Linux-awk-grep命令是什么，如何用正则表达式匹配AxxxxAxxx？（正则还是用的比较少-生疏了。。。）" class="headerlink" title="Linux awk grep命令是什么，如何用正则表达式匹配AxxxxAxxx？（正则还是用的比较少 生疏了。。。）"></a>Linux awk grep命令是什么，如何用正则表达式匹配AxxxxAxxx？（正则还是用的比较少 生疏了。。。）</h4><h3 id="讲一下在浏览器输入URL之后到浏览器出现界面的全过程，系统后面用了哪些协议"><a href="#讲一下在浏览器输入URL之后到浏览器出现界面的全过程，系统后面用了哪些协议" class="headerlink" title="讲一下在浏览器输入URL之后到浏览器出现界面的全过程，系统后面用了哪些协议"></a>讲一下在浏览器输入URL之后到浏览器出现界面的全过程，系统后面用了哪些协议</h3><ul>
+<li><p>首先进行域名解析，域名解析具体过程讲一下：</p>
+</li>
+<li><p>浏览器搜索自己的DNS缓存，缓存中维护一张域名与IP地址的对应表；操作系统会先检查自己本地的hosts文件是否有这个网址映射关系，如果有，就先调用这个IP地址映射，完成域名解析。</p>
+</li>
+<li><p>如果hosts里没有这个域名的映射，则查找本地DNS解析器缓存，是否有这个网址映射关系，如果有，直接返回，完成域名解析。</p>
+</li>
+<li><p>如果hosts与本地DNS解析器缓存都没有相应的网址映射关系，首先会找TCP/IP参数中设置的首选DNS服务器，则操作系统将域名发送至本地域名服务器（递归查询方式），本地域名服务器查询自己的DNS缓存，查找成功则返回结果，否则，通过以下方式迭代查找：</p>
+</li>
+<li><p>本地域名服务器向根域名服务器发起请求，根域名服务器返回com域的顶级域名服务器的地址；</p>
+</li>
+<li><p>本地域名服务器向com域的顶级域名服务器发起请求，返回权限域名服务器地址；</p>
+</li>
+<li><p>本地域名服务器向权限域名服务器发起请求，得到IP地址；</p>
+</li>
+</ul>
+<ul>
+<li><p>本地域名服务器将得到的IP地址返回给操作系统，同时自己将IP地址缓存起来；</p>
+</li>
+<li><p>操作系统将IP地址返回给浏览器，同时自己也将IP地址缓存起来；</p>
+</li>
+<li><p>至此，浏览器已经得到了域名对应的IP地址。</p>
+</li>
+</ul>
+<ol start="2">
+<li>浏览器发起HTTP请求；</li>
+</ol>
+<ol start="3">
+<li><p>接下来到了传输层，选择传输协议，TCP或者UDP，TCP是可靠的传输控制协议，对HTTP请求进行封装，加入了端口号等信息–三次握手建立连接–四次挥手断开连接；</p>
+</li>
+<li><p>然后到了网络层，通过IP协议将IP地址封装为IP数据报；然后此时会用到ARP协议，主机发送信息时将包含目标IP地址的ARP请求广播到网络上的所有主机，并接收返回消息，以此确定目标的物理地址，找到目的MAC地址；</p>
+</li>
+<li><p>接下来到了数据链路层，把网络层交下来的IP数据报添加首部和尾部，封装为MAC帧，现在根据目的mac开始建立TCP连接，三次握手，接收端在收到物理层上交的比特流后，根据首尾的标记，识别帧的开始和结束，将中间的数据部分上交给网络层，然后层层向上传递到应用层；</p>
+</li>
+<li><p>服务器响应请求并请求客户端要的资源，传回给客户端；</p>
+</li>
+<li><p>断开TCP连接，浏览器对页面进行渲染呈现给客户端。</p>
+</li>
+</ol>
+<h4 id="如果你有很多IP地址，如何找到出现次数最多的前三个IP地址？（hashMap-heap）"><a href="#如果你有很多IP地址，如何找到出现次数最多的前三个IP地址？（hashMap-heap）" class="headerlink" title="如果你有很多IP地址，如何找到出现次数最多的前三个IP地址？（hashMap + heap）"></a>如果你有很多IP地址，如何找到出现次数最多的前三个IP地址？（hashMap + heap）</h4><ul>
+<li><p>1.直接排序</p>
+</li>
+<li><p>2.使用hashTable  我们的算法就有了：维护一个Key为Query字串，Value为该Query出现次数的HashTable，每次读取一个Query，如果该字串不在Table中，那么加入该字串，并且将Value值设为1；如果该字串在Table中，那么将该字串的计数加一即可。最终我们在O(N)的时间复杂度内完成了对该海量数据的处理。</p>
+</li>
+<li><p>本方法相比算法1：在时间复杂度上提高了一个数量级，为O（N），但不仅仅是时间复杂度上的优化，该方法只需要IO数据文件一次，而算法1的IO次数较多的，因此该算法2比算法1在工程上有更好的可操作性。</p>
+</li>
+</ul>
+<h3 id="如果你有一个100G的IP地址文件，你的机器只有5G存储空间，如何找到出现次数最多的前三IP地址？"><a href="#如果你有一个100G的IP地址文件，你的机器只有5G存储空间，如何找到出现次数最多的前三IP地址？" class="headerlink" title="如果你有一个100G的IP地址文件，你的机器只有5G存储空间，如何找到出现次数最多的前三IP地址？"></a>如果你有一个100G的IP地址文件，你的机器只有5G存储空间，如何找到出现次数最多的前三IP地址？</h3><h3 id="如果一张订单表特别大，你会如何处理这个表格，如何优化它？"><a href="#如果一张订单表特别大，你会如何处理这个表格，如何优化它？" class="headerlink" title="如果一张订单表特别大，你会如何处理这个表格，如何优化它？"></a>如果一张订单表特别大，你会如何处理这个表格，如何优化它？</h3><h3 id="我们一般都是把历史数据定期转存其他表（一样的表名后加年月例如TABLE201205）归档"><a href="#我们一般都是把历史数据定期转存其他表（一样的表名后加年月例如TABLE201205）归档" class="headerlink" title="我们一般都是把历史数据定期转存其他表（一样的表名后加年月例如TABLE201205）归档~"></a>我们一般都是把历史数据定期转存其他表（一样的表名后加年月例如TABLE201205）归档~</h3><p>这样该表本年度的查询的压力也小点（90%查询量集中在本年度）,即使查询历史数据也不影响性能，强力推荐！</p>
+<h4 id="算法题：字符串切分-反转"><a href="#算法题：字符串切分-反转" class="headerlink" title="算法题：字符串切分+反转"></a>算法题：字符串切分+反转</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">reverseString</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// i am a student</span></span><br><span class="line">        String string = <span class="string">"i am a student"</span>;</span><br><span class="line">        String s = reverseDemo(string);</span><br><span class="line">        System.out.println(s);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">reverseDemo</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">        String[] strArr = string.split(<span class="string">" "</span>);</span><br><span class="line">        String[] resultArr = <span class="keyword">new</span> String[strArr.length];</span><br><span class="line"></span><br><span class="line">        StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;strArr.length;i++)&#123;</span><br><span class="line">            resultArr[i] = strArr[strArr.length - i - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span> (i != strArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">                stringBuffer.append(resultArr[i]);</span><br><span class="line">                stringBuffer.append(<span class="string">" "</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                stringBuffer.append(resultArr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stringBuffer.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="16-盲人有10双袜子，两双黑的，8双白的，如何在没人帮助下找出黑的（在太阳下晒一晒黑色更吸热）"><a href="#16-盲人有10双袜子，两双黑的，8双白的，如何在没人帮助下找出黑的（在太阳下晒一晒黑色更吸热）" class="headerlink" title="16.盲人有10双袜子，两双黑的，8双白的，如何在没人帮助下找出黑的（在太阳下晒一晒黑色更吸热）"></a>16.盲人有10双袜子，两双黑的，8双白的，如何在没人帮助下找出黑的（在太阳下晒一晒黑色更吸热）</h3><h3 id="17-你有什么问题想问我的？"><a href="#17-你有什么问题想问我的？" class="headerlink" title="17.你有什么问题想问我的？"></a>17.你有什么问题想问我的？</h3><h3 id="MYSQL日志分为几种"><a href="#MYSQL日志分为几种" class="headerlink" title="MYSQL日志分为几种"></a>MYSQL日志分为几种</h3><p><a href="https://blog.csdn.net/xiamiflying/article/details/80960598" target="_blank" rel="noopener">https://blog.csdn.net/xiamiflying/article/details/80960598</a></p>
+<p>如何保证回滚</p>
+<p>数据库中事务到底是mvcc回滚还是日志回滚</p>
+<h3 id="socket有几种状态"><a href="#socket有几种状态" class="headerlink" title="socket有几种状态"></a>socket有几种状态</h3><h5 id="Socket-11种状态"><a href="#Socket-11种状态" class="headerlink" title="Socket 11种状态"></a>Socket 11种状态</h5><ul>
+<li>1、SOCKET状态介绍</li>
+</ul>
+<p>socket本质是编程接口(API)，对TCP/IP的封装，TCP/IP也要提供可供程序员做网络开发所用的接口，这就是Socket编程接口;HTTP是轿车，提供了封装或者显示数据的具体形式;Socket是发动机，提供了网络通信的能力。</p>
+<p>  1、客户端独有的：（1）SYN_SENT （2）FIN_WAIT1 （3）FIN_WAIT2 （4）CLOSING （5）TIME_WAIT 。</p>
+<p>  2、服务器独有的：（1）LISTEN （2）SYN_RCVD （3）CLOSE_WAIT （4）LAST_ACK 。</p>
+<p>  3、共有的：（1）CLOSED （2）ESTABLISHED 。</p>
+<h5 id="mysql更新了数据日志文件有什么改变"><a href="#mysql更新了数据日志文件有什么改变" class="headerlink" title="mysql更新了数据日志文件有什么改变"></a>mysql更新了数据日志文件有什么改变</h5><h5 id="它的意思是服务器崩了，你访问服务器应该是什么样"><a href="#它的意思是服务器崩了，你访问服务器应该是什么样" class="headerlink" title="它的意思是服务器崩了，你访问服务器应该是什么样"></a>它的意思是服务器崩了，你访问服务器应该是什么样</h5><p>服务器崩了发送什么错误码，崩了情况下500是谁发的<br>开发环境和生产环境不一样，配置环境应该有什么不同配置数据库<br>ACID<br>死锁以及解决措施</p>
+<p>rabbitmq中各种模式<br>堆栈区别<br>GC回收算法<br>点击按钮这个过程详解一下</p>
+<h3 id="算法题："><a href="#算法题：" class="headerlink" title="算法题："></a>算法题：</h3><p>长字符串相加<br>nums[] = {1,-1,0,2,-2,1,3} 找到所有不重复a + b + c = 0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">暴力解法，而且重复</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">zifuJia</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">int</span>[] array = &#123;<span class="number">1</span>,-<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,-<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        List list = stringSum(array);</span><br><span class="line"></span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List <span class="title">stringSum</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList();</span><br><span class="line"></span><br><span class="line">        Arrays.sort(array);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">1</span> &amp;&amp; array[i] == array[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.length; j++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j + <span class="number">1</span>; k &lt; array.length; k++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (array[i] + array[j] + array[k] == <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">                       list.add(Arrays.asList(array[i], array[j], array[k]));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size()-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (list.get(i).equals(list.get(i+<span class="number">1</span>)))&#123;</span><br><span class="line">                list.remove(list.get(i + <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="堆排序："><a href="#堆排序：" class="headerlink" title="堆排序："></a>堆排序：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">heapSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = &#123;<span class="number">12</span>,<span class="number">15</span>,<span class="number">10</span>,<span class="number">18</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">16</span>&#125;;</span><br><span class="line">        heap_sort(array, array.length);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            System.out.print(array[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 参数说明   arr 表示待构建数组</span></span><br><span class="line"><span class="comment">     * n：表示堆的元素个数</span></span><br><span class="line"><span class="comment">     * i: 表示每一个小堆的父节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heap_step</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> n, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> c1 = <span class="number">2</span> * i + <span class="number">1</span>;    <span class="comment">//i结点的左孩子</span></span><br><span class="line">        <span class="keyword">int</span> c2 = <span class="number">2</span> * i + <span class="number">2</span>;   <span class="comment">//i结点的右孩子</span></span><br><span class="line">        <span class="keyword">int</span> max = i;   <span class="comment">//这三个元素最大值的下标指向</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//定义递归出口</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt; n) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (c1 &lt; n &amp;&amp; arr[c1] &gt; arr[max])&#123;</span><br><span class="line">            max = c1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (c2 &lt; n &amp;&amp; arr[c2] &gt; arr[max]) &#123;</span><br><span class="line">            max = c2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (max != i) &#123;</span><br><span class="line">            swap(arr, max, i);<span class="comment">//交换两个位置的元素</span></span><br><span class="line">            heap_step(arr, n, max);<span class="comment">//继续进行递归判断，确保每一次构建完任意一个小堆都是大顶堆</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 我们需要对每一个非叶子结点以及他们的左右孩子构建大顶堆</span></span><br><span class="line"><span class="comment">     * 从最后一个非叶子结点开始</span></span><br><span class="line"><span class="comment">     * 最后一个叶子结点数组下标为：  last_node = arr.length-1</span></span><br><span class="line"><span class="comment">     * 则最后一个非叶子结点为   last_parent = (last_node-1)/2</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">build_heap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> last_node = n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> last_parent = (last_node-<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">        <span class="comment">//对每一个非叶子结点，依次从后向前遍历，每一个都做heap_step的大顶堆构建</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = last_parent; i &gt;=<span class="number">0</span> ; i--) &#123;</span><br><span class="line">            heap_step(arr,n,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构建完大顶堆之后，需要进行大顶堆的第一个元素与最后元素进行交换</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        build_heap(arr, arr.length);   <span class="comment">//把数组先构造成为一个大顶堆</span></span><br><span class="line">        <span class="comment">// 这个时候数组已经是一个大顶堆了</span></span><br><span class="line">        <span class="comment">//交换数据</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            swap(arr, i, <span class="number">0</span>);</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">                因为这个时候完全二叉树已经是一个大顶堆了，</span></span><br><span class="line"><span class="comment">                所以我们只需要使用heap_step交换最顶层的三个数字就可以,也就是最根节点以及它们的左右孩子节点</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            heap_step(arr, i, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        两个元素交换位置的函数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序;"></a>快速排序;</h5><p>问了项目，单点登录实现 </p>
+<p>如何解决分布式session </p>
+<p>redis集群怎么做的，主从复制流程 </p>
+<p>RDB和AOF，如果AOF文件很大怎么办，AOF重做，还是特别大怎么办，分片复制 </p>
+<h4 id="TCP三次握手四次挥手"><a href="#TCP三次握手四次挥手" class="headerlink" title="TCP三次握手四次挥手"></a>TCP三次握手四次挥手</h4><p>三次挥手行不行，为什么 </p>
+<h4 id="状态码301与302的区别"><a href="#状态码301与302的区别" class="headerlink" title="状态码301与302的区别"></a>状态码301与302的区别</h4><p>详细来说，301和302状态码都表示重定向，就是说浏览器在拿到服务器返回的这个状态码后会自动跳转到一个新的URL地址，这个地址可以从响应的Location首部中获取（用户看到的效果就是他输入的地址A瞬间变成了另一个地址B）——这是它们的共同点。他们的不同在于。301表示旧地址A的资源已经被永久地移除了（这个资源不可访问了）</p>
+<p>301 redirect: 301 代表永久性转移(Permanently Moved)</p>
+<p>302 redirect: 302 代表暂时性转移(Temporarily Moved )</p>
+<h4 id="Linux找到文件夹下包含某个字符的所有记录"><a href="#Linux找到文件夹下包含某个字符的所有记录" class="headerlink" title="Linux找到文件夹下包含某个字符的所有记录"></a>Linux找到文件夹下包含某个字符的所有记录</h4><p>grep -r message ./</p>
+<p>示例解释：在当前目录下递归查找含有字符串message的文件</p>
+<p>-r 是递归查找</p>
+<p>-n 是显示行号</p>
+<p>-R 查找所有文件包含子目录</p>
+<p>-i 忽略大小写</p>
+<h3 id="分页查询页数很大效率低怎么办，join-连接主键优化"><a href="#分页查询页数很大效率低怎么办，join-连接主键优化" class="headerlink" title="分页查询页数很大效率低怎么办，join 连接主键优化"></a>分页查询页数很大效率低怎么办，join 连接主键优化</h3><p>select * from orders_history where type=8 limit 100000,100;</p>
+<p><strong><em>\</em>这种分页查询方式会从数据库第一条记录开始扫描，所以越往后，查询速度越慢，而且查询的数据越多，也会拖慢总查询速度。**</strong></p>
+<p><strong>(1)</strong> <strong><em>\</em>使用子查询优化–**</strong>这种方式先定位偏移位置的 id，然后往后查询，这种方式适用于 id 递增的情况。</p>
+<p><strong>(2)</strong> <strong><em>\</em>使用 id 限定优化*****</strong>*—****这种方式假设数据表的id是连续递增的，则我们根据查询的页数和查询的记录数可以算出查询的id的范围，可以使用 id between and 来查询</p>
+<p>(3) 当然还可以使用 in 的方式来进行查询，这种方式经常用在多表关联的时候进行查询，使用其他表查询的id集合，来进行查询</p>
+<h3 id="聚簇索引和非聚簇索引"><a href="#聚簇索引和非聚簇索引" class="headerlink" title="聚簇索引和非聚簇索引"></a>聚簇索引和非聚簇索引</h3><p>聚簇索引的叶子节点就是数据节点，而非聚簇索引的叶子节点仍然是索引节点，只不过有指向对应数据块的指针。</p>
+<h3 id="索引覆盖"><a href="#索引覆盖" class="headerlink" title="索引覆盖"></a>索引覆盖</h3><p>(1) 就是select的数据列只用从索引中就能够取得，不必从数据表中读取，换句话说查询列要被所使用的索引覆盖。</p>
+<p>(2) 索引是高效找到行的一个方法，当能通过检索索引就可以读取想要的数据，那就不需要再到数据表中读取行了。如果一个索引包含了（或覆盖了）满足查询语句中字段与条件的数据就叫做覆盖索引。</p>
+<p>一个包含查询所需字段的索引称为“覆盖索引”</p>
+<p>MySQL只需要通过索引就可以返回查询所需要的数据，而不必在查到索引之后进行回表操作，减少IO，提高了效率</p>
+<h3 id="算法：下一个排列"><a href="#算法：下一个排列" class="headerlink" title="算法：下一个排列"></a>算法：下一个排列</h3><p>solr怎么用的，zookeeper怎么用的 </p>
+<p>如何保证solr与数据库一致性 </p>
+<h3 id="DNS递归和迭代"><a href="#DNS递归和迭代" class="headerlink" title="DNS递归和迭代"></a>DNS递归和迭代</h3><p>一、主机向本地域名服务器的查询一般都是采用递归查询。</p>
+<p>​    所谓递归查询就是：如果主机所询问的本地域名服务器不知道被查询的域名的IP地址，那么本地域名服务器就以DNS客户的身份，</p>
+<p>​    向其它根域名服务器继续发出查询请求报文(即替主机继续查询)，而不是让主机自己进行下一步查询。</p>
+<p>​    因此，递归查询返回的查询结果或者是所要查询的IP地址，或者是报错，表示无法查询到所需的IP地址。</p>
+<h4 id="二、本地域名服务器向根域名服务器的查询的迭代查询。"><a href="#二、本地域名服务器向根域名服务器的查询的迭代查询。" class="headerlink" title="二、本地域名服务器向根域名服务器的查询的迭代查询。"></a>二、本地域名服务器向根域名服务器的查询的迭代查询。</h4><p>​    迭代查询的特点：当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的IP地址，要么告诉本地服务器：“你下一步应当向哪一个域名服务器进行查询”。</p>
+<p>​    然后让本地服务器进行后续的查询。根域名服务器通常是把自己知道的顶级域名服务器的IP地址告诉本地域名服务器，让本地域名服务器再向顶级域名服务器查询。</p>
+<p>​    顶级域名服务器在收到本地域名服务器的查询请求后，要么给出所要查询的IP地址，要么告诉本地服务器下一步应当向哪一个权限域名服务器进行查询。</p>
+<p>​    最后，知道了所要解析的IP地址或报错，然后把这个结果返回给发起查询的主机</p>
+<h2 id="CAS原理，ABA问题，解决方法"><a href="#CAS原理，ABA问题，解决方法" class="headerlink" title="CAS原理，ABA问题，解决方法"></a>CAS原理，ABA问题，解决方法</h2><p>volatile只能保证可见性，不能保证原子性。</p>
+<p>但原子类（AtomicInteger等可以保证原子性），原子类利用volatile+CAS来保证原子性</p>
+<p>CAS有3个操作数，内存值V，旧的预期值A，要修改的新值B。当且仅当预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做。</p>
+<h4 id="CAS原理"><a href="#CAS原理" class="headerlink" title="CAS原理"></a>CAS原理</h4><p>独占锁是一种悲观锁，synchronized就是一种独占锁，会导致其它所有需要锁的线程挂起，等待持有锁的线程释放锁。而另一个更加有效的锁就是乐观锁。所谓乐观锁就是，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。乐观锁用到的机制就是CAS，Compare and Swap。</p>
+<p>CAS 操作包含三个操作数 —— 内存位置（V）、预期原值（A）和新值(B)。 如果内存位置的值与预期原值相匹配，那么处理器会自动将该位置值更新为新值 。否则，处理器不做任何操作。无论哪种情况，它都会在 CAS 指令之前返回该 位置的值。（在 CAS 的一些特殊情况下将仅返回 CAS 是否成功，而不提取当前 值。）CAS 有效地说明了“我认为位置 V 应该包含值 A；如果包含该值，则将 B 放到这个位置；否则，不要更改该位置，只告诉我这个位置现在的值即可。</p>
+<h3 id="CAS存在的问题"><a href="#CAS存在的问题" class="headerlink" title="CAS存在的问题"></a>CAS存在的问题</h3><h5 id="CAS虽然很高效的解决原子操作，但是CAS仍然存在三大问题。ABA问题，循环时间长开销大和只能保证一个共享变量的原子操作"><a href="#CAS虽然很高效的解决原子操作，但是CAS仍然存在三大问题。ABA问题，循环时间长开销大和只能保证一个共享变量的原子操作" class="headerlink" title="CAS虽然很高效的解决原子操作，但是CAS仍然存在三大问题。ABA问题，循环时间长开销大和只能保证一个共享变量的原子操作"></a>CAS虽然很高效的解决原子操作，但是CAS仍然存在三大问题。ABA问题，循环时间长开销大和只能保证一个共享变量的原子操作</h5><ol>
+<li>ABA问题。因为CAS需要在操作值的时候检查下值有没有发生变化，如果没有发生变化则更新，但是如果一个值原来是A，变成了B，又变成了A，那么使用CAS进行检查时会发现它的值没有发生变化，但是实际上却变化了。ABA问题的解决思路就是使用版本号。在变量前面追加上版本号，每次变量更新的时候把版本号加一，那么A－B－A 就会变成1A-2B－3A。</li>
+</ol>
+<p>从Java1.5开始JDK的atomic包里提供了一个类AtomicStampedReference来解决ABA问题。这个类的compareAndSet方法作用是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。</p>
+<ol start="2">
+<li>循环时间长开销大。自旋CAS如果长时间不成功，会给CPU带来非常大的执行开销。如果JVM能支持处理器提供的pause指令那么效率会有一定的提升，pause指令有两个作用，第一它可以延迟流水线执行指令（de-pipeline）,使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。第二它可以避免在退出循环的时候因内存顺序冲突（memory order violation）而引起CPU流水线被清空（CPU pipeline flush），从而提高CPU的执行效率</li>
+</ol>
+<ol start="3">
+<li>只能保证一个共享变量的原子操作。当对一个共享变量执行操作时，我们可以使用循环CAS的方式来保证原子操作，但是对多个共享变量操作时，循环CAS就无法保证操作的原子性，这个时候就可以用锁，或者有一个取巧的办法，就是把多个共享变量合并成一个共享变量来操作。比如有两个共享变量i＝2,j=a，合并一下ij=2a，然后用CAS来操作ij。从Java1.5开始JDK提供了AtomicReference类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行CAS操作。</li>
+</ol>
+<h3 id="Dubbo原理"><a href="#Dubbo原理" class="headerlink" title="Dubbo原理"></a>Dubbo原理</h3><h4 id="注册中心宕机怎么办"><a href="#注册中心宕机怎么办" class="headerlink" title="注册中心宕机怎么办"></a>注册中心宕机怎么办</h4><h3 id="RPC分为哪几部分"><a href="#RPC分为哪几部分" class="headerlink" title="RPC分为哪几部分"></a>RPC分为哪几部分</h3><h4 id="Linux常用命令，让我按要求查日志，就是grep，cut，啥的"><a href="#Linux常用命令，让我按要求查日志，就是grep，cut，啥的" class="headerlink" title="Linux常用命令，让我按要求查日志，就是grep，cut，啥的"></a>Linux常用命令，让我按要求查日志，就是grep，cut，啥的</h4><p>cat 查看文件  cat 文件名 ——一次显示整个文件的内容</p>
+<p>将几个文件合并为一个文件</p>
+<p>$cat file1 file2 &gt; file</p>
+<p>grep 搜索</p>
+<p>用于过滤/搜索的特定字符。可使用正则表达式能多种命令配合使用，使用上十分灵活。</p>
+<p>ps -ef | grep redis   查找指定进程</p>
+<p>从文件中查找关键词</p>
+<p>Grep “cat” 文件名</p>
+<p>搜索log目录下卡号为：“4563513600036385540”,在哪个文件的具体位置及行数</p>
+<p>grep -rin “4563513600036385540” log/</p>
+<p>Cut 剪切文件</p>
+<p>cut命令是一个选取命令，其功能是将文件中的每一行”字节” ”字符” ”字段” 进行剪切，选取我们需要的，并将这些选取好的数据输出至标准输出</p>
+<p>Cut  -c 文件名  以字符为单位进行分割</p>
+<p>Cut -d 文件名   默认制表符分割</p>
+<p>ES倒排索引 </p>
+<p>算法： </p>
+<p>\1. 一个字符串数组，按长度大小，相同长度按字典顺序 </p>
+<p>字符数组排序</p>
+<p>public static void sortString(String[] arr) {<br>  for (int i = 0; i &lt; arr.length - 1; i++) {<br>    for (int j = i + 1; j &lt; arr.length; j++) {<br>      if (arr[i].compareTo(arr[j]) &gt; 0)  //字符串比较  arr[i].compareTo(arr[j])<br>      <strong>swap</strong>(arr, i, j);<br>    }<br>  }<br>}</p>
+<p>2.EXCEL数字转字母</p>
+<p>生活中你是怎样的人</p>
+<p>举个例子</p>
+<p>了解作业帮吗</p>
+<p>说说你的缺点</p>
+<p>说说你觉得经历过比较困难的时间</p>
+<p>有看非技术的书吗，推荐下，</p>
+<p>介绍下*本书讲了什么</p>
+<p>对未来的规划</p>
+<p>想来北京发展吗等等</p>
+<p>一面： </p>
+<h3 id="一棵m阶的B-tree-m叉树-：树中每个结点至多-个孩子，除根结点和叶子结点外，其它每个结点至少有-个孩子-B-树又叫平衡多路查找树。一棵m阶的B-树-m叉树-的特性如下："><a href="#一棵m阶的B-tree-m叉树-：树中每个结点至多-个孩子，除根结点和叶子结点外，其它每个结点至少有-个孩子-B-树又叫平衡多路查找树。一棵m阶的B-树-m叉树-的特性如下：" class="headerlink" title="一棵m阶的B-tree(m叉树)：树中每个结点至多()个孩子，除根结点和叶子结点外，其它每个结点至少有()个孩子 B 树又叫平衡多路查找树。一棵m阶的B 树 (m叉树)的特性如下："></a>一棵m阶的B-tree(m叉树)：树中每个结点至多()个孩子，除根结点和叶子结点外，其它每个结点至少有()个孩子 B 树又叫平衡多路查找树。一棵m阶的B 树 (m叉树)的特性如下：</h3><ol>
+<li><p>树中每个结点最多含有m个孩子（m&gt;=2）；</p>
+</li>
+<li><p>除根结点和叶子结点外，其它每个结点至少有[ceil(m / 2)]个孩子（其中ceil(x)是一个取上限的函数）；</p>
+</li>
+<li><p>若根结点不是叶子结点，则至少有2个孩子（特殊情况：没有孩子的根结点，即根结点为叶子结点，整棵树只有一个根节点）；</p>
+</li>
+<li><p>所有叶子结点都出现在同一层，叶子结点不包含任何关键字信息(可以看做是外部接点或查询失败的接点，实际上这些结点不存在，指向这些结点的指针都为null)；</p>
+</li>
+<li><p>每个非终端结点中包含有n个关键字信息： (P1，K1，P2，K2，P3，……，Kn，Pn+1)。其中：</p>
+</li>
+</ol>
+<p>​    a)  Ki (i=1…n)为关键字，且关键字按顺序升序排序K(i-1)&lt; Ki。 </p>
+<p>​    b)  Pi为指向子树根的接点，且指针P(i)指向子树种所有结点的关键字均小于Ki，但都大于K(i-1)。 </p>
+<p>​    c)  关键字的个数n必须满足： [ceil(m / 2)-1]&lt;= n &lt;= m-1。</p>
+<h3 id="二进制1101-01转化成十进制"><a href="#二进制1101-01转化成十进制" class="headerlink" title="二进制1101.01转化成十进制"></a>二进制1101.01转化成十进制</h3><h2 id="快速排序的平均时间复杂度和最坏时间复杂度是多少"><a href="#快速排序的平均时间复杂度和最坏时间复杂度是多少" class="headerlink" title="快速排序的平均时间复杂度和最坏时间复杂度是多少"></a>快速排序的平均时间复杂度和最坏时间复杂度是多少</h2><h3 id="排序算法的时间复杂度"><a href="#排序算法的时间复杂度" class="headerlink" title="排序算法的时间复杂度"></a>排序算法的时间复杂度</h3><h3 id="7-lt-lt-1-amp-15运算后的结果是"><a href="#7-lt-lt-1-amp-15运算后的结果是" class="headerlink" title="(7&lt;&lt;1)&amp;15运算后的结果是"></a>(7&lt;&lt;1)&amp;15运算后的结果是</h3><h3 id="TCP-IP协议栈-说的越多越好"><a href="#TCP-IP协议栈-说的越多越好" class="headerlink" title="TCP/IP协议栈(说的越多越好)"></a>TCP/IP协议栈(说的越多越好)</h3><p>那为什么要叫TCP/IP协议栈内，这些协议和栈有什么关系呢，大家应该都知道栈是一种先进后出的数据结构，那这和TCP/IP协议有什么关系呢？我们就拿一个HTTP报文来说吧，HTTP报文属于应用层协议的报文，我们输入网址，首先会调用到DNS协议（域名协议，后面会讲到），然后把我们输入的网址转换为IP地址，这个IP地址大致就相当于现实生活中每个人的身份证一样，是每个网页唯一的标识，关于IP地址，后续我会详细介绍，IP协议属于网络层的协议。我们先将HTTP报文压入一个栈中（就好像是在分装报文），然后是IP，不对，我们貌似漏了一个传输层啊，别急别介，HTTP报文在传输层用的是TCP协议，好，我们把TCP压入栈中，再讲IP层也压入栈中，至于链路层的话，就用最常见的以太网就OK了，好了，现在我们的栈里面从头至尾依次是以太帧头-IP协议-TCP协议-HTTP协议，然后我们先忽略最底层的物理层，假设这个封装好的栈一样的报文漂洋过海，来到了它的目的地（至于怎么过来的，我们后续也会讲到），当对端收到这个报文以后，也就是我们封装好的这个栈一样的东西以后该怎么办呢？会不会也是先拿HTTP呢？因为这个报文是我们构造的一个栈，所以说它的顺序肯定也是栈，因此拿取的顺序就是以太帧头-IP协议-TCP协议-HTTP协议，发现没，最先被封装入的HTTP报文是最后才被拿出来的，这中间的细节如果能全部掌握，那基本商就算是入门了，关于这部分东西，我会在后面详细介绍，现在有这个概念就可以了。</p>
+<h3 id="二面："><a href="#二面：" class="headerlink" title="二面："></a>二面：</h3><h4 id="说一下你项目中遇到的最大的问题，如何解决的（再次把我毫不相关的科研项目扯了一通）"><a href="#说一下你项目中遇到的最大的问题，如何解决的（再次把我毫不相关的科研项目扯了一通）" class="headerlink" title="说一下你项目中遇到的最大的问题，如何解决的（再次把我毫不相关的科研项目扯了一通）"></a>说一下你项目中遇到的最大的问题，如何解决的（再次把我毫不相关的科研项目扯了一通）</h4><p>堆和栈 </p>
+<h3 id="const和define的区别"><a href="#const和define的区别" class="headerlink" title="const和define的区别"></a>const和define的区别</h3><h3 id="Linux用过吗"><a href="#Linux用过吗" class="headerlink" title="Linux用过吗"></a>Linux用过吗</h3><h4 id="一个文件里面有很多ip地址，如何用grep命令查看出现次数最多的三个？用awk呢？"><a href="#一个文件里面有很多ip地址，如何用grep命令查看出现次数最多的三个？用awk呢？" class="headerlink" title="一个文件里面有很多ip地址，如何用grep命令查看出现次数最多的三个？用awk呢？"></a>一个文件里面有很多ip地址，如何用grep命令查看出现次数最多的三个？用awk呢？</h4><p>awk  wk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。</p>
+<p>awk ‘BEGIN{ commands } pattern{ commands } END{ commands }’</p>
+<ul>
+<li><p>第一步：运行BEGIN{ commands }语句块中的语句。</p>
+</li>
+<li><p>第二步：从文件或标准输入(stdin)读取一行。然后运行pattern{ commands }语句块，它逐行扫描文件，从第一行到最后一行反复这个过程。直到文件所有被读取完成。</p>
+</li>
+<li><p>第三步：当读至输入流末尾时，运行END{ commands }语句块。</p>
+</li>
+</ul>
+<p>BEGIN语句块在awk開始从输入流中读取行之前被运行，这是一个可选的语句块，比方变量初始化、打印输出表格的表头等语句通常能够写在BEGIN语句块中。</p>
+<p>END语句块在awk从输入流中读取全然部的行之后即被运行。比方打印全部行的分析结果这类信息汇总都是在END语句块中完毕，它也是一个可选语句块。</p>
+<p>可用awk来统计固定格式日志里的一些数据，如日志中出现过所有不同的IP</p>
+<p>awk ‘{i=$1;count[i]++}END{for(i in count)print(i,count[i])}’ /var/log/httpd/access_log</p>
+<p>awk对文件进行流处理，每次读取一行。$1就是IP，count[i]++是将IP作为一个数组的下标，并且使得统计这个IP所对应的数组元素自增</p>
+<p>也可以用来找出访问次数最多的ip。</p>
+<p>awk ‘{a[$1] += 1;} END {for (i in a) printf(“%d %s\n”, a[i], i);}’ 日志文件 | sort -n | tail -n 10 <strong>#用tail显示最后10行</strong></p>
+<p>有一个文件ip.txt，每行一条ip记录，共若干行，下面哪个命令可以实现“统计出现次数最多的前3个ip及其次数”？</p>
+<p>sort ip.txt | uniq -c | sort -rn | head -n 3</p>
+<p>root用户如何修改文件的所属人？谈到了chmod命令 </p>
+<p>chmod作用：修改文件、目录的权限</p>
+<p>有两种方式修改权限</p>
+<p>（1）+ 、-、= 变更权限 </p>
+<p> u：所有者 g:所在组 o：其他组 a：所有人(u、g、o的总和) </p>
+<p>① chmod  u=rwx, g=rx, o=x  文件目录名 </p>
+<p>② chmod  o+w  文件目录名 给其他组的用户增加写的权限</p>
+<p>③ chmod  a-x   文件目录名 给所有人去掉可执行文件的权限</p>
+<h3 id="算法题：-1"><a href="#算法题：-1" class="headerlink" title="算法题："></a>算法题：</h3><p>面试官说有一道简单的，一道难一点的，让我自己选择，因为前面linux命令那块答得不太好，就选了难的那道 </p>
+<p>给出一个字符串S，牛牛想知道这个字符串有多少个子序列等于”niuniu”<br>子序列可以通过在原串上删除任意个字符(包括0个字符和全部字符)得到</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">niuniuString</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 给出一个字符串S，牛牛想知道这个字符串有多少个子序列等于"niuniu"</span></span><br><span class="line"><span class="comment">     * 子序列可以通过在原串上删除任意个字符(包括0个字符和全部字符)得到</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str = <span class="string">"yrabbbit"</span>;</span><br><span class="line">        String str2 = <span class="string">"rabbit"</span>;</span><br><span class="line">        <span class="keyword">int</span> i = numDistinct(str, str2);</span><br><span class="line">        System.out.println(i);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(String S, String T)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(S==<span class="keyword">null</span>&amp;&amp;T==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(S==<span class="keyword">null</span>&amp;&amp;T!=<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(S!=<span class="keyword">null</span>&amp;&amp;T==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span>[][]dp=<span class="keyword">new</span> <span class="keyword">int</span>[S.length()+<span class="number">1</span>][T.length()+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=S.length();i++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=T.length();i++)&#123;</span><br><span class="line">            dp[<span class="number">0</span>][i]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=S.length();i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=T.length();j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(S.charAt(i-<span class="number">1</span>)!=T.charAt(j-<span class="number">1</span>))&#123;</span><br><span class="line">                    dp[i][j]=dp[i-<span class="number">1</span>][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j]=dp[i-<span class="number">1</span>][j]+dp[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;dp.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; dp[<span class="number">0</span>].length; j++) &#123;</span><br><span class="line">                System.out.print(dp[i][j]+<span class="string">" "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[S.length()][T.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="求子串的长度算法"><a href="#求子串的长度算法" class="headerlink" title="求子串的长度算法"></a>求子串的长度算法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str = <span class="string">"vrabbbit"</span>;</span><br><span class="line">        String str2 = <span class="string">"rabbit"</span>;</span><br><span class="line">        <span class="keyword">int</span> i = childString(str, str2);</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">childString</span><span class="params">(String s1,String s2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s1 == <span class="keyword">null</span> &amp;&amp; s2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (s1 == <span class="keyword">null</span> &amp;&amp; s2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[][] result = <span class="keyword">new</span> <span class="keyword">int</span>[s1.length()+<span class="number">1</span>][s2.length()+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; result.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; result[<span class="number">0</span>].length; j++) &#123;</span><br><span class="line">                System.out.print(result[i][j]+<span class="string">" "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; result.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; result[<span class="number">1</span>].length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s1.charAt(i-<span class="number">1</span>) == s2.charAt(j-<span class="number">1</span>)) &#123;</span><br><span class="line">                    result[i][j] = result[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (result[i][j - <span class="number">1</span>] &gt;= result[i - <span class="number">1</span>][j]) &#123;</span><br><span class="line">                        result[i][j] = result[i][j-<span class="number">1</span>];</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        result[i][j] = result[i-<span class="number">1</span>][j];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result[s1.length()][s2.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="3、linux命令（我平时不太用linux就只知道哪些情况用什么命令但是具体参数不太知道；问了查找文件里关键词最多的怎么查，还有查找进程名为live的进程等等"><a href="#3、linux命令（我平时不太用linux就只知道哪些情况用什么命令但是具体参数不太知道；问了查找文件里关键词最多的怎么查，还有查找进程名为live的进程等等" class="headerlink" title="3、linux命令（我平时不太用linux就只知道哪些情况用什么命令但是具体参数不太知道；问了查找文件里关键词最多的怎么查，还有查找进程名为live的进程等等"></a>3、linux命令（我平时不太用linux就只知道哪些情况用什么命令但是具体参数不太知道；问了查找文件里关键词最多的怎么查，还有查找进程名为live的进程等等</h3><p>grep -count 文件名称   | tail 10</p>
+<h3 id="4、数据库查找stu表内名字为lily，住址包含北京的信息，按年龄降序排序；我开始是select-然后要求只查住址列怎么办？然后问我修改包含北京的列里北京两个字为上海怎么办（replace我没用过…"><a href="#4、数据库查找stu表内名字为lily，住址包含北京的信息，按年龄降序排序；我开始是select-然后要求只查住址列怎么办？然后问我修改包含北京的列里北京两个字为上海怎么办（replace我没用过…" class="headerlink" title="4、数据库查找stu表内名字为lily，住址包含北京的信息，按年龄降序排序；我开始是select *然后要求只查住址列怎么办？然后问我修改包含北京的列里北京两个字为上海怎么办（replace我没用过…"></a>4、数据库查找stu表内名字为lily，住址包含北京的信息，按年龄降序排序；我开始是select *然后要求只查住址列怎么办？然后问我修改包含北京的列里北京两个字为上海怎么办（replace我没用过…</h3><h3 id="int和Integer的区别，为什么有了int还需要Integer"><a href="#int和Integer的区别，为什么有了int还需要Integer" class="headerlink" title="int和Integer的区别，为什么有了int还需要Integer"></a>int和Integer的区别，为什么有了int还需要Integer</h3><h3 id="ArrayList和LinkedList区别，各有什么特点"><a href="#ArrayList和LinkedList区别，各有什么特点" class="headerlink" title="ArrayList和LinkedList区别，各有什么特点"></a>ArrayList和LinkedList区别，各有什么特点</h3><h3 id="进程和线程的区别，联系"><a href="#进程和线程的区别，联系" class="headerlink" title="进程和线程的区别，联系"></a>进程和线程的区别，联系</h3><h3 id="多线程编程，死锁检测与预防，死锁的检测手段，怎样避免死锁"><a href="#多线程编程，死锁检测与预防，死锁的检测手段，怎样避免死锁" class="headerlink" title="多线程编程，死锁检测与预防，死锁的检测手段，怎样避免死锁"></a>多线程编程，死锁检测与预防，死锁的检测手段，怎样避免死锁</h3><h3 id="讲一讲线程池，讲讲为什么很多公司对于线程池的使用非常谨慎"><a href="#讲一讲线程池，讲讲为什么很多公司对于线程池的使用非常谨慎" class="headerlink" title="讲一讲线程池，讲讲为什么很多公司对于线程池的使用非常谨慎"></a>讲一讲线程池，讲讲为什么很多公司对于线程池的使用非常谨慎</h3><h3 id="SQL代码书写：有一个学生信息表包含id，学号，选修课程和该课程的成绩，写一个SQL语句来查找总分最高的前十名同学。"><a href="#SQL代码书写：有一个学生信息表包含id，学号，选修课程和该课程的成绩，写一个SQL语句来查找总分最高的前十名同学。" class="headerlink" title="SQL代码书写：有一个学生信息表包含id，学号，选修课程和该课程的成绩，写一个SQL语句来查找总分最高的前十名同学。"></a>SQL代码书写：有一个学生信息表包含id，学号，选修课程和该课程的成绩，写一个SQL语句来查找总分最高的前十名同学。</h3><h3 id="建表过程中索引添加的规范"><a href="#建表过程中索引添加的规范" class="headerlink" title="建表过程中索引添加的规范"></a>建表过程中索引添加的规范</h3><h3 id="InnoDB的4种事务隔离级别"><a href="#InnoDB的4种事务隔离级别" class="headerlink" title="InnoDB的4种事务隔离级别"></a>InnoDB的4种事务隔离级别</h3><h3 id="SSM和Spring-Boot的比较，Spring-Boot的缺点-没答上来，面试官的解释是Spring-Boot封装层数过多导致的性能问题"><a href="#SSM和Spring-Boot的比较，Spring-Boot的缺点-没答上来，面试官的解释是Spring-Boot封装层数过多导致的性能问题" class="headerlink" title="SSM和Spring Boot的比较，Spring Boot的缺点(没答上来，面试官的解释是Spring Boot封装层数过多导致的性能问题)"></a>SSM和Spring Boot的比较，Spring Boot的缺点(没答上来，面试官的解释是Spring Boot封装层数过多导致的性能问题)</h3><h3 id="假如有10亿个手机号，怎么样快速判断一个手机号是否在其中-一开始没什么好的思路，面试官一步一步从hash，二分，布隆过滤器引导到位图"><a href="#假如有10亿个手机号，怎么样快速判断一个手机号是否在其中-一开始没什么好的思路，面试官一步一步从hash，二分，布隆过滤器引导到位图" class="headerlink" title="假如有10亿个手机号，怎么样快速判断一个手机号是否在其中(一开始没什么好的思路，面试官一步一步从hash，二分，布隆过滤器引导到位图)"></a>假如有10亿个手机号，怎么样快速判断一个手机号是否在其中(一开始没什么好的思路，面试官一步一步从hash，二分，布隆过滤器引导到位图)</h3><h3 id="机智题：烧完一整根香需要30分钟，怎么样得到15分钟的计时，怎么样得到7-5分钟的计时"><a href="#机智题：烧完一整根香需要30分钟，怎么样得到15分钟的计时，怎么样得到7-5分钟的计时" class="headerlink" title="机智题：烧完一整根香需要30分钟，怎么样得到15分钟的计时，怎么样得到7.5分钟的计时"></a>机智题：烧完一整根香需要30分钟，怎么样得到15分钟的计时，怎么样得到7.5分钟的计时</h3><h3 id="算法题：把数组中奇数放在前面，偶数放在后面，并且奇数偶数都要保证从小到大，要求空间复杂度O-1"><a href="#算法题：把数组中奇数放在前面，偶数放在后面，并且奇数偶数都要保证从小到大，要求空间复杂度O-1" class="headerlink" title="算法题：把数组中奇数放在前面，偶数放在后面，并且奇数偶数都要保证从小到大，要求空间复杂度O(1)"></a>算法题：把数组中奇数放在前面，偶数放在后面，并且奇数偶数都要保证从小到大，要求空间复杂度O(1)</h3><h3 id="MySQL索引结构，说说B树和B-树的区别"><a href="#MySQL索引结构，说说B树和B-树的区别" class="headerlink" title="MySQL索引结构，说说B树和B+树的区别"></a>MySQL索引结构，说说B树和B+树的区别</h3><h3 id="MySQL索引什么时候失效，联合索引，聚集索引"><a href="#MySQL索引什么时候失效，联合索引，聚集索引" class="headerlink" title="MySQL索引什么时候失效，联合索引，聚集索引"></a>MySQL索引什么时候失效，联合索引，聚集索引</h3><h3 id="聚集索引："><a href="#聚集索引：" class="headerlink" title="聚集索引："></a>聚集索引：</h3><p>聚集索引就是按照每张表的主键构造一棵B+树，同时叶子节点中存放的即为整张表的行记录数据。聚集索引的叶子节点称为数据页，每个数据页通过一个双向链表来进行链接，而且数据页按照主键的顺序进行排列。</p>
+<h2 id="辅助索引："><a href="#辅助索引：" class="headerlink" title="辅助索引："></a>辅助索引：</h2><p>辅助索引(二级索引)：叶子节点中存储主键值，每次查找数据时，根据索引找到叶子节点中的主键值，根据主键值再到聚簇索引中得到完整的一行记录。</p>
+<p>覆盖索引：</p>
+<p>当能通过检索索引就可以读取想要的数据，那就不需要再到数据表中读取行了。如果一个索引包含了（或覆盖了）满足查询语句中字段与条件的数据就叫 做覆盖索引。</p>
+<h4 id="写一个单例模式"><a href="#写一个单例模式" class="headerlink" title="写一个单例模式"></a>写一个单例模式</h4><p>Redis数据结构，场景题</p>
+<p>讲讲Java的堆内存、GC</p>
+<p>Java把内存分成两种，一种叫做栈内存，一种叫做堆内存，有着不同的作用。栈内存用来存储局部变量和方法调用。<br>栈内存归属于单个线程，每个线程都会有一个栈内存，其存储的变量只能在其所属线程中可见，即栈内存可以理解成线程的私有内存。<br>而堆内存中的对象对所有线程可见。堆内存中的对象可以被所有线程访问。而堆内存用来存储Java中的对象。无论是成员变量，局部变量，还是类变量，它们指向的对象都存储在堆内存中。</p>
+<p>引用变量是普通变量，定义时在栈中分配内存，引用变量在程序运行到作用域外释放。而数组＆对象本身在堆中分配，即使程序运行到使用new产生数组和对象的语句所在地代码块之外，数组和对象本身占用的堆内存也不会被释放，<strong><em>\</em>数**</strong>组和对象在没有引用变量指向它的时候，才变成垃圾，不能再被使用，但是仍然占着内存，在随后的一个不确定的时间被垃圾回收器释放掉。这个也是java比较占内存的主要原因，实际上，栈中的变量指向堆内存中的变量，这就是 Java 中的指针!</p>
+<h3 id="说说抽象类和接口的区别"><a href="#说说抽象类和接口的区别" class="headerlink" title="说说抽象类和接口的区别"></a>说说抽象类和接口的区别</h3><ul>
+<li><p>相同点：都不能被实例化</p>
+</li>
+<li><p>区别一，两者表达的概念不一样。抽象类是一类事物的高度聚合，那么对于继承抽象类的子类来说，对于抽象类来说，属于“是”的关系；而接口是定义行为规范，因此对于实现接口的子类来说，相对于接口来说，是“行为需要按照接口来完成”。</p>
+</li>
+</ul>
+<ul>
+<li>区别二，抽象类在定义类型方法的时候，可以给出方法的实现部分，也可以不给出；而对于接口来说，其中所定义的方法都不能给出实现部分。</li>
+</ul>
+<ul>
+<li>区别三，继承类对于两者所涉及方法的实现是不同的。继承类对于抽象类所定义的抽象方法，可以不用重写，也就是说，可以延用抽象类的方法；而对于接口类所定义的方法或者属性来说，在继承类中必须要给出相应的方法和属性实现。</li>
+</ul>
+<ul>
+<li>区别四，在抽象类中，新增一个方法的话，继承类中可以不用作任何处理；而对于接口来说，则需要修改继承类，提供新定义的方法。</li>
+</ul>
+<p>写程序。排序。要求奇数放到前面，偶数放到后面(空间复杂度o(1)) </p>
+<p>一次http请求过程发生了什么 </p>
+<p>springmvc处理过程(http请求服务端发生了那些) </p>
+<p>（1）我们应该都知道在启动一个Spring MVC项目的时候，我们要在web.xml配置文件中声明DispatcherServlet。如下图的web.xml所示，这个Servlet监听的URL是*模式，这意味着所有的请求都能通过DispatcherServlet。</p>
+<p>URL匹配模式是非常重要的，如果请求符合DispatcherServlet配置的URL模式,那么这个请求就会被处理，否则就不会。DispatcherServlet根据URL请求的地址把请求传给指定的controller。那么DispatcherServlet是如何知道请求要传给哪个controller的呢？ </p>
+<p>使用@RequestMapping注解或者Spring MVC配置文件，可以找到URL请求的controller。当然也可以用特定的请求注解，比如@GetMapping或PostMapping。controller文件必须使用@Controller或@RestController(Restful风格)注解进行标记。</p>
+<p>最后，总结一下Spring MVC处理HTTP请求的过程 </p>
+<p>1.客户端发送HTTP请求到指定的URL。 </p>
+<p>2.Spring MVC的DispatcherServlet接收到请求 </p>
+<p>3.DispatcherServlet把请求传到用@Controller和@RequestMapping注解的controller </p>
+<p>4.Spring MVC返回逻辑视图的名称和模型给DispatcherServlet </p>
+<p>5.DispatcherServlet咨询视图处理器直到有实际的视图来展示数据为止 </p>
+<p>6.DispatcherServlet使用模型数据联系所选的视图，例如Thymeleaf,Freemarker,JSP,并根据数据模型呈现输出。 </p>
+<p>7.呈现的输出作为响应返回给客户端 </p>
+<p>以上就是Spring MVC的工作流程或者说Spring MVC处理HTTP请求的过程。</p>
+<p>mybatis执行过程，原理 </p>
+<p>怎么转换成html了。(没怎么写过前端，都是传json数据) </p>
+<p>为什么握手是三次 </p>
+<p>数据库索引用的什么结构。b 树比b树有什么优势 </p>
+<p>最左前缀(数据库自己的优化) </p>
+<p>单例模式 </p>
+<p>session和cookie </p>
+<p>JAVA垃圾回收 </p>
+<p>二面 </p>
+<p>分享一个你觉得比较有的讲得实习经历(五分钟) </p>
+<p>怼项目(十分钟) </p>
+<p>JAVA是自学的还是开的课程 </p>
+<p>学习JAVA你怎么学习的 </p>
+<p>JAVA虚拟机内存模型 </p>
+<p>syn和lock </p>
+<p>可重入锁实现原理</p>
+<p>事务用来做什么 </p>
+<p>lru </p>
+<p>网络方面TCP断开time_wait(什么时候进入这种状态，为什么要有这种状态) </p>
+<p>快排 </p>
+<p>对工作的方向对语言有要求吗 </p>
+<p>看你学JAVA很多，是因为这方面需求比较大吗 </p>
+<p>平时得工作环境在Linux吗</p>
+<p>统计某个字符串的行数统计用什么命令 </p>
+<p>Grep -count “字符串” 文件名称</p>
+<p>统计某个文件的行数</p>
+<p>Wc 文件名   显示行数  字数  字节数</p>
+<p>有什么要问我的吗？</p>
+<p>MYSQL日志分为几种</p>
+<p>如何保证回滚</p>
+<p>数据库中事务到底是mvcc回滚还是日志回滚<br>socket有几种状态<br>mysql更新了数据日志文件有什么改变<br>它的意思是服务器崩了，你访问服务器应该是什么样<br>服务器崩了发送什么错误码，崩了情况下500是谁发的<br>开发环境和生产环境不一样，配置环境应该有什么不同配置数据库<br>ACID<br>死锁以及解决措施<br>rabbitmq中各种模式<br>堆栈区别<br>GC回收算法<br>点击按钮这个过程详解一下</p>
+<p>算法题：<br>长字符串相加<br>nums[] = {1,-1,0,2,-2,1,3} 找到所有不重复a + b + c = 0</p>
+
+      
+    </div>
+    
+    
+    	
+
+    <div>
+		  
+			
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/06/09/%E4%BD%9C%E4%B8%9A%E5%B8%AE%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/">作业帮面试整理</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 雷凯博 的个人博客">雷凯博</a></p>
+  <p><span>发布时间:</span>2020年06月09日 - 22:06</p>
+  <p><span>最后更新:</span>2021年05月16日 - 19:05</p>
+  <p><span>原始链接:</span><a href="/2020/06/09/%E4%BD%9C%E4%B8%9A%E5%B8%AE%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" title="作业帮面试整理">http://yoursite.com/2020/06/09/%E4%BD%9C%E4%B8%9A%E5%B8%AE%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/06/09/%E4%BD%9C%E4%B8%9A%E5%B8%AE%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+		  
+	</div>
+	
+	
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="雷凯博 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="雷凯博 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95%EF%BC%8C%E4%BD%9C%E4%B8%9A%E5%B8%AE/" rel="tag"><i class="fa fa-tag"></i> 面试，作业帮</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/09/Java%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/" rel="next" title="Java常见面试题整理">
+                <i class="fa fa-chevron-left"></i> Java常见面试题整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/10/%E5%A0%86%E6%8E%92%E5%BA%8F/" rel="prev" title="堆排序">
+                堆排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzQzOS8yMzkzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.jpg"
+                alt="雷凯博" />
+            
+              <p class="site-author-name" itemprop="name">雷凯博</p>
+              <p class="site-description motion-element" itemprop="description">你现在所经历的挫折和失败，它只属于现在，把它交给时间，一切都是最好的安排</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/leikaibo1014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kaibo_lei@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/Leo1120178518" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/p/67b731c3f840" title="主题配置" target="_blank">主题配置</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux常用命令"><span class="nav-text">Linux常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一面："><span class="nav-text">一面：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、B树的应用"><span class="nav-text">一、B树的应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、B树大量应用在数据库和文件系统当中。"><span class="nav-text">1、B树大量应用在数据库和文件系统当中。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二、B-树的应用"><span class="nav-text">二、B+树的应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、红黑树"><span class="nav-text">三、红黑树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希表用什么解决冲突的？"><span class="nav-text">哈希表用什么解决冲突的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果优化为树结构，数据量依旧很大，如何进一步优化？"><span class="nav-text">如果优化为树结构，数据量依旧很大，如何进一步优化？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-数据库读写分离机制，如何做分库分表的？用的什么中间件去分库分表？"><span class="nav-text">10 数据库读写分离机制，如何做分库分表的？用的什么中间件去分库分表？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-自我介绍"><span class="nav-text">1.自我介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-做过哪些项目，给自己印象最深的项目是什么"><span class="nav-text">2.做过哪些项目，给自己印象最深的项目是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-用redis做二级缓存的时候如何确保高并发数据的一致性，如果有一张订单表，我要你找到对应用户所拥有的订单，怎么找？"><span class="nav-text">3.用redis做二级缓存的时候如何确保高并发数据的一致性，如果有一张订单表，我要你找到对应用户所拥有的订单，怎么找？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Str1-“a”-str2-new-string-“a”-区别，虚拟机内存空间上如何体现这两个区别，这区别具体在开发中会造成什么问题，如何解决？"><span class="nav-text">Str1=“a” str2=new string(“a”)区别，虚拟机内存空间上如何体现这两个区别，这区别具体在开发中会造成什么问题，如何解决？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java和C-在内存处理上有什么区别？虚拟机的常用垃圾回收机制有什么？"><span class="nav-text">Java和C++在内存处理上有什么区别？虚拟机的常用垃圾回收机制有什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候会发生OOM错误（内存溢出错误）"><span class="nav-text">什么时候会发生OOM错误（内存溢出错误）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis的基本数据结构是什么？"><span class="nav-text">Redis的基本数据结构是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis如何做持久化的？"><span class="nav-text">redis如何做持久化的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给你一个场景，设计秒杀系统，假设有10件商品，-先用redis去get数量，数量-1，然后用set更新redis的数据，如果get数据为0就表示商品卖完了，这种情况安全么，有问题的话如何解决"><span class="nav-text">给你一个场景，设计秒杀系统，假设有10件商品， 先用redis去get数量，数量-1，然后用set更新redis的数据，如果get数据为0就表示商品卖完了，这种情况安全么，有问题的话如何解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis加锁上锁的命令是什么"><span class="nav-text">redis加锁上锁的命令是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux-awk-grep命令是什么，如何用正则表达式匹配AxxxxAxxx？（正则还是用的比较少-生疏了。。。）"><span class="nav-text">Linux awk grep命令是什么，如何用正则表达式匹配AxxxxAxxx？（正则还是用的比较少 生疏了。。。）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讲一下在浏览器输入URL之后到浏览器出现界面的全过程，系统后面用了哪些协议"><span class="nav-text">讲一下在浏览器输入URL之后到浏览器出现界面的全过程，系统后面用了哪些协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果你有很多IP地址，如何找到出现次数最多的前三个IP地址？（hashMap-heap）"><span class="nav-text">如果你有很多IP地址，如何找到出现次数最多的前三个IP地址？（hashMap + heap）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果你有一个100G的IP地址文件，你的机器只有5G存储空间，如何找到出现次数最多的前三IP地址？"><span class="nav-text">如果你有一个100G的IP地址文件，你的机器只有5G存储空间，如何找到出现次数最多的前三IP地址？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果一张订单表特别大，你会如何处理这个表格，如何优化它？"><span class="nav-text">如果一张订单表特别大，你会如何处理这个表格，如何优化它？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们一般都是把历史数据定期转存其他表（一样的表名后加年月例如TABLE201205）归档"><span class="nav-text">我们一般都是把历史数据定期转存其他表（一样的表名后加年月例如TABLE201205）归档~</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法题：字符串切分-反转"><span class="nav-text">算法题：字符串切分+反转</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-盲人有10双袜子，两双黑的，8双白的，如何在没人帮助下找出黑的（在太阳下晒一晒黑色更吸热）"><span class="nav-text">16.盲人有10双袜子，两双黑的，8双白的，如何在没人帮助下找出黑的（在太阳下晒一晒黑色更吸热）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-你有什么问题想问我的？"><span class="nav-text">17.你有什么问题想问我的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL日志分为几种"><span class="nav-text">MYSQL日志分为几种</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket有几种状态"><span class="nav-text">socket有几种状态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Socket-11种状态"><span class="nav-text">Socket 11种状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql更新了数据日志文件有什么改变"><span class="nav-text">mysql更新了数据日志文件有什么改变</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#它的意思是服务器崩了，你访问服务器应该是什么样"><span class="nav-text">它的意思是服务器崩了，你访问服务器应该是什么样</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法题："><span class="nav-text">算法题：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆排序："><span class="nav-text">堆排序：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#快速排序"><span class="nav-text">快速排序;</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP三次握手四次挥手"><span class="nav-text">TCP三次握手四次挥手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#状态码301与302的区别"><span class="nav-text">状态码301与302的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux找到文件夹下包含某个字符的所有记录"><span class="nav-text">Linux找到文件夹下包含某个字符的所有记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页查询页数很大效率低怎么办，join-连接主键优化"><span class="nav-text">分页查询页数很大效率低怎么办，join 连接主键优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚簇索引和非聚簇索引"><span class="nav-text">聚簇索引和非聚簇索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引覆盖"><span class="nav-text">索引覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法：下一个排列"><span class="nav-text">算法：下一个排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS递归和迭代"><span class="nav-text">DNS递归和迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二、本地域名服务器向根域名服务器的查询的迭代查询。"><span class="nav-text">二、本地域名服务器向根域名服务器的查询的迭代查询。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS原理，ABA问题，解决方法"><span class="nav-text">CAS原理，ABA问题，解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CAS原理"><span class="nav-text">CAS原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS存在的问题"><span class="nav-text">CAS存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CAS虽然很高效的解决原子操作，但是CAS仍然存在三大问题。ABA问题，循环时间长开销大和只能保证一个共享变量的原子操作"><span class="nav-text">CAS虽然很高效的解决原子操作，但是CAS仍然存在三大问题。ABA问题，循环时间长开销大和只能保证一个共享变量的原子操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo原理"><span class="nav-text">Dubbo原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注册中心宕机怎么办"><span class="nav-text">注册中心宕机怎么办</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC分为哪几部分"><span class="nav-text">RPC分为哪几部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux常用命令，让我按要求查日志，就是grep，cut，啥的"><span class="nav-text">Linux常用命令，让我按要求查日志，就是grep，cut，啥的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一棵m阶的B-tree-m叉树-：树中每个结点至多-个孩子，除根结点和叶子结点外，其它每个结点至少有-个孩子-B-树又叫平衡多路查找树。一棵m阶的B-树-m叉树-的特性如下："><span class="nav-text">一棵m阶的B-tree(m叉树)：树中每个结点至多()个孩子，除根结点和叶子结点外，其它每个结点至少有()个孩子 B 树又叫平衡多路查找树。一棵m阶的B 树 (m叉树)的特性如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制1101-01转化成十进制"><span class="nav-text">二进制1101.01转化成十进制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序的平均时间复杂度和最坏时间复杂度是多少"><span class="nav-text">快速排序的平均时间复杂度和最坏时间复杂度是多少</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序算法的时间复杂度"><span class="nav-text">排序算法的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-lt-lt-1-amp-15运算后的结果是"><span class="nav-text">(7&lt;&lt;1)&amp;15运算后的结果是</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP协议栈-说的越多越好"><span class="nav-text">TCP/IP协议栈(说的越多越好)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二面："><span class="nav-text">二面：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说一下你项目中遇到的最大的问题，如何解决的（再次把我毫不相关的科研项目扯了一通）"><span class="nav-text">说一下你项目中遇到的最大的问题，如何解决的（再次把我毫不相关的科研项目扯了一通）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const和define的区别"><span class="nav-text">const和define的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux用过吗"><span class="nav-text">Linux用过吗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一个文件里面有很多ip地址，如何用grep命令查看出现次数最多的三个？用awk呢？"><span class="nav-text">一个文件里面有很多ip地址，如何用grep命令查看出现次数最多的三个？用awk呢？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法题：-1"><span class="nav-text">算法题：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#求子串的长度算法"><span class="nav-text">求子串的长度算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、linux命令（我平时不太用linux就只知道哪些情况用什么命令但是具体参数不太知道；问了查找文件里关键词最多的怎么查，还有查找进程名为live的进程等等"><span class="nav-text">3、linux命令（我平时不太用linux就只知道哪些情况用什么命令但是具体参数不太知道；问了查找文件里关键词最多的怎么查，还有查找进程名为live的进程等等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、数据库查找stu表内名字为lily，住址包含北京的信息，按年龄降序排序；我开始是select-然后要求只查住址列怎么办？然后问我修改包含北京的列里北京两个字为上海怎么办（replace我没用过…"><span class="nav-text">4、数据库查找stu表内名字为lily，住址包含北京的信息，按年龄降序排序；我开始是select *然后要求只查住址列怎么办？然后问我修改包含北京的列里北京两个字为上海怎么办（replace我没用过…</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int和Integer的区别，为什么有了int还需要Integer"><span class="nav-text">int和Integer的区别，为什么有了int还需要Integer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList区别，各有什么特点"><span class="nav-text">ArrayList和LinkedList区别，各有什么特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程和线程的区别，联系"><span class="nav-text">进程和线程的区别，联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程编程，死锁检测与预防，死锁的检测手段，怎样避免死锁"><span class="nav-text">多线程编程，死锁检测与预防，死锁的检测手段，怎样避免死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讲一讲线程池，讲讲为什么很多公司对于线程池的使用非常谨慎"><span class="nav-text">讲一讲线程池，讲讲为什么很多公司对于线程池的使用非常谨慎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL代码书写：有一个学生信息表包含id，学号，选修课程和该课程的成绩，写一个SQL语句来查找总分最高的前十名同学。"><span class="nav-text">SQL代码书写：有一个学生信息表包含id，学号，选修课程和该课程的成绩，写一个SQL语句来查找总分最高的前十名同学。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建表过程中索引添加的规范"><span class="nav-text">建表过程中索引添加的规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB的4种事务隔离级别"><span class="nav-text">InnoDB的4种事务隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSM和Spring-Boot的比较，Spring-Boot的缺点-没答上来，面试官的解释是Spring-Boot封装层数过多导致的性能问题"><span class="nav-text">SSM和Spring Boot的比较，Spring Boot的缺点(没答上来，面试官的解释是Spring Boot封装层数过多导致的性能问题)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#假如有10亿个手机号，怎么样快速判断一个手机号是否在其中-一开始没什么好的思路，面试官一步一步从hash，二分，布隆过滤器引导到位图"><span class="nav-text">假如有10亿个手机号，怎么样快速判断一个手机号是否在其中(一开始没什么好的思路，面试官一步一步从hash，二分，布隆过滤器引导到位图)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机智题：烧完一整根香需要30分钟，怎么样得到15分钟的计时，怎么样得到7-5分钟的计时"><span class="nav-text">机智题：烧完一整根香需要30分钟，怎么样得到15分钟的计时，怎么样得到7.5分钟的计时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法题：把数组中奇数放在前面，偶数放在后面，并且奇数偶数都要保证从小到大，要求空间复杂度O-1"><span class="nav-text">算法题：把数组中奇数放在前面，偶数放在后面，并且奇数偶数都要保证从小到大，要求空间复杂度O(1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL索引结构，说说B树和B-树的区别"><span class="nav-text">MySQL索引结构，说说B树和B+树的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL索引什么时候失效，联合索引，聚集索引"><span class="nav-text">MySQL索引什么时候失效，联合索引，聚集索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集索引："><span class="nav-text">聚集索引：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辅助索引："><span class="nav-text">辅助索引：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#写一个单例模式"><span class="nav-text">写一个单例模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说抽象类和接口的区别"><span class="nav-text">说说抽象类和接口的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雷凯博</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">140.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://github.com/leikaibo1014">leikaibo</a> 运行驱动</div>
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+ 
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider"></span>
+ 
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

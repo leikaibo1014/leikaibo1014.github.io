@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,BP,KNN," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="雷凯博的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="ILPD数据集ILPD数据集来自美国加州大学一个统计学习相关的网站上（UCI）数据集的名称叫做Indian Liver Patient Dataset印度肝病患者数据集，这个数据集由三个印度的教授收集自印度安得拉邦的东北部，包含了416个肝癌病人和167个非肝癌病人共计583个肝病患者的病历数据记录。583个病人中包含441名男性病人和142名女性病人，其中任何年龄超过89岁的患者都被列为年龄90">
+<meta name="keywords" content="机器学习,BP,KNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BP神经网络与KNN分类算法（ILPD数据集）">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95&#x2F;index.html">
+<meta property="og:site_name" content="雷凯博的博客">
+<meta property="og:description" content="ILPD数据集ILPD数据集来自美国加州大学一个统计学习相关的网站上（UCI）数据集的名称叫做Indian Liver Patient Dataset印度肝病患者数据集，这个数据集由三个印度的教授收集自印度安得拉邦的东北部，包含了416个肝癌病人和167个非肝癌病人共计583个肝病患者的病历数据记录。583个病人中包含441名男性病人和142名女性病人，其中任何年龄超过89岁的患者都被列为年龄90">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183223375.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183303405.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183323132.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183345370.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183613220.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183625485.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183652148.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183915670.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183924364.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183940438.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824184108676.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824184135863.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824184205848.png">
+<meta property="og:updated_time" content="2021-05-16T11:04:06.707Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190824183223375.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/10/2019-11-10-BP神经网络与KNN分类算法/"/>
+
+
+
+
+
+  <title>BP神经网络与KNN分类算法（ILPD数据集） | 雷凯博的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+<a href="https://github.com/leikaibo1014" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雷凯博的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录学习中的点点滴滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resume">
+          <a href="/resume" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="雷凯博">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雷凯博的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BP神经网络与KNN分类算法（ILPD数据集）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-10T19:56:32+08:00">
+                2019-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/" class="leancloud_visitors" data-flag-title="BP神经网络与KNN分类算法（ILPD数据集）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.9k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ILPD数据集"><a href="#ILPD数据集" class="headerlink" title="ILPD数据集"></a>ILPD数据集</h2><p>ILPD数据集来自美国加州大学一个统计学习相关的网站上（UCI）数据集的名称叫做Indian Liver Patient Dataset印度肝病患者数据集，这个数据集由三个印度的教授收集自印度安得拉邦的东北部，包含了416个肝癌病人和167个非肝癌病人共计583个肝病患者的病历数据记录。583个病人中包含441名男性病人和142名女性病人，其中任何年龄超过89岁的患者都被列为年龄90。</p>
+<a id="more"></a>
+
+<p><img src="https://img-blog.csdnimg.cn/20190824183223375.png" alt="在这里插入图片描述"></p>
+<h2 id="ILPD数据集属性描述"><a href="#ILPD数据集属性描述" class="headerlink" title="ILPD数据集属性描述"></a>ILPD数据集属性描述</h2><p>在ILPD数据集中，该数据集包含416个肝脏患者记录和167个非肝脏患者记录。共计10个主要属性，以及583个样本数，里面有肝病患者和非肝病患者的记录。<br>具体属性描述如下表：<br><img src="https://img-blog.csdnimg.cn/20190824183303405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="原始数据集展示"><a href="#原始数据集展示" class="headerlink" title="原始数据集展示"></a>原始数据集展示</h2><p>该数据集是一个CSV格式的数据文件，一共有538行11列数据。<br>下图是对原始数据集的前25条数据展示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824183323132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>数据的第一列代表患者年龄，第二列为患者性别。在这里性别是一个字符串形式的表示，我们在下面的数据分析中需要把数据转换为离散型的数据表示，可以方便我们的数据分析。数据的最后一行表示是否患病，1表示肝癌病人，2表示非肝癌病人。</p>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>首先进行数据的简单预处理，进行偏差检测，即检查导致偏差的因素，并识别离散值与噪声值。然后进行数据清洗，即处理缺失值与噪声，通过观察数据集我们可以发现在数据集的第二列，性别表示中男性是male表示，女性是female表示，为了能让提高我们的分类准确率，这里需要进行替换，男性male用1表示，female用2来表示。<br>处理后的数据集表示如下：<br><img src="https://img-blog.csdnimg.cn/20190824183345370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="1-BP（反向传播）算法实现"><a href="#1-BP（反向传播）算法实现" class="headerlink" title="1. BP（反向传播）算法实现"></a>1. BP（反向传播）算法实现</h1><h3 id="BP算法描述"><a href="#BP算法描述" class="headerlink" title="BP算法描述"></a>BP算法描述</h3><p>BP算法（Back-propagation），误差反向传播算法，它的基本思想：学习过程由信号的正向传播（求损失）与误差的反向传播（误差回传）两个过程组成。网络的运行流程为：当输入一个样例后，获得该样例的特征向量，再根据权向量得到感知器的输入值，然后使用函数计算出每个感知器的输出，再将此输出作为下一层感知器的输入，依次类推，直到输出层。在多层的神经网络中，误差曲面可能有多个局部极小值，这意味着使用梯度下降算法找到的可能是局部极小值，而不是全局最小值。现在可以使用损失函数，这时可以根据损失函数来调整输出结点中的输入权向量，采用随机梯度下降算法求解，然后从后向前逐层调整权重，这就是反向传播算法计算的大致流程。<br>BP算法是一种有监督式的学习算法，其主要步骤是是输入学习样本，使用反向传播算法对网络的权值和偏差进行反复的调整训练，使输出的向量与期望向量尽可能地接近，当网络输出层的误差平方和小于指定的误差时训练完成，保存网络的权值和偏差。具体步骤如下：<br>（1）初始化，随机给定各连接权[w],[v]及阈值θi，rt。<br>（2）由给定的输入输出模式对计算隐层、输出层各单元输出bj=f（wijai-θj） ct=f（vjtbj－rt）<br>式中：bj为隐层第j个神经元实际输出；ct为输出层第t个神经元的实际输出；wij为输入层至隐层的连接权；vjt为隐层至输出层的连接权。<br>dtk=（ytk－ct）ct（1－ct） ejk=[dtvjt] bj（1－bj）<br>（3）选取下一个输入模式对返回第2步反复训练直到网络设输出误差达到要求结束训练。</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>（1）数据集划分<br>在本数据集中，一共有538条数据，采用前400条数据进行参数训练，后138条数据进行测试数据。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%读取训练数据</span></span><br><span class="line">[NUM]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:K400'</span>)</span><br><span class="line">[A]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:J400'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%读取测试数据</span></span><br><span class="line">[NUMT]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:K583'</span>)</span><br><span class="line">[C]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:J583'</span>)</span><br></pre></td></tr></table></figure>
+<p>（2）算法步骤<br>将前400条数据作为输入，即（患者的年龄、患者的 性别性别、TB总胆红素 、DB直接胆红素、碱性磷酸酶、氨基转移酶、天冬氨酸氨基转移酶、TP总标本、ALB白蛋白 、A / G比率白蛋白和球蛋白比率）。将对应的分类结果作为输出。并用matlab自带的premnmx()函数将这些数据归一化处理。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%特征值归一化</span></span><br><span class="line"> [input,minI,maxI] = premnmx( [A ]')  ;</span><br></pre></td></tr></table></figure>
+<p>通过样本数据的训练，不断修正网络权值和阈值使误差函数沿负梯度方向下降，逼近期望输出。<br>归一化之后欧的数据形式如下：</p>
+<p><strong>训练集归一化：</strong><br><img src="https://img-blog.csdnimg.cn/20190824183613220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>测试集归一化：</strong><br><img src="https://img-blog.csdnimg.cn/20190824183625485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>输入输出：</strong></p>
+<p>该模型由每组数据的各项指标作为输入，以分类结果作为输出输入层的节点数为10，输出层的节点数为1。<br><strong>隐含层设计:</strong><br>IW = net.IW{1,1};<br>LW = net.LW{2,1};<br>b1 = net.b{1}<br>b2 = net.b{2}<br>net是训练得到的网络，IW表示隐含层的权矩阵，维数 = 隐含层神经元个数 * 特征数，LW表示隐含层权矩阵，维数 = 1 * 隐含层神经元个数，b1输入层的阈值，b2隐含层的阈值。<br>输入输入以及隐含层的设计如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824183652148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>激励函数：</strong></p>
+<p>BP神经网络通常采用Sigmoid可微函数和线性函数作为网络的激励函数。本文选择S型正切函数tansig作为隐层神经元的激励函数。而由于网络的输出归一到[ -1, 1]范围内, 因此预测模型选取S 型对数函数tansig作为输出层神经元的激励函数。<br><strong>代码如下：</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out1 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-n1));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">Z = (LW * out1) + <span class="built_in">repmat</span>(b2,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>)); </span><br><span class="line">out2 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-Z));    <span class="comment">% tansig函数的表达式，out2表示输入层的输出结果</span></span><br></pre></td></tr></table></figure>
+<p>将训练样本数据归一化后输入网络, 设定网络隐层和输出层激励函数分别为tansig, 网络训练函数为traingdx, 网络性能函数为mse,隐层神经元数初设为4。<br><strong>设定网络参数：</strong></p>
+<p>网络迭代次数epochs为10000次, 期望误差goal为0.01, 学习速率lr为0.01，设置完毕，开始训练。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%设置训练参数</span></span><br><span class="line">net.trainparam.epochs = <span class="number">10000</span> ;</span><br><span class="line">net.trainparam.goal = <span class="number">0.01</span> ;</span><br><span class="line">net.trainParam.lr = <span class="number">0.01</span> ;</span><br></pre></td></tr></table></figure>
+
+<p><strong>完整代码</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">[NUM]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:K400'</span>)</span><br><span class="line">[A]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:J400'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">%特征值归一化</span></span><br><span class="line">[input,minI,maxI] = premnmx( [A ]')  ;</span><br><span class="line"><span class="comment">%构造输出矩阵</span></span><br><span class="line">s = <span class="built_in">size</span>(A,<span class="number">1</span>);</span><br><span class="line">output = <span class="built_in">zeros</span>( s , <span class="number">5</span>  ) ;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : s </span><br><span class="line">   output( <span class="built_in">i</span> , NUM(<span class="built_in">i</span>,<span class="number">11</span>)) = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%创建神经网络</span></span><br><span class="line">net = newff( minmax(input) , [<span class="number">55</span> <span class="number">5</span>] , &#123; <span class="string">'logsig'</span> <span class="string">'logsig'</span> &#125; , <span class="string">'traingdx'</span> ) ; </span><br><span class="line"> </span><br><span class="line"><span class="comment">%设置训练参数</span></span><br><span class="line">net.trainparam.show = <span class="number">25</span> ;</span><br><span class="line">net.trainparam.epochs = <span class="number">10000</span> ;</span><br><span class="line">net.trainparam.goal = <span class="number">0.01</span> ;</span><br><span class="line">net.trainParam.lr = <span class="number">0.01</span> ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%开始训练</span></span><br><span class="line">net = train( net, input , output' ) ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%读取测试数据</span></span><br><span class="line">[NUMT]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:K583'</span>)</span><br><span class="line">[C]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:J583'</span>)</span><br><span class="line"><span class="comment">%测试数据归一化</span></span><br><span class="line">testInput = tramnmx ( [C]' , minI, maxI ) ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%仿真</span></span><br><span class="line">Y = sim( net , testInput ) </span><br><span class="line">IW = net.IW&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;  <span class="comment">% net是训练得到的网络，IW表示隐含层的权矩阵</span></span><br><span class="line">                   <span class="comment">% 维数 = 隐含层神经元个数 * 特征数</span></span><br><span class="line">LW = net.LW&#123;<span class="number">2</span>,<span class="number">1</span>&#125;;  <span class="comment">% LW表示隐含层权矩阵，维数 = 1 * 隐含层神经元个数</span></span><br><span class="line">b1 = net.b&#123;<span class="number">1</span>&#125;    <span class="comment">% 输入层的阈值</span></span><br><span class="line">b2 = net.b&#123;<span class="number">2</span>&#125;    <span class="comment">% 隐含层的阈值</span></span><br><span class="line">t=<span class="built_in">size</span>(testInput,<span class="number">2</span>)</span><br><span class="line">u=IW * testInput;</span><br><span class="line">n1 = (IW * testInput) + <span class="built_in">repmat</span>(b1,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>));</span><br><span class="line">out1 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-n1));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">Z = (LW * out1) + <span class="built_in">repmat</span>(b2,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>));        <span class="comment">% purelin函数就是形如 y = x，所以直接可以得到out2</span></span><br><span class="line">out2 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-Z));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">out3=(<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-LW))) * (<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(- IW)));</span><br><span class="line">C= LW * IW;</span><br><span class="line">out4=<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-C));</span><br><span class="line"><span class="comment">%统计识别正确率</span></span><br><span class="line">[s1 , s2] = <span class="built_in">size</span>( Y ) ;</span><br><span class="line">hitNum = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : s2</span><br><span class="line">    [m , Index] = <span class="built_in">max</span>( Y( : ,  <span class="built_in">i</span> ) ) ;</span><br><span class="line">    <span class="keyword">if</span>( Index  ==  NUMT(<span class="built_in">i</span>,<span class="number">11</span>)   ) </span><br><span class="line">        hitNum = hitNum + <span class="number">1</span> ; </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">sprintf(<span class="string">'分类识别率是 %3.3f%%'</span>,<span class="number">100</span> * hitNum / s2 )</span><br></pre></td></tr></table></figure>
+<h3 id="实验结果分析"><a href="#实验结果分析" class="headerlink" title="实验结果分析"></a>实验结果分析</h3><p>网络训练完成后，进行测试集测试训练结果，与分类的正确率。<br><img src="https://img-blog.csdnimg.cn/20190824183915670.png" alt="在这里插入图片描述"><br>实验结果：<br>网络输出误差与训练状态<br><img src="https://img-blog.csdnimg.cn/20190824183924364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">图 网络训练误差<br><img src="https://img-blog.csdnimg.cn/20190824183940438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">图 网络训练状态</p>
+<h1 id="2-KNN算法分类"><a href="#2-KNN算法分类" class="headerlink" title="2. KNN算法分类"></a>2. KNN算法分类</h1><h3 id="KNN算法步骤"><a href="#KNN算法步骤" class="headerlink" title="KNN算法步骤"></a>KNN算法步骤</h3><p>KNN的算法原理描述与算法执行流程，我们在上一章的1.5章节已经介绍过，在这里不再重复介绍。本章节主要是KNN算法在印度肝病分类实验中的应用与分类效果。<br>KNN算法在分析印度肝病患者数据集时的具体算法步骤如下：<br>1）计算测试数据与各个训练数据之间的距离，也就是计算数据集中前400条训练数据与138条数据中各个属性之间的距离。<br>2）按照距离的递增关系进行排序，然后进行后续的坐标点的选择。<br>3）选取距离最小的K个点；<br>4）确定前K个点所在类别的出现频率；<br>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
+<h2 id="实验设计-1"><a href="#实验设计-1" class="headerlink" title="实验设计"></a>实验设计</h2><p>（1）数据集分类<br>前400行前10列作为训练数据，第11列作为测试标签，后138行前10列作为测试属性，后138行第11列作为测试标签。<br>[NUM]=xlsread(‘shujv’,’A1:J400’)<br>[A]=xlsread(‘shujv’,’K1:K400’)</p>
+<p>%读取测试数据<br>[NUMT]=xlsread(‘shujv’,’A401:J538’)<br>[C]=xlsread(‘shujv’,’K401:K538’)</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824184108676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>（2）数据归一化<br>[mtrain,ntrain] = size(NUM);<br>[mtest,ntest] = size(NUMT);<br>dataset = [NUM;NUMT];<br>[dataset_scale,ps] = mapminmax(dataset’,0,1);<br>dataset_scale = dataset_scale’;<br>train_data = dataset_scale(1:mtrain,:);<br>test_data = dataset_scale( (mtrain+1):(mtrain+mtest),: );</p>
+<p>（3）算法代码<br>[NUM]=xlsread(‘shujv’,’A1:J400’)<br>[A]=xlsread(‘shujv’,’K1:K400’)<br>[NUMT]=xlsread(‘shujv’,’A401:J538’)<br>[C]=xlsread(‘shujv’,’K401:K538’)</p>
+<p>mdl = ClassificationKNN.fit(NUM,A,’NumNeighbors’,1);<br>predict_label   =     predict(mdl, NUMT);<br>accuracy   =   length(find(predict_label == C))/length(C)<em>100<br>*</em>测试分类标签和预测分类标签。（左侧为测试分类标签，右侧为预测分类标签）**<br><img src="https://img-blog.csdnimg.cn/20190824184135863.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>正确率：正确率 = 预测标签 / 测试标签<br>accuracy   =   length(find(predict_label == C))/length(C)*100</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824184205848.png" alt="在这里插入图片描述"><br>由实验结果可以看出来印度肝病患者这个数据集用BP网络训练的模型，分类的准确率更高。KNN自身的优点具有：计算简单，易于理解，可解释性强；比较适合处理有缺失属性的样本；能够处理不相关的特征；在相对短的时间内能够对大型数据源做出可行且效果良好的结果。缺点是往往忽略了数据之间的相关性；BP神经网络实质上实现了一个从输入到输出的映射功能，数学理论证明三层的神经网络就能够以任意精度逼近任何非线性连续函数。这使得其特别适合于求解内部机制复杂的问题，即BP神经网络具有较强的非线性映射能力。BP神经网络在其局部的或者部分的神经元受到破坏后对全局的训练结果不会造成很大的影响，也就是说即使系统在受到局部损伤时还是可以正常工作的。即BP神经网络具有一定的容错能力。</p>
+
+      
+    </div>
+    
+    
+    	
+
+    <div>
+		  
+			
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/">BP神经网络与KNN分类算法（ILPD数据集）</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 雷凯博 的个人博客">雷凯博</a></p>
+  <p><span>发布时间:</span>2019年11月10日 - 19:11</p>
+  <p><span>最后更新:</span>2021年05月16日 - 19:05</p>
+  <p><span>原始链接:</span><a href="/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/" title="BP神经网络与KNN分类算法（ILPD数据集）">http://yoursite.com/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+		  
+	</div>
+	
+	
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="雷凯博 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="雷凯博 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+            <a href="/tags/BP/" rel="tag"><i class="fa fa-tag"></i> BP</a>
+          
+            <a href="/tags/KNN/" rel="tag"><i class="fa fa-tag"></i> KNN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/10/2019-11-10-SVM%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/" rel="next" title="SVM与KNN分类算法（wine数据集）">
+                <i class="fa fa-chevron-left"></i> SVM与KNN分类算法（wine数据集）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/10/2019-07-10-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF/" rel="prev" title="静态代理技术">
+                静态代理技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzQzOS8yMzkzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.jpg"
+                alt="雷凯博" />
+            
+              <p class="site-author-name" itemprop="name">雷凯博</p>
+              <p class="site-description motion-element" itemprop="description">你现在所经历的挫折和失败，它只属于现在，把它交给时间，一切都是最好的安排</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/leikaibo1014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kaibo_lei@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/Leo1120178518" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/p/67b731c3f840" title="主题配置" target="_blank">主题配置</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ILPD数据集"><span class="nav-text">ILPD数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ILPD数据集属性描述"><span class="nav-text">ILPD数据集属性描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原始数据集展示"><span class="nav-text">原始数据集展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据处理"><span class="nav-text">数据处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-BP（反向传播）算法实现"><span class="nav-text">1. BP（反向传播）算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BP算法描述"><span class="nav-text">BP算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验设计"><span class="nav-text">实验设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验结果分析"><span class="nav-text">实验结果分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-KNN算法分类"><span class="nav-text">2. KNN算法分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN算法步骤"><span class="nav-text">KNN算法步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验设计-1"><span class="nav-text">实验设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果"><span class="nav-text">实验结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雷凯博</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">140.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://github.com/leikaibo1014">leikaibo</a> 运行驱动</div>
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+ 
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider"></span>
+ 
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

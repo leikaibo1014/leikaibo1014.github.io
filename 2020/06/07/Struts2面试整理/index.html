@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,面试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="雷凯博的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1. 什么是Struts2？Struts2是一个用Java构建Web应用程序的开源框架。Struts2基于OpenSymphony WebWork框架。它从Struts1中得到了很大的改进，使其更加灵活，易于使用和扩展。Struts2的核心组件是Action，Interceptors和Result页面。 Struts2提供了许多方法来创建Action类并通过struts.xml或注释来配置它们。我">
+<meta name="keywords" content="java,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struts2面试整理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;07&#x2F;Struts2%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="雷凯博的博客">
+<meta property="og:description" content="1. 什么是Struts2？Struts2是一个用Java构建Web应用程序的开源框架。Struts2基于OpenSymphony WebWork框架。它从Struts1中得到了很大的改进，使其更加灵活，易于使用和扩展。Struts2的核心组件是Action，Interceptors和Result页面。 Struts2提供了许多方法来创建Action类并通过struts.xml或注释来配置它们。我">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-05-16T11:04:06.710Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/07/Struts2面试整理/"/>
+
+
+
+
+
+  <title>Struts2面试整理 | 雷凯博的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+<a href="https://github.com/leikaibo1014" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雷凯博的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录学习中的点点滴滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resume">
+          <a href="/resume" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/Struts2%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="雷凯博">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雷凯博的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Struts2面试整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T18:26:32+08:00">
+                2020-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">面试整理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/06/07/Struts2%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" class="leancloud_visitors" data-flag-title="Struts2面试整理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  28 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-什么是Struts2？"><a href="#1-什么是Struts2？" class="headerlink" title="1. 什么是Struts2？"></a>1. 什么是Struts2？</h2><p>Struts2是一个用Java构建Web应用程序的开源框架。Struts2基于OpenSymphony WebWork框架。它从Struts1中得到了很大的改进，使其更加灵活，易于使用和扩展。Struts2的核心组件是Action，Interceptors和Result页面。</p>
+<p>Struts2提供了许多方法来创建Action类并通过struts.xml或注释来配置它们。我们可以为常见任务创建自己的拦截器。Struts2附带了很多标签，并使用OGNL表达式语言。我们可以创建自己的类型转换器来渲染结果页面。结果页面可以是JSP和FreeMarker模板。</p>
+ <a id="more"></a>
+
+
+
+<h2 id="2-Struts2的核心组件是什么？"><a href="#2-Struts2的核心组件是什么？" class="headerlink" title="2. Struts2的核心组件是什么？"></a>2. Struts2的核心组件是什么？</h2><p>1、前端控制器 </p>
+<p>2、OGNL/ VS：OGNL/ ValueStack </p>
+<p>3、Action：动作</p>
+<p>4、Result：结果 </p>
+<p>5、Interceptor：拦截器 </p>
+<p>6、Tags：标签库</p>
+<h2 id="3-Struts2的工作流程"><a href="#3-Struts2的工作流程" class="headerlink" title="3. Struts2的工作流程"></a>3. Struts2的工作流程</h2><p>（1）所有请求提交给前端控制器。</p>
+<p>（2）根据配置信息确定要调用的 Action。</p>
+<p>（3）创建一个 ValueStack 对象（每个请求都有一个独立的 VS 对象）。</p>
+<p>（4）创建 Action 对象，把 Action 对象放到 VS 的栈顶，将 VS 对象存入到 request 中，存储的 key 为“ struts.valueStack”。</p>
+<p>（5）控制器调用 Action 对象接收请求参数， 并在方法中根据输入属性算输出属性。</p>
+<p>（6）在调用 Action 之前或之后调用一系列 Interceptor。</p>
+<p>（7）根据 Action 返回的字符串确定 Result（ 10 种类型）。</p>
+<p>（8）调用 Result 对象，将 VS 中的数据按照特定的格式输出。</p>
+<p>（9）很多情况下， Result 将转发到 JSP， JSP 页面用 Tags 取出数据并显示。</p>
+<p>（10）请求处理完后，将 ValueStack 对象和 Action 对象销毁。</p>
+<h2 id="4-OGNL技术"><a href="#4-OGNL技术" class="headerlink" title="4. OGNL技术"></a>4. OGNL技术</h2><h5 id="1-什么是OGNL"><a href="#1-什么是OGNL" class="headerlink" title="1.什么是OGNL?"></a>1.什么是OGNL?</h5><p>OGNL是 Object-Graph Navigation Language（对象图形导航语言）的缩写，它是一种功能强大的表达式语言。是一种表达式语言。使用这种表达式语言，你可以通过某种表达式语法，存取Java对象树中的任意属性、调用Java对象树的方法、同时能够自动实现必要的类型转化。</p>
+<p>OGNL简介：　</p>
+<p>　　（1）OGNL是Object Graphic Navigation Language（对象图导航语言）的缩写，它是一个开源项目。</p>
+<p>　　　　 struts2框架默认就支持Ognl表达式语言（所以struts必须引用的包：ognl.jar）；</p>
+<p>　　（2）struts2的ognl的作用：页面取值使用；</p>
+<p>　　（3）OGNL和EL的区别:</p>
+<p>　　　　　EL表达式语言:用于页面取值，jsp页面取值的标准（默认可以直接使用，应用范围更加广泛）；</p>
+<p>　　　　  OGNL表达式语言：struts2标签默认支持的表达式语言，必须配置struts标签使用，不能离开struts2标签直接使用；</p>
+<p>　　（4）OGNL 有一个上下文（Context）概念,[OgnlContext对象：OgnlContext对象是ognl表达式语言的核心];</p>
+<p>　　　　 其实上下文就是一个MAP结构，它实现了 java.utils.Map 的接口。</p>
+<p>　　（5）ognl表达式语言取值，取根元素的值，不用带#符号；ognl表达式语言取值，取非根元素的值，需要带#符号；</p>
+<p>6：ValueStack, 即值栈对象（根元素的值存储在root中，非根元素的值存储在context中）。</p>
+<p>　 （1）：值栈对象是整个struts数据存储的核心，或者叫中转站。</p>
+<p>　 （2）：用户每次访问struts的action，都会创建一个Action对象、值栈对象、ActionContext对象；  然后把Action对象放入值栈中； 最后再把值栈对象放入request中，传入jsp页面。</p>
+<p>　 （3）：(key: struts.valueStack)； 开发者只需要通过ActionContext对象就可以访问struts的其他的关键对象。 （ActionContext是给开发者用的，便于学习与使用。）</p>
+<h5 id="2-Struts2标签的使用"><a href="#2-Struts2标签的使用" class="headerlink" title="2. Struts2标签的使用"></a>2. Struts2标签的使用</h5><p>Struts2 的很多标记就是通过访问 ValueStack 获得数据的。使用前要在页面中要引入： &lt;%@taglib uri=”/struts-tags” prefix=”s”%&gt;， prefix：表示前缀</p>
+<h2 id="5-什么是Struts2中的拦截器？"><a href="#5-什么是Struts2中的拦截器？" class="headerlink" title="5. 什么是Struts2中的拦截器？"></a>5. 什么是Struts2中的拦截器？</h2><p>它提供了一种机制可以使开发者可以定义在一个action执行的前后执行的代码，也可以在一个action执行前阻止其执行，同时也提供了一种可以提取action中可重用部分的方式。在AOP（Aspect-Oriented Programming）中拦截器用于在某个方法或字段被访问之前，进行拦截然后在之前或之后加入某些操作。Struts2内置了很多拦截器，每个拦截器完成相对独立的功能，多个拦截器的组合体成为拦截器栈。最为重要的拦截器栈是系统默认拦截器栈DefaultStack。struts2默认定义了35种拦截器，默认执行20种。</p>
+<p>1）拦截器（Interceptor）是Struts2的核心组成部分，是XWork体系的重要组件。</p>
+<p>2）Struts2很多功能都是构建在拦截器基础之上的，例如文件的上传下载、国际化、数据类型转换和数据校验等等。</p>
+<p>3）Struts2拦截器在访问某个Action方法之前和之后实施拦截</p>
+<p>4）Struts2拦截器是可插拔的，拦截器是AOP（面向切面编程）的一种实现。</p>
+<p>5）拦截器栈（Interceptor Stack）：将拦截器按一定的顺序联结成一条链，在访问被拦截的方法时，Struts2拦截器链中的拦截器就会按其之前定义的顺序依次调用。</p>
+<p>struts2中的的功能（参数处理、文件上传、字符编码等）都是通过系统拦截器实现的。如果业务需要，当然我们也可以自定义拦截器,进行可插拔配置，在执行  Action  的方法前后、加入相关逻辑完成业务。</p>
+<p>使用场景：</p>
+<p>（1）用户登录判断，在执行 Action的前面判断是否已经登录，如果没有登录的跳转到登录页面。</p>
+<p>（2）用户权限判断，在执行 Action的前面判断是否具有，如果没有权限就给出提示信息。</p>
+<p>（3）操作日志……等等</p>
+<h2 id="6-在Struts2中创建Action类有哪些不同的方法？"><a href="#6-在Struts2中创建Action类有哪些不同的方法？" class="headerlink" title="6. 在Struts2中创建Action类有哪些不同的方法？"></a>6. 在Struts2中创建Action类有哪些不同的方法？</h2><p>（1）方式一：直接创建一个类，可以是POJO，即原生Java类，没有继承任何类，也没有实现任何接口。这种方式使得strust2框架的代码侵入性更低，但是这种方式是理想状态，开发中并不常用。</p>
+<p>（2）方式二：实现一个接口com.opensymphony.xwork2.Action。接口里面有execute方法，提供了action方法的规范，Action接口预置了一些字符串，可以在返回结果时使用。为了方便。这种方式也不常用。</p>
+<p>（3）方式三：继承一个类，ActionSupport。该方式帮我们实现了一些接口 Action, Validateable, ValidationAware, TextProvider, LocaleProvider, Serializable  如果我们需要用到这些接口的时候，就不需要自己实现了</p>
+<h2 id="7-什么是ValueStack和OGNL？"><a href="#7-什么是ValueStack和OGNL？" class="headerlink" title="7. 什么是ValueStack和OGNL？****"></a>7. 什么是ValueStack和OGNL？****</h2><p>ValueStack是Struts2存储应用程序数据以处理客户端请求的存储区域。数据存储在ActionContext使用ThreadLocal的对象中，以具有特定于特定请求线程的值。</p>
+<p>对象图导航语言（OGNL）是一种功能强大的表达式语言，用于处理存储在ValueStack上的数据。正如您在架构图中看到的，拦截器和结果页面都可以使用OGNL访问存储在ValueStack上的数据。</p>
+<h2 id="8-列举Struts2中引入的一些有用的注释？"><a href="#8-列举Struts2中引入的一些有用的注释？" class="headerlink" title="8. 列举Struts2中引入的一些有用的注释？****"></a>8. 列举Struts2中引入的一些有用的注释？****</h2><p>Struts2中引入的一些重要注释是：</p>
+<p>@Action创建动作类</p>
+<p>@Actions为多个动作配置单个类</p>
+<p>@Namespace和@Namespaces用于创建不同的模块</p>
+<p>@Result用于结果页面</p>
+<p>@ResultPath用于配置结果页面位置</p>
+<h2 id="9-项目中继承ActionSupport并实现ModelDriven接口？"><a href="#9-项目中继承ActionSupport并实现ModelDriven接口？" class="headerlink" title="9. 项目中继承ActionSupport并实现ModelDriven接口？****"></a>9. 项目中继承ActionSupport并实现ModelDriven接口？****</h2><p>struts可以继承ActionSupport类，也可以不继承，继承的好处简单来说就是更方便实现验证，国际化等功能，与struts2的功能结合紧密，方便我们开发。</p>
+<p>ActionSupport类的作用：</p>
+<p>   此类实现了很多实用的接口，提供了很多默认的方法，这些默认方法包括国际化信息，默认的处理用户请求的方法等，可以大大简化action的开发，在继承ActionSupport的情况下，必须有无参构造函数。</p>
+<p>  struts2不要求我们自己设计的action类继承任何的struts基类或struts接口，但是我们为了方便实现我们自己的action，大多数情况下都会继承com.opensymphony.xwork2.ActionSupport类，并重写此类里的public String execute() throws Exception方法。因为此类中实现了很多的实用借口，提供了很多默认方法，这些默认方法包括国际化信息的方法、默认的处理用户请求的方法等，这样可以大大的简化Acion的开发。</p>
+<p>实现了ModelDriven</p>
+<p>可以使用VO，就是提交过来的参抄数（这个参数就百是表单的数据）</p>
+<p>可以直接驱动到action的setXXX（）里面，意思就是说</p>
+<p>实现了ModelDriven就必须百实现getModel这个方法，该方法返回的是你的度ModelDrivern泛型中设定的实体类。其实是为了实现代码的重用，不要再定义问一次你在数据访问层定义的属性了，直接用那答个类就行了。不过有时候也回不是很需要这个东西，答比如只有一两个表单域的时候。</p>
+<h2 id="10-Struts国际化？"><a href="#10-Struts国际化？" class="headerlink" title="10. Struts国际化？****"></a>10. Struts国际化？****</h2><p>国际化（i18n）是规划和实施的产品和服务，使他们能很容易地适应特定的本地语言和文化的过程中，这个过程被称为本地化。国际化的过程有时也被称为翻译或本地化启用。国际化是缩写i18n，因为我和两端用n字打头，并有18个字符之间的第i个和最后n。</p>
+<h2 id="11-如何在Struts2应用程序中上传文件？"><a href="#11-如何在Struts2应用程序中上传文件？" class="headerlink" title="11. 如何在Struts2应用程序中上传文件？****"></a>11. 如何在Struts2应用程序中上传文件？****</h2><p>文件上传是Web应用程序中的常见任务之一。 Struts2通过FileUploadInterceptor提供对文件上传的内置支持。 此拦截器在struts-default包中配置，并提供选项以设置文件的最大大小和可以上载到服务器的文件类型。</p>
+<h2 id="12-Struts2实现文件上传的步骤？"><a href="#12-Struts2实现文件上传的步骤？" class="headerlink" title="12. Struts2实现文件上传的步骤？****"></a>12. Struts2实现文件上传的步骤？****</h2><p>基于表单的文件上传需要下载所需要的jar包文件<strong><em>\</em>Commons-FileUpload组件*****</strong>*、*<strong>**</strong>*需要下载Common-FileUplaod*<strong>* *</strong>*当然MyEclipce中Struts2支持里自带有这两个包****</p>
+<p>基于表单的上传，在form标签中有一个必须的属性值设置：enctype </p>
+<p>如果要做文件上传功能必须将enctype值设为multipart/form-data</p>
+<p>修改struts2配置文件</p>
+<p>配置struts.xml文件，重置fileUpload拦截器</p>
+<p>&lt;interceptor-ref name=<strong>“fileUpload”</strong>&gt;</p>
+<p>​      &lt;param name=<strong>“maximumSize”</strong>&gt;10485760</param> </p>
+<!-- 10M -->
+
+ </interceptor-ref>
+
+
+
+<p>编写相应的action类</p>
+<h2 id="13-Struts2的核心是什么-体现了什么思想？"><a href="#13-Struts2的核心是什么-体现了什么思想？" class="headerlink" title="13. Struts2的核心是什么? 体现了什么思想？****"></a>13. Struts2的核心是什么? 体现了什么思想？****</h2><p>Struts2的核心是拦截器,基本上核心功能都是由拦截器完成,拦截器的实现体现了AOP(面向切面编程)思想</p>
+<h2 id="14-为何继承ActionSupport"><a href="#14-为何继承ActionSupport" class="headerlink" title="14. 为何继承ActionSupport"></a>14. 为何继承ActionSupport</h2><p>因为ActionSupport实现了Action接口，提供了国际化，校验功能。</p>
+<p>ActionSupport实现了国际化功能：因为它提供了一个getText(String key)方法实现国际化,该方法从资源文件上获取国际化信息。</p>
+<p>Action接口提供了五个常量(success,error,login,input,none)。</p>
+<h2 id="15-Struts2-如何定位action中的方法"><a href="#15-Struts2-如何定位action中的方法" class="headerlink" title="15. Struts2 如何定位action中的方法"></a>15. Struts2 如何定位action中的方法</h2><p>在xml配置文件中通过配置多个action，使用action的method指定方法。</p>
+<p>使用通配符(*)匹配方法。</p>
+<h2 id="16-模型驱动与属性驱动是什么-模型驱动使用时注意什么问题"><a href="#16-模型驱动与属性驱动是什么-模型驱动使用时注意什么问题" class="headerlink" title="16. 模型驱动与属性驱动是什么 模型驱动使用时注意什么问题"></a>16. 模型驱动与属性驱动是什么 模型驱动使用时注意什么问题</h2><p>模型驱动与属性驱动都是用来封装数据的。</p>
+<p>（1）模型驱动：在实现类中实现ModelDriven<T>接口使用泛型把属性类封装起来，重写getModel()方法，然后在实现类里创建一个属性类的实例，</p>
+<p>通过这个实例拿到封装进来的值，拿返回值的时候使用工具进行值拷贝。</p>
+<p>（2）属性驱动：在实现类里定义属性，生成get与set方法，通过属性来拿值。</p>
+<p>注意：模型驱动使用时注意的是在使用前先把属性类实例化，否则会出现空指针错误，拿返回对象的值需要用拷贝内存因为地址发生改变。</p>
+<p>模型驱动不可以使用局部类型转换器。</p>
+<h2 id="17-Struts2是怎样进行值封装的？"><a href="#17-Struts2是怎样进行值封装的？" class="headerlink" title="17. Struts2是怎样进行值封装的？"></a>17. Struts2是怎样进行值封装的？</h2><p>struts2的值封装实际上是采用了ognl表达式</p>
+<p>struts2的拦截器经过模型驱动时会先判断action是否实现了ModelDriven，如果是，则拿到模型的实例放在了栈的顶部，</p>
+<p>到属性驱动的时候会从栈里面把栈顶的实例给取出来，从页面传进来的值放在一个map集合当中，</p>
+<p>通过map集合进行迭代会通过ognl技术把值封装到实例中。</p>
+<h2 id="18-OGNL是什么你在项目中如何使用它-？"><a href="#18-OGNL是什么你在项目中如何使用它-？" class="headerlink" title="18. OGNL是什么你在项目中如何使用它****？"></a>18. OGNL是什么你在项目中如何使用它*<strong>**</strong>*？</h2><p>OGNL是：对象图形导航语言。</p>
+<p>原ognl是单个对象的，在struts2的应用是多个对象的，struts2的类型转换也是通过ognl来实现的。</p>
+<p>Struts2中默认的表达式语言就是ognl，struts2的取值设值都是通过ognl来实现的,struts2要依靠它的标签才可以使用ognl。</p>
+<p>相对于jstl或者其他表达式语言，它有如下优势：</p>
+<p>（1）能够调用对象实例的方法</p>
+<p>（2）能够调用类的静态方法</p>
+<p>（3）操作集合对象</p>
+<p>（4）访问Ognl上下文</p>
+<p>取值时ognl有三个参数：</p>
+<p>（1）表达式</p>
+<p>（2）ognl的上下文(map)</p>
+<p>（3）对象实例(值栈)。</p>
+<p>如果表达式带#号是从上下文中(map)拿值，否则是从值栈中拿值。</p>
+<p>设值时有四个参数：</p>
+<p>（1）表达式，（2）ognl的上下文(map)，（3）对象实例，（4）设入的值</p>
+<p>如果表达式带#号是把值设入上下文中(map)，否则是把值设入值栈中。</p>
+<p>在struts2中 ognl的实现关系:ActionConetxt。</p>
+<p>ognl 3个常用的符号 # $ %</p>
+<p># ：构造map，list集合。取ognl上下文的值。用来过滤集合。</p>
+<p>$ ：在校验框架中取资源文件中的值。可以在配置文件中传递参数。</p>
+<p>% ：使用百分号可以进行转义。</p>
+<h2 id="19-Strust2如何访问Servlet-API-？"><a href="#19-Strust2如何访问Servlet-API-？" class="headerlink" title="19. Strust2如何访问Servlet API****？"></a>19. Strust2如何访问Servlet API*<strong>**</strong>*？</h2><p>答：</p>
+<p>（1）通过ActionContext可以获得request，application，session三个作用域(struts2实际上是通过适配器来把servlet的api转换为一个map，</p>
+<p>并把这些map放在ActionContext里面)。</p>
+<p>（2）通过ActionContext的子类ServletActionContext去获取原滋原味的API。</p>
+<p>（3）可以通过实现ServletRequestAware接口，重写里面的setServletRequest方法可以获得request，实际上是通过set的依赖注入。</p>
+<h2 id="20-什么是拦截器-说说Struts2用拦截器来干什么-说出6个拦截器来"><a href="#20-什么是拦截器-说说Struts2用拦截器来干什么-说出6个拦截器来" class="headerlink" title="20. 什么是拦截器 说说Struts2用拦截器来干什么 说出6个拦截器来****"></a>20. 什么是拦截器 说说Struts2用拦截器来干什么 说出6个拦截器来****</h2><p>在访问类的某个方法或者属性之前执行，拦截的是Action的请求，进行拦截然后在方法的执行前或者之后加入某些操作，如：国际化，权限，效验等与源代码无关的操作。</p>
+<p>拦截器：国际化，表单重复提交，类型转换，自动装配，数据封装,异常处理，模型驱动，请求参数，处理类型转换错误，日志拦截器。</p>
+<p><strong><em>\</em>（*****</strong>*项目中遇到什么问题*<strong>**</strong>*）****</p>
+<p>3.使用模型驱动拿返回值的时候地址内存不一样，会拿不到值。</p>
+<p>原因：因为struts2最开始是把创建action的实例放到ActionContext的栈顶，后来把创建模型驱动的实例放到栈顶，</p>
+<p>而通过struts2的标签去取值会取栈顶的实例，而此时拿到的还是最开始的创建的那个实例，所以为空。</p>
+<p>解决方式：利用原型进行对象拷贝，使用拷贝工具，BeanUtils或者是propertyUtils。</p>
+<h2 id="21-ActionContext是用来干什么用的？"><a href="#21-ActionContext是用来干什么用的？" class="headerlink" title="21. ActionContext是用来干什么用的？"></a>21. ActionContext是用来干什么用的？</h2><p>答：ActionContext是Action的上下文。</p>
+<p>通过ActionContext这个类来可以获得:request，application，session，Locale、ValueStack,ConversionErrors</p>
+<p>（1）可以获得servlet的api：request，application，session。</p>
+<p>（2）进行国际化：获得语言环境 Locale。</p>
+<p>（3）收集错误信息：ConversionErrors。</p>
+<p>（4）有个值栈来装action实例与创建的模型驱动的实例:ValueStack。</p>
+<p>（5）ActionContext是线程安全的-用本地线程实现的。</p>
+<h2 id="22-Struts2是如何实现mvc的：struts2的底层视图默认是freemaker。什么mvc？"><a href="#22-Struts2是如何实现mvc的：struts2的底层视图默认是freemaker。什么mvc？" class="headerlink" title="22. Struts2是如何实现mvc的：struts2的底层视图默认是freemaker。什么mvc？****"></a>22. Struts2是如何实现mvc的：struts2的底层视图默认是freemaker。什么mvc？****</h2><p>M：模型，V：视图，C：控制器</p>
+<p>在struts2中分别对应什么？</p>
+<p>M(模型)：除核心控制器外都属于模型，实现业务的类(service层与dao层)。</p>
+<p>V(视图)：result,type,dispatcher默认的(jsp，freemaker，velocity，源代码等)。</p>
+<p>C(控制器)：核心控制器与业务控制器。</p>
+<p>mvc解决什么问题？</p>
+<p>解决了数据封装，类型转换，数据效验，国际化，异常处理等问题。</p>
+<h2 id="23-开发项目时struts2在页面怎样拿值？"><a href="#23-开发项目时struts2在页面怎样拿值？" class="headerlink" title="23. 开发项目时struts2在页面怎样拿值？"></a>23. 开发项目时struts2在页面怎样拿值？</h2><p>从值栈中或者是ognl的上下文中取值</p>
+<h2 id="24-怎么样用Struts2进行文件的上传或者下载"><a href="#24-怎么样用Struts2进行文件的上传或者下载" class="headerlink" title="24. 怎么样用Struts2进行文件的上传或者下载\"></a>24. 怎么样用Struts2进行文件的上传或者下载\</h2><p>上传：Struts2里面已经提供了默认的拦截器来处理上传,只要在jsp用了s:file标签,把s:from的enctype 属性设置为 multipart/form-data,然后在action里面定义三个字段 File file ,String [file]ContentType,String [file]?FileName即可,如果有多个文件上传,那么就用List<File>来接受,然后把接受到的File构建成FileInputStream,转化成硬盘上面的文件即可(用输出流)</p>
+<p>下载：用了resust为stream的类型,然后在action定义四个属性,默认的有个是InputStream 的类型叫inputStream的,从硬盘上面读取文件到这个流赋值即可.</p>
+<h2 id="25-简单讲下struts里面的标签-说不少于5个"><a href="#25-简单讲下struts里面的标签-说不少于5个" class="headerlink" title="25. 简单讲下struts里面的标签,说不少于5个****"></a>25. 简单讲下struts里面的标签,说不少于5个****</h2><p>s:iterater ?s:property s:form s:url s:if 等等</p>
+<h2 id="26-默认struts2里面的标签取值都是从那里取值的"><a href="#26-默认struts2里面的标签取值都是从那里取值的" class="headerlink" title="26.默认struts2里面的标签取值都是从那里取值的****"></a>26.默认struts2里面的标签取值都是从那里取值的****</h2><p>默认都是从OGNL值栈里面取值的</p>
+<h2 id="27-ValueStack分为那两部分-组成部分是什么-分别怎么访问"><a href="#27-ValueStack分为那两部分-组成部分是什么-分别怎么访问" class="headerlink" title="27. ValueStack分为那两部分,组成部分是什么,分别怎么访问****"></a>27. ValueStack分为那两部分,组成部分是什么,分别怎么访问****</h2><p>分为对象栈和ContextMap ,对象栈里面放入的是Action及其用户定义的对象,在前台可以直接访问,在contextMap里面放入的是Servlet对象转化后map,譬如requestMap,sessionMap,访问的时候前面加#即可。</p>
+<h2 id="28-struts2的请求处理流程"><a href="#28-struts2的请求处理流程" class="headerlink" title="28. struts2的请求处理流程\"></a>28. struts2的请求处理流程\</h2><p>（1）客户端发送请求。</p>
+<p>（2）经过一系列的过滤器（如:ActionContextCleanUp、SiteMesh等）到达核心控制器（FilterDispatcher）。</p>
+<p>（3）核心控制器通过ActionMapper决定调用哪个Action，如果不是调用Action就直接跳转到jsp页面</p>
+<p>（4）如果ActionMapper决定调用了某个Action，核心控制器就把请求的处理交给一个代理类（ActionProxy）。</p>
+<p>（5）代理类通过配置管理器(Configuration Manager)找到配置文件（struts.xml）找到需要调用的Action类。</p>
+<p>（6）代理类还要创建一个Action的调度器（ActionInvocation）。</p>
+<p>（7）由调度器去调用Action，当然这里还涉及到一些相关的拦截器的调用。</p>
+<p>（8）Action执行完后，这个调度器还会创建一个Result返回结果集，返回结果前还可以做一些操作（结果集前的监听器）。</p>
+<h2 id="29-struts2源码与设计模式"><a href="#29-struts2源码与设计模式" class="headerlink" title="29. struts2源码与设计模式"></a>29. struts2源码与设计模式</h2><p>命令模式(发生.do请求封装成action调用execute方法)，代理模式(访问action时核心控制器把请求交给代理类(ActionProxy)去访问Action就是代理模式)，</p>
+<p>责任链模式(访问action时经过一系列的拦截器就使用了责任链模式)，适配器(把Servlet的API通过适配器转换成Map，把Map放入ActionContext中)，</p>
+<p>组合模式(拦截器栈和拦截器就使用到组和模式)。</p>
+<p>源码：</p>
+<p>服务器启动的时候容器会创建FilterDispatcher实例，进入dispatcher.init()方法，在init方法里面会初始化sturts2的一系列的配置文件，然后向服务器发送请求，进入doFilter方法，在里面通过调用dispatcher.serviceAction方法,进入到Dispatcher里面的serviceAction方法，在这里就会把servlet的api转换为map，并把它一个个的放在ActionContext中，在这里还会创建ActionProxy的实例去调用execute方法，到StrutsActionProxy的execute方法，通过DefaultActionInvocation的实例去调用invoke方法，在invoke方法里面会进行判断拦截器是否存在，如果存在就会调用intercept方法，在拦截器类(Intercept)中会通过DefaultActionInvocation实例调用里面的invock方法,它们会形成递归调用，当拦截器不存在的时候就会进入invokeActionOnly方法，判断有没有返回结果前的监听器preResultListener如果有则进去一个个执行，最后调用 executeResult()方法，创建result返回，执行execute方法，并返回视图。</p>
+<h2 id="30-struts2工作流程"><a href="#30-struts2工作流程" class="headerlink" title="30. struts2工作流程"></a>30. struts2工作流程</h2><p>1、Struts 2框架本身大致可以分为3个部分：核心控制器FilterDispatcher、业务控制器Action和用户实现的企业业务逻辑组件。</p>
+<p>（1）核心控制器FilterDispatcher是Struts 2框架的基础，包含了框架内部的控制流程和处理机制。</p>
+<p>（2）业务控制器Action和业务逻辑组件是需要用户来自己实现的。用户在开发Action和业务逻辑组件的同时，还需要编写相关的配置文件，供核心控制器FilterDispatcher来使用。</p>
+<p>​    Struts 2的工作流程相对于Struts 1要简单，与WebWork框架基本相同，所以说Struts 2是WebWork的升级版本。</p>
+<p><strong><em>\</em>简要执行流程：**</strong></p>
+<p>（1）客户端初始化一个指向Servlet容器的请求；</p>
+<p>（2）这个请求经过一系列的过滤器（Filter）</p>
+<p>​    （这些过滤器中有一个叫做ActionContextCleanUp的可选过滤器，这个过滤器对于Struts2和其他框架的集成很有帮助，例如：SiteMesh Plugin）</p>
+<p>（3）接着FilterDispatcher被调用，</p>
+<p>​     FilterDispatcher询问ActionMapper来决定这个请是否需要调用某个Action</p>
+<p>（4）如果ActionMapper决定需要调用某个Action，</p>
+<p>​     FilterDispatcher把请求的处理交给ActionProxy</p>
+<p>（5）ActionProxy通过Configuration Manager询问框架的配置文件，找到需要调用的Action类</p>
+<p>（6）ActionProxy创建一个ActionInvocation的实例。</p>
+<p>（7）ActionInvocation实例使用命名模式来调用，</p>
+<p>​     在调用Action的过程前后，涉及到相关拦截器（Intercepter）的调用。</p>
+<p>（8）一旦Action执行完毕，ActionInvocation负责根据struts.xml中的配置找到对应的返回结果。返回结果通常是（但不总是，也可 能是另外的一个Action链）一个需要被表示的JSP或者FreeMarker的模版。在表示的过程中可以使用Struts2 框架中继承的标签。    在这个过程中需要涉及到ActionMapper</p>
+<p>（9）响应的返回是通过我们在web.xml中配置的过滤器</p>
+<p>（10）如果ActionContextCleanUp是当前使用的，则FilterDispatecher将不会清理sreadlocal ActionContext;如果ActionContextCleanUp不使用，则将会去清理sreadlocals。 </p>
+<h2 id="31-拦截器和过滤器的区别？"><a href="#31-拦截器和过滤器的区别？" class="headerlink" title="31. 拦截器和过滤器的区别？"></a>31. 拦截器和过滤器的区别？</h2><p>1、拦截器是基于Java反射机制的，而过滤器是基于函数回调的。</p>
+<p>2、过滤器依赖于servlet容器，而拦截器不依赖于servlet容器。</p>
+<p>3、拦截器只能对Action请求起作用，而过滤器则可以对几乎所有请求起作用。</p>
+<p>4、拦截器可以访问Action上下文、值栈里的对象，而过滤器不能。</p>
+<p>5、在Action的生命周期中，拦截器可以多次调用，而过滤器只能在容器初始化时被调用一次。</p>
+<h2 id="32-Struts2是如何启动的？"><a href="#32-Struts2是如何启动的？" class="headerlink" title="32. Struts2是如何启动的？\"></a>32. Struts2是如何启动的？\</h2><p>1、struts2框架是通过Filter启动的，即StrutsPrepareAndExecuteFilter，此过滤器为struts2的核心过滤器； </p>
+<p>2、StrutsPrepareAndExecuteFilter的init()方法中将会读取类路径下默认的配置文件struts.xml完成初始化操作。struts2读取到struts.xml的内容后，是将内容封装进javabean对象然后存放在内存中，以后用户的每次请求处理将使用内存中的数据，而不是每次请求都读取struts.xml文件。</p>
+<h2 id="33-Struts2的核心控制器是什么？它是什么作用？"><a href="#33-Struts2的核心控制器是什么？它是什么作用？" class="headerlink" title="33. Struts2的核心控制器是什么？它是什么作用？\"></a>33. Struts2的核心控制器是什么？它是什么作用？\</h2><p>1、Struts2框架的核心控制器是StrutsPrepareAndExecuteFilter。 </p>
+<p>2、作用： </p>
+<p> 负责拦截由<url-pattern>/*</url-pattern>指定的所有用户请求，当用户请求到达时，该Filter会过滤用户的请求。默认情况下，如果用户请求的路径 </p>
+<p>不带后缀或者后缀以.action结尾，这时请求将被转入struts2框架处理，否则struts2框架将略过该请求的处理。 </p>
+<p>可以通过常量”struts.action.extension”修改action的后缀，如： </p>
+<constant name="struts.action.extension" value="do"/> 
+
+<p>如果用户需要指定多个请求后缀，则多个后缀之间以英文逗号（,）隔开。</p>
+<constant name="struts.action.extension" value="do,Go"/>  
+
+
+
+<h2 id="34-struts2是如何管理action的？这种管理方式有什么好处？"><a href="#34-struts2是如何管理action的？这种管理方式有什么好处？" class="headerlink" title="34. struts2是如何管理action的？这种管理方式有什么好处？"></a>34. struts2是如何管理action的？这种管理方式有什么好处？</h2><p>struts2框架中使用包来管理Action，包的作用和java中的类包是非常类似的。 </p>
+<p>主要用于管理一组业务功能相关的action。在实际应用中，我们应该把一组业务功能相关的Action放在同一个包下。 </p>
+<p>struts2中的默认包struts-default有什么作用？ </p>
+<p>（1）struts-default包是由struts内置的，它定义了struts2内部的众多拦截器和Result类型，而Struts2很多核心的功能都是通过这些内置的拦截器实现，如：从请求中 </p>
+<p>把请求参数封装到action、文件上传和数据验证等等都是通过拦截器实现的。当包继承了struts-default包才能使用struts2为我们提供的这些功能。 </p>
+<p>（2）struts-default包是在struts-default.xml中定义，struts-default.xml也是Struts2默认配置文件。 Struts2每次都会自动加载 struts-default.xml文件。 </p>
+<p>（3）通常每个包都应该继承struts-default包。   </p>
+<h2 id="35-值栈ValueStack的原理与生命周期？"><a href="#35-值栈ValueStack的原理与生命周期？" class="headerlink" title="35. 值栈ValueStack的原理与生命周期？"></a>35. 值栈ValueStack的原理与生命周期？</h2><p>（1）ValueStack贯穿整个 Action 的生命周期，保存在request域中，所以ValueStack和request的生命周期一样。当Struts2接受一个请求时，会迅速创建ActionContext， ValueStack，action。然后把action存放进ValueStack，所以action的实例变量可以被OGNL访问。 请求来的时候，action、ValueStack的生命开始，请求结束，action、  ValueStack的生命结束； </p>
+<p>（2）action是多例的，和Servlet不一样，Servelt是单例的； </p>
+<p>（3）每个action的都有一个对应的值栈，值栈存放的数据类型是该action的实例，以及该action中的实例变量，Action对象默认保存在栈顶； </p>
+<p>（4）ValueStack本质上就是一个ArrayList； </p>
+<p>（5）关于ContextMap，Struts 会把下面这些映射压入 ContextMap 中： </p>
+<p>parameters ：该 Map 中包含当前请求的请求参数</p>
+<p>request ： 该 Map 中包含当前 request 对象中的所有属性 </p>
+<p>session ：该 Map 中包含当前 session 对象中的所有属性 </p>
+<p>Application：该 Map 中包含当前 application 对象中的所有属性 </p>
+<p>attr：该 Map 按如下顺序来检索某个属性: request, session, application     </p>
+<p>（6）使用OGNL访问值栈的内容时，不需要#号，而访问request、session、application、attr时，需要加#号； </p>
+<p>（7）注意： Struts2中，OGNL表达式需要配合Struts标签才可以使用。如：&lt;s:property value=”name”/&gt; </p>
+<p>（8）在struts2配置文件中引用ognl表达式 ,引用值栈的值 ，此时使用的”$”，而不是#或者%; </p>
+<h2 id="36-ActionContext、ServletContext、pageContext的区别？"><a href="#36-ActionContext、ServletContext、pageContext的区别？" class="headerlink" title="36. ActionContext、ServletContext、pageContext的区别？"></a>36. ActionContext、ServletContext、pageContext的区别？</h2><p>（1）ActionContext是当前的Action的上下文环境，通过ActionContext可以获取到request、session、ServletContext等与Action有关的对象的引用； </p>
+<p>（2）ServletContext是域对象，一个web应用中只有一个ServletContext，生命周期伴随整个web应用； </p>
+<p>（3）pageContext是JSP中的最重要的一个内置对象，可以通过pageContext获取其他域对象的应用，同时它是一个域对象，作用范围只针对当前页面，当前页面结束时，pageContext销毁， </p>
+<p>生命周期是JSP四个域对象中最小的。 </p>
+<h2 id="37-struts的工作原理"><a href="#37-struts的工作原理" class="headerlink" title="37. struts的工作原理"></a>37. struts的工作原理</h2><p>（1）初始化，读取struts-config.xml、web.xml等配置文件（所有配置文件的初始化）</p>
+<p>（2）发送HTTP请求,客户端发送以.do结尾的请求</p>
+<p>（3）填充FormBean（实例化、复位、填充数据、校验、保存）</p>
+<p>（4）将请求转发到Action（调用Action的execute（）方法）</p>
+<p>（5）处理业务（可以调用后台类，返回ActionForward对象）</p>
+<p>（6）返回目标响应对象（从Action返回到ActionServlet）</p>
+<p>（7）转换Http请求到目标响应对象（查找响应，根据返回的Forward keyword）</p>
+<p>（8）Http响应，返回到Jsp页面</p>
+<h2 id="38-用自己的话简要阐述struts2的执行流程。"><a href="#38-用自己的话简要阐述struts2的执行流程。" class="headerlink" title="38. 用自己的话简要阐述struts2的执行流程。"></a>38. 用自己的话简要阐述struts2的执行流程。</h2><p>Struts 2框架本身大致可以分为3个部分：核心控制器FilterDispatcher、业务控制器Action和用户实现的企业业务逻辑组件。</p>
+<p>核心控制器FilterDispatcher是Struts 2框架的基础，包含了框架内部的控制流程和处理机制。业务控制器Action和业务逻辑组件是需要用户来自己实现的。用户在开发Action和业务逻辑组件的同时，还需要编写相关的配置文件，供核心控制器FilterDispatcher来使用。</p>
+<p>Struts 2的工作流程相对于Struts 1要简单，与WebWork框架基本相同，所以说Struts 2是WebWork的升级版本。基本简要流程如下：</p>
+<p>（1）客户端浏览器发出HTTP请求。</p>
+<p>（2）根据web.xml配置，该请求被FilterDispatcher接收。</p>
+<p>（3）根据struts.xml配置，找到需要调用的Action类和方法， 并通过IoC方式，将值注入给Aciton。</p>
+<p>（4）Action调用业务逻辑组件处理业务逻辑，这一步包含表单验证。</p>
+<p>（5）Action执行完毕，根据struts.xml中的配置找到对应的返回结果result，并跳转到相应页面。</p>
+<p>（6）返回HTTP响应到客户端浏览器。</p>
+<p>它是以Webwork的设计思想为核心，吸收struts1的优点，可以说 struts2是struts1和Webwork结合的产物。</p>
+<h3 id="struts2-的工作原理图：-一个请求在Struts2框架中的处理分为以下几个步骤："><a href="#struts2-的工作原理图：-一个请求在Struts2框架中的处理分为以下几个步骤：" class="headerlink" title="struts2 的工作原理图： 一个请求在Struts2框架中的处理分为以下几个步骤："></a>struts2 的工作原理图： 一个请求在Struts2框架中的处理分为以下几个步骤：</h3><p>（1）客户端发出一个指向servlet容器的请求(tomcat)；</p>
+<p>（2）这个请求会经过图中的几个过滤器，最后会到达FilterDispatcher过滤器。</p>
+<p>（3）过滤器FilterDispatcher是struts2框架的心脏，在处理用户请求时，它和请求一起相互配合访问struts2 的底层框架结构。在web容器启动时，struts2框架会自动加载配置文件里相关参数，并转换成相应的类。 </p>
+<p>如：ConfigurationManager、ActionMapper和ObjectFactory。ConfigurationManager 存有配置文件的一 些基本信息，ActionMapper存有action的配置信息。在请求过程中所有的对象（Action，Results， Interceptors，等）都是通过ObjectFactory来创建的。过滤器会通过询问ActionMapper类来查找请求中 需要用到的Action。</p>
+<p>（4）如果找到需要调用的Action，过滤器会把请求的处理交给ActionProxy。ActionProxy为Action的代理对象 。ActionProxy通过ConfigurationManager询问框架的配置文件，找到需要调用的Action类。 </p>
+<p>（5）ActionProxy创建一个ActionInvocation的实例。ActionInvocation在ActionProxy层之下，它表示了 Action的执行状态,或者说它控制的Action的执行步骤。它持有Action实例和所有的Interceptor。 </p>
+<p>（6）ActionInvocation实例使用命名模式来调用，1） ActionInvocation初始化时，根据配置，加载Action相 关的所有Interceptor。2）通过ActionInvocation.invoke方法调用Action实现时，执行Interceptor。在 调用Action的过程前后，涉及到相关拦截器(intercepetor)的调用。</p>
+<p>（7）一旦Action执行完毕，ActionInvocation负责根据struts.xml中的配置找到对应的返回结果。返回结果 通常是（但不总是，也可能是另外的一个Action链）一个需要被表示的JSP或者FreeMarker的模版。在表 示的过程中可以使用Struts2 框架中继承的标签。</p>
+<h2 id="39-Struts2-如何访问-HttpServletRequest、HttpSession、ServletContext-三个域对象"><a href="#39-Struts2-如何访问-HttpServletRequest、HttpSession、ServletContext-三个域对象" class="headerlink" title="39. Struts2 如何访问 HttpServletRequest、HttpSession、ServletContext 三个域对象 ?"></a>39. Struts2 如何访问 HttpServletRequest、HttpSession、ServletContext 三个域对象 ?</h2><p>①. 与 Servlet API 解耦的访问方式</p>
+<p>　　&gt; 通过 ActionContext 访问域对象对应的 Map 对象</p>
+<p>　　&gt; 通过实现 Aware 接口使 Struts2 注入对应的 Map 对象</p>
+<p>②. 与 Servlet API 耦合的访问方式</p>
+<p>　　&gt; 通过 ServletActionContext 直接获取 Servlet API 对象</p>
+<p>　　&gt; 通过实现 ServletXxxAware 接口的方式使 Struts2 注入对应的对象</p>
+
+      
+    </div>
+    
+    
+    	
+
+    <div>
+		  
+			
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/06/07/Struts2%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/">Struts2面试整理</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 雷凯博 的个人博客">雷凯博</a></p>
+  <p><span>发布时间:</span>2020年06月07日 - 18:06</p>
+  <p><span>最后更新:</span>2021年05月16日 - 19:05</p>
+  <p><span>原始链接:</span><a href="/2020/06/07/Struts2%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" title="Struts2面试整理">http://yoursite.com/2020/06/07/Struts2%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/06/07/Struts2%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+		  
+	</div>
+	
+	
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="雷凯博 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="雷凯博 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"><i class="fa fa-tag"></i> 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/06/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%860406/" rel="next" title="面试整理0406">
+                <i class="fa fa-chevron-left"></i> 面试整理0406
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/07/springMVC/" rel="prev" title="springMVC">
+                springMVC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzQzOS8yMzkzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.jpg"
+                alt="雷凯博" />
+            
+              <p class="site-author-name" itemprop="name">雷凯博</p>
+              <p class="site-description motion-element" itemprop="description">你现在所经历的挫折和失败，它只属于现在，把它交给时间，一切都是最好的安排</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/leikaibo1014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kaibo_lei@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/Leo1120178518" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/p/67b731c3f840" title="主题配置" target="_blank">主题配置</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是Struts2？"><span class="nav-text">1. 什么是Struts2？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Struts2的核心组件是什么？"><span class="nav-text">2. Struts2的核心组件是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Struts2的工作流程"><span class="nav-text">3. Struts2的工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-OGNL技术"><span class="nav-text">4. OGNL技术</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-什么是OGNL"><span class="nav-text">1.什么是OGNL?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Struts2标签的使用"><span class="nav-text">2. Struts2标签的使用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-什么是Struts2中的拦截器？"><span class="nav-text">5. 什么是Struts2中的拦截器？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-在Struts2中创建Action类有哪些不同的方法？"><span class="nav-text">6. 在Struts2中创建Action类有哪些不同的方法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-什么是ValueStack和OGNL？"><span class="nav-text">7. 什么是ValueStack和OGNL？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-列举Struts2中引入的一些有用的注释？"><span class="nav-text">8. 列举Struts2中引入的一些有用的注释？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-项目中继承ActionSupport并实现ModelDriven接口？"><span class="nav-text">9. 项目中继承ActionSupport并实现ModelDriven接口？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Struts国际化？"><span class="nav-text">10. Struts国际化？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-如何在Struts2应用程序中上传文件？"><span class="nav-text">11. 如何在Struts2应用程序中上传文件？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-Struts2实现文件上传的步骤？"><span class="nav-text">12. Struts2实现文件上传的步骤？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Struts2的核心是什么-体现了什么思想？"><span class="nav-text">13. Struts2的核心是什么? 体现了什么思想？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-为何继承ActionSupport"><span class="nav-text">14. 为何继承ActionSupport</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-Struts2-如何定位action中的方法"><span class="nav-text">15. Struts2 如何定位action中的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-模型驱动与属性驱动是什么-模型驱动使用时注意什么问题"><span class="nav-text">16. 模型驱动与属性驱动是什么 模型驱动使用时注意什么问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-Struts2是怎样进行值封装的？"><span class="nav-text">17. Struts2是怎样进行值封装的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-OGNL是什么你在项目中如何使用它-？"><span class="nav-text">18. OGNL是什么你在项目中如何使用它****？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-Strust2如何访问Servlet-API-？"><span class="nav-text">19. Strust2如何访问Servlet API****？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-什么是拦截器-说说Struts2用拦截器来干什么-说出6个拦截器来"><span class="nav-text">20. 什么是拦截器 说说Struts2用拦截器来干什么 说出6个拦截器来****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-ActionContext是用来干什么用的？"><span class="nav-text">21. ActionContext是用来干什么用的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-Struts2是如何实现mvc的：struts2的底层视图默认是freemaker。什么mvc？"><span class="nav-text">22. Struts2是如何实现mvc的：struts2的底层视图默认是freemaker。什么mvc？****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-开发项目时struts2在页面怎样拿值？"><span class="nav-text">23. 开发项目时struts2在页面怎样拿值？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-怎么样用Struts2进行文件的上传或者下载"><span class="nav-text">24. 怎么样用Struts2进行文件的上传或者下载\</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-简单讲下struts里面的标签-说不少于5个"><span class="nav-text">25. 简单讲下struts里面的标签,说不少于5个****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-默认struts2里面的标签取值都是从那里取值的"><span class="nav-text">26.默认struts2里面的标签取值都是从那里取值的****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-ValueStack分为那两部分-组成部分是什么-分别怎么访问"><span class="nav-text">27. ValueStack分为那两部分,组成部分是什么,分别怎么访问****</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-struts2的请求处理流程"><span class="nav-text">28. struts2的请求处理流程\</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#29-struts2源码与设计模式"><span class="nav-text">29. struts2源码与设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#30-struts2工作流程"><span class="nav-text">30. struts2工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31-拦截器和过滤器的区别？"><span class="nav-text">31. 拦截器和过滤器的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-Struts2是如何启动的？"><span class="nav-text">32. Struts2是如何启动的？\</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-Struts2的核心控制器是什么？它是什么作用？"><span class="nav-text">33. Struts2的核心控制器是什么？它是什么作用？\</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-struts2是如何管理action的？这种管理方式有什么好处？"><span class="nav-text">34. struts2是如何管理action的？这种管理方式有什么好处？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-值栈ValueStack的原理与生命周期？"><span class="nav-text">35. 值栈ValueStack的原理与生命周期？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36-ActionContext、ServletContext、pageContext的区别？"><span class="nav-text">36. ActionContext、ServletContext、pageContext的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#37-struts的工作原理"><span class="nav-text">37. struts的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#38-用自己的话简要阐述struts2的执行流程。"><span class="nav-text">38. 用自己的话简要阐述struts2的执行流程。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#struts2-的工作原理图：-一个请求在Struts2框架中的处理分为以下几个步骤："><span class="nav-text">struts2 的工作原理图： 一个请求在Struts2框架中的处理分为以下几个步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#39-Struts2-如何访问-HttpServletRequest、HttpSession、ServletContext-三个域对象"><span class="nav-text">39. Struts2 如何访问 HttpServletRequest、HttpSession、ServletContext 三个域对象 ?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雷凯博</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">140.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://github.com/leikaibo1014">leikaibo</a> 运行驱动</div>
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+ 
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider"></span>
+ 
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

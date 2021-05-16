@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,面试，阿里," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="雷凯博的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1. spring两个核心容器对象的区别 ApplicationContext  它在构建核心容器的时候，采用的创建对象的策略是立即加载的方式，也就是说，只要一读取配置文件马上就创建配置文件中配置的对象、">
+<meta name="keywords" content="java,面试，阿里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring整理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;09&#x2F;spring&#x2F;index.html">
+<meta property="og:site_name" content="雷凯博的博客">
+<meta property="og:description" content="1. spring两个核心容器对象的区别 ApplicationContext  它在构建核心容器的时候，采用的创建对象的策略是立即加载的方式，也就是说，只要一读取配置文件马上就创建配置文件中配置的对象、">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-05-16T11:04:06.711Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/09/spring/"/>
+
+
+
+
+
+  <title>spring整理 | 雷凯博的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+<a href="https://github.com/leikaibo1014" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雷凯博的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录学习中的点点滴滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resume">
+          <a href="/resume" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="雷凯博">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雷凯博的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-09T20:26:32+08:00">
+                2020-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">面试整理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/06/09/spring/" class="leancloud_visitors" data-flag-title="spring整理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  24 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-spring两个核心容器对象的区别"><a href="#1-spring两个核心容器对象的区别" class="headerlink" title="1. spring两个核心容器对象的区别"></a>1. spring两个核心容器对象的区别</h3><ol>
+<li>ApplicationContext</li>
+</ol>
+<p>它在构建核心容器的时候，采用的创建对象的策略是立即加载的方式，也就是说，只要一读取配置文件马上就创建配置文件中配置的对象、</p>
+ <a id="more"></a>
+
+
+
+<ol start="2">
+<li>BeanFactory</li>
+</ol>
+<p>它在构建核心容器时，创建对象采用的策略是采用延迟加载的方式，也就是说，什么时候根据id获取对象了，什么时候才真正的创建对象。</p>
+<h3 id="2-spring对bean的管理细节"><a href="#2-spring对bean的管理细节" class="headerlink" title="2. spring对bean的管理细节"></a>2. spring对bean的管理细节</h3><h4 id="创建bean的三种方式"><a href="#创建bean的三种方式" class="headerlink" title="创建bean的三种方式"></a>创建bean的三种方式</h4><ol>
+<li><p>第一种方式，使用默认构造函数创建</p>
+<p>在spring的配置文件中使用bean标签，配以id 和class属性之后，且没有其他属性和标签时，采用的就是默认构造函数创建bean对象，此类如果类中没有默认构造函数，则对象无法创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--这是第一种方式，直接使用默认构造函数的方式进行创建--&gt;</span><br><span class="line">    &lt;!--&lt;bean id=<span class="string">"userService"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"lei.study.service.impl.userServiceImpl"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>使用普通工厂中的方法创建对象，（使用某个类中的方法创建对象，并存入spring容器中  ）</li>
+</ol>
+<p>创建需要实例化的工厂类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> IUserService <span class="title">getUserServiceInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> userServiceImpl();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>spring 容器中进行配置</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id="factoryInstance" class="lei.study.factory.factoryInstance"&gt;&lt;/bean&gt;</span><br><span class="line">    &lt;bean id="userService" factory-bean="factoryInstance" factory-method="getUserServiceInstance"&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>（工厂中有可能是一个普通方法还可能是一个静态方法，这是时候使用）使用工厂中的静态方法创建对象，使用某个类中的静态方法创建对象，并存入spring容器中</li>
+</ol>
+<p>静态方法中需要创建对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">factoryStaticInstance</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IUserService <span class="title">getUserServiceInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> userServiceImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--刚才的第二种创建中，可能不是一个普通类，而是一个静态的类--&gt;</span><br><span class="line">    &lt;bean id="userService" class="lei.study.factory.factoryStaticInstance" factory-method="getUserServiceInstance"&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-bean对象的作用范围"><a href="#3-bean对象的作用范围" class="headerlink" title="3. bean对象的作用范围"></a>3. bean对象的作用范围</h4><p>&lt;bean标签的作用范围</p>
+<p>bean标签的scope属性：</p>
+<p>作用：用于指定bean的作用范围</p>
+<p>取值：（常用的就是singleton和protopyte）</p>
+<p>singleton：为默认值，是单例的</p>
+<p>protopyte： 多例的</p>
+<p>request：作用于web应用的请求范围</p>
+<p>session：作用于web应用的会话范围</p>
+<p>global-session：作用于集群环境的会话范围（全局会话范围），当不是集群环境是作用就是session</p>
+<h4 id="4-bean的生命周期"><a href="#4-bean的生命周期" class="headerlink" title="4. bean的生命周期"></a>4. bean的生命周期</h4><p>当创建对象配置bean标签中的内容的时候，我们 可以指定bean的生命周期，当配置的是单例模式的时候，我们使ApplicationContext创建容器的时候，对象就创建了，当我们关闭对象的时候，对象销毁。</p>
+<p>当配置的是单例模式的时候，我们使BeanFactory创建容器的时候，对象不会创建，只有当我们使用的时候，才会创建对象，，什么时候对象销毁呢，针对多例模式，spring容器不提供销毁对象的方法，把对象的销毁交给java的垃圾回收机制进行回收。</p>
+<p><strong>单例对象：</strong></p>
+<p>出生：当容器创建时，对象出生</p>
+<p>活着：当容器还在，对象一直活着</p>
+<p>死亡：当容器销毁，对象消亡</p>
+<p>总结：单例对象的声明周期和容器相同</p>
+<p><strong>多例对象：</strong></p>
+<p> 出生：当我们使用对象时，spring对象为我们创建</p>
+<p>活着：对象只要是在使用过程中，就一直活着</p>
+<p>死亡：当对象长时间不用，且没有别的对象引用时，由java的垃圾回收器进行回收</p>
+<h3 id="5-spring的依赖注入"><a href="#5-spring的依赖注入" class="headerlink" title="5. spring的依赖注入"></a>5. spring的依赖注入</h3><p>IOC的作用，就是降低程序间的耦合关系，也叫做依赖关系</p>
+<p>依赖关系的管理：以后都交给spring来进行维护</p>
+<p>在当前类需要用到其他类的对象，由spring为我们提供，我们只需要在配置文件中进行说明。</p>
+<p>依赖关系的维护就称之为依赖注入</p>
+<p>依赖注入：</p>
+<p>能注入的数据，有三类</p>
+<p>（1） 基本类型和string</p>
+<p>（2）其他bean类型（在配置文件中或者是注解中配置过的bean）</p>
+<p>（3）其他类型/集合类型</p>
+<p><strong>依赖注入的方式有三种：</strong></p>
+<p><strong>（1）第一种：使用构造函数提供</strong></p>
+<p><strong>（2）第二种：使用set方法提供</strong></p>
+<p><strong>（3）第三种：使用注解 提供</strong></p>
+<h5 id="1-使用构造函数提供注入"><a href="#1-使用构造函数提供注入" class="headerlink" title="1. 使用构造函数提供注入"></a>1. 使用构造函数提供注入</h5><p>构造函数注入，需要在bean标签内，使用constructor-arg标签，标签出现的位置是bean标签的内部，、</p>
+<p>标签中的属性：</p>
+<p>​        type：用户指定要注入的数据的数据类型，该数据类型也是构造函数中某个或者是某些参数的类型</p>
+<p>​        index：用于指定要注入的数据给构造函数中指定索引位置的参数赋值，索引的位置是从0开始的</p>
+<p>​        name：用于指定给构造函数中指定名称的参数赋值</p>
+<p>=============最常用的是使用name的方式，给指定的参数进行赋值，=============以上三种都是用于指定给构造函数找那个的那个参数进行赋值</p>
+<p>​        value：用户提供基本类型和string类型的数据</p>
+<p>​        ref： 用于指定其他的bean类型，指的就是在spring的IOC核心容器中，出现过的bean对象。</p>
+<p>构造函数的特点与优势：</p>
+<p>​    在获取bean对象时，注入数据是必须的操作，否则对象是无法创建成功的。当我们使用的某个类的时候，就想使用某些数据的时候，我们就可以使用构造函数注入的方式，使用这种方式更简单。</p>
+<p>弊端：</p>
+<p>​        改变了bean对象的实例化方式，使我们在创建对象的时候，如果用不到这些数据，也必须提供。当我们在开发中除非非要采用这种方式进行创建，一般的时候我们是不使用的。</p>
+<p>例如：</p>
+<p>我们在userServiceImpl中写生需要注入的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userServiceImpl</span> <span class="keyword">implements</span> <span class="title">IUserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Date brithday;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">userServiceImpl</span><span class="params">(String name, Integer age, Date brithday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.brithday = brithday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"userServiceImpl中的save方法执行了"</span>+name+<span class="string">","</span>+age+<span class="string">","</span>+brithday);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后在spring的配置文件中，进行依赖的注入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--依赖注入的方式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService2"</span> <span class="attr">class</span>=<span class="string">"lei.study.service.impl.userServiceImpl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"第一个"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"19"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"brithday"</span> <span class="attr">ref</span>=<span class="string">"dataNow"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataNow"</span> <span class="attr">class</span>=<span class="string">"java.util.Date"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>编写测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">    System.out.println(ac);</span><br><span class="line">    IUserService userService = (IUserService) ac.getBean(<span class="string">"userService2"</span>);</span><br><span class="line">    userService.saveUser();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>执行结果：</p>
+<p>userServiceImpl中的save方法执行了第一个,19,Sun May 17 15:23:41 CST 2020</p>
+<p>说明注入成功</p>
+<p>引入：</p>
+<p>在进行spring配置文件的编写的时候，需要在配置文件中引入约束，spring容器中相对完整的约束如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;beans xmlns=<span class="string">"http://www.springframework.org/schema/beans"</span></span><br><span class="line">       xmlns:mvc=<span class="string">"http://www.springframework.org/schema/mvc"</span></span><br><span class="line">       xmlns:tx=<span class="string">"http://www.springframework.org/schema/tx"</span></span><br><span class="line">       xmlns:aop=<span class="string">"http://www.springframework.org/schema/aop"</span></span><br><span class="line">       xmlns:context=<span class="string">"http://www.springframework.org/schema/context"</span></span><br><span class="line">       xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">       xsi:schemaLocation=<span class="string">"</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/beans</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/beans/spring-beans.xsd</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/context</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/context/spring-context.xsd</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/mvc</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/mvc/spring-mvc.xsd</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/tx</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/tx/spring-tx.xsd</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/aop</span></span><br><span class="line"><span class="string">            http://www.springframework.org/schema/aop/spring-aop.xsd "</span></span><br><span class="line">       <span class="keyword">default</span>-autowire=<span class="string">"byName"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="2-set方法注入-经常使用的方式"><a href="#2-set方法注入-经常使用的方式" class="headerlink" title="2. set方法注入(经常使用的方式)"></a>2. set方法注入(经常使用的方式)</h3><p>set方式注入，设计的标签：property</p>
+<p>出现的位置，bean标签的内部</p>
+<p>标签的属性：</p>
+<p>​        name：用于指定注入时所调用的set方法名称</p>
+<p>​        value：用户提供基本类型和string类型的数据</p>
+<p>​        ref： 用于指定其他的bean类型，指的就是在spring的IOC核心容器中，出现过的bean对象。</p>
+<p><strong>set注入的优点：</strong></p>
+<p>​        创建的对象的时候没有明确的限制，可以直接使用默认构造函数，然后通过property 找到对应的set方法名称，进行一些取值的注入即可</p>
+<p><strong>set注入的缺点：</strong></p>
+<p>​    如果有某个成员必须有值，则获取对象时，有可能set方法没有执行。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userServiceImpl</span> <span class="keyword">implements</span> <span class="title">IUserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Date brithday;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * setter方式注入的方式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBrithday</span><span class="params">(Date brithday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.brithday = brithday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"userServiceImpl中的save方法执行了"</span>+name+<span class="string">","</span>+age+<span class="string">","</span>+brithday);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在spring中的配置文件中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--setter方式注入的方式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService3"</span> <span class="attr">class</span>=<span class="string">"lei.study.service.impl.userServiceImpl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"哈哈哈"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"18"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"brithday"</span> <span class="attr">ref</span>=<span class="string">"dataNow"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在测试文件中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">    System.out.println(ac);</span><br><span class="line">    IUserService userService = (IUserService) ac.getBean(<span class="string">"userService3"</span>);</span><br><span class="line">    userService.saveUser();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="使用set注入-复杂数据类型-集合类型的数据结构"><a href="#使用set注入-复杂数据类型-集合类型的数据结构" class="headerlink" title="使用set注入 复杂数据类型/集合类型的数据结构"></a>使用set注入 复杂数据类型/集合类型的数据结构</h5><p>用于给List结构集合注入的标签有：list  array    set</p>
+<p>用户给Map结构集合注入的标签：map   props</p>
+<p>注意：结构相同，可以互换</p>
+<h6 id=""><a href="#" class="headerlink" title="========================================================="></a>=========================================================</h6><h2 id="Spring基于注解的IOC以及IOC的案例"><a href="#Spring基于注解的IOC以及IOC的案例" class="headerlink" title="Spring基于注解的IOC以及IOC的案例"></a>Spring基于注解的IOC以及IOC的案例</h2><p>注意： 在本节中我们学习使用注解进行依赖的主注入，在上面的案例中，我们使用的是配置文件的方式进行配置的。</p>
+<p>我们学习了———</p>
+<p>用于创建对象</p>
+<p>用于注入数据</p>
+<p>用于改变作用范围的</p>
+<p>和生命周期相关</p>
+<p>等等相关的配置</p>
+<p><strong>当我们使用注解之后，</strong></p>
+<p><strong>用户创建对象的注解</strong>：他们的作用就和在XML配置文件中，编写一个&lt;bean 标签实现的功能是一样的</p>
+<p><strong>用于注入数据的</strong>：他们的作用就和在xml配置文件中的bean 标签中写一个property标签的作用是一样的</p>
+<p><strong>用于改变作用范围的</strong>：他们的作用就和在bean标签中使用scope属性实现的功能是一样的</p>
+<p><strong>和生命周期相关</strong>：他们的作用就和在bean标签中使用  init-method 和destory-method的作用是一样的</p>
+<p><strong>(1) 创建对象的注解：</strong></p>
+<p><strong>①    @Component    作用在类上</strong></p>
+<p>作用：就是把当前类对象存入spring容器中</p>
+<p>属性：value：用于指定bean的id。当我们不写时，它的默认值是当前类名，且首字母小写</p>
+<p><strong>注意：使用这个注解之前，我们需要在spring的配置文件中，加上一个说明，告知spring在创建容器的时候，需要扫描的包，配置所需要的标签不是在beans的约束中，而是一个名称为context名称空间和约束中</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--告诉spring容器需要扫描的包--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"lei.study"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(value = <span class="string">"haha"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userServiceImpl2</span> <span class="keyword">implements</span> <span class="title">IUserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"userServiceImpl中的save方法执行了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">    IUserService userService = (IUserService) ac.getBean(<span class="string">"haha"</span>);</span><br><span class="line">    userService.saveUser();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>②   @ Controller        @Service      @Repository   三个注解</strong></p>
+<p>以上三个注解他们的作用和属性与Component是一模一样的。他们三个是spring框架，为我们明确提供的三层对象使用的注解，使三层对象更加清晰</p>
+<p> <strong>@ Controller</strong>  一般使用在表现层</p>
+<p> <strong>@Service</strong>      一般使用的service层</p>
+<p><strong>@Repository</strong>  一般使用在持久层</p>
+<p> <strong>（2）注入数据的注解</strong></p>
+<p><strong>@Autowired :</strong> </p>
+<p>出现位置：可以使变量上，也可以是方法上</p>
+<p>细节：在使用注解注入数据的时候，set方法就不是必须的了</p>
+<p>作用就是，自动按照类型注入（例如   @Autowired   在这上面注解 private  IUserDao  userDao = null，那么就会按照IUserDao  类型 ，去spring容器中进行寻找对象取值），只要容器中有唯一的一个bean 对象类型和要注入的变量类型匹配，就可以注入成功。如果IoC容器中没有任何bean的类型和要注入的变量类型匹配，则报错。</p>
+<p>如果有多个类型相互匹配的时候，就会自动按照名称(userDao 这个名称)进行找对象bean对象，如果名称不一致或者是不存在，就会报错。</p>
+<p>例如我们定义了两个userDaoImpl方法实现了同一个接口，并在每一个方法上面使用@Component注解生成对象到容器中</p>
+<p>第一个</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(value = <span class="string">"userDao1"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userDaoImpl</span> <span class="keyword">implements</span> <span class="title">IUserDao</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"saveUser1方法执行了,保存了用户1111111"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二个</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(value = <span class="string">"userDao2"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userDaoImpl2</span> <span class="keyword">implements</span> <span class="title">IUserDao</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"saveUser1方法执行了,保存了用户222222"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>，当我们在service层取值调用bean的时候</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> IUserDao userDao;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      userDao.saveUser();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候按照类型IUserDao寻找bean的时候就会找到两个bean（因为@Autowired是按照类型进行寻找的），程序会报错，这个时候我们就可以和@Qualifer注解进行配合使用</p>
+<p> <strong>这个时候出现了@Qualifer注解</strong></p>
+<p><strong>@Qualifer</strong></p>
+<p>作用：在按照类中注入的基础之上再按照名称进行注入，它在给类成员注入时不能单独使用，但是在给方法参数注入时可以单独使用。</p>
+<p>属性：value 用于指定注入bean的id</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span>(value = <span class="string">"userDao2"</span>)</span><br><span class="line"><span class="keyword">private</span> IUserDao userDao;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    userDao.saveUser();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>还有一个注解：</strong></p>
+<p><strong>@Resource</strong></p>
+<p>@Recource 作用是，直接按照bean的id注入，它可以独立使用</p>
+<p>属性：name   ：用于指定bean的id</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span>(name = <span class="string">"userDao2"</span>)</span><br><span class="line"> <span class="keyword">private</span> IUserDao userDao;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     userDao.saveUser();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>需要注意的是：以上三种注解都只能注入其他bean类型的数据，而基本类型和String类型无法使用上述注解实现。另外，集合类型的注入只能通过XML来实现。</strong></p>
+<p><strong>@Value注解</strong></p>
+<p>作用：用于注入基本类型和String类型的数据</p>
+<p>属性：value—用于指定数据的值，它可以使用spring中的spEl（也就是spring中的EL表达式）</p>
+<p>​            spEl的写法 ：   ${表达式}</p>
+<p><strong>（3）用于改变作用范围的注解</strong></p>
+<p>他们的作用就和在bean标签中使用scope属性实现的功能是一样的</p>
+<p>Scope：作用—用于指定bean的作用范围</p>
+<p>属性：value：指定范围的取值，常用取值  single    prototype   分别对应单例和多例</p>
+<p><strong>（4）和生命周期相关的注解</strong></p>
+<p> 他们的作用就和在bean标签中使用init-method和destory-method的作用是一样的</p>
+<p>@PreDestory   作用：用于指定销毁方法</p>
+<p>@PostConstruct    作用：用于指定初始化方法</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title="=================================================="></a>==================================================</h3><h1 id="Spring的新注解"><a href="#Spring的新注解" class="headerlink" title="Spring的新注解"></a>Spring的新注解</h1><p>@Configuration   </p>
+<pre><code>作用》：指定当前类是一个配置类    </code></pre><p>​                细节：当配置类作为AnnotationConfigApplicationContext对象创建的参数时，该注解可以不写</p>
+<p>@ComponentScan </p>
+<p>​                作用》：用于通过注解指定spring在创建容器时要扫描的包</p>
+<p>​                属性：   value：它和basePackages的作用是一样的，都是用于指定创建容器时要扫描的包，我们使用这个注解就相当于在spring的配置文件xml中使用了  &lt;context:component-scan base-package=”lei.study”/&gt;  进行了一个包扫描的作用</p>
+<p>@Bean注解</p>
+<p>​            作用》：用于把当前方法的返回值作为bean对象存入spring的Ioc容器中</p>
+<p>​            属性：  name  用于指定bean的id，当不写时，默认值是当前方法的名称</p>
+<p>​            细节：当我们使用注解配置方法时，如果方法有参数，spring框架会去容器中查找有没有可用的bean对象</p>
+<p>​                        查找的方式和Autowired注解的作用是一样的</p>
+<p>@Import<br>                作用》：用于导入其他的配置类</p>
+<p>​                属性：value   用于指定其他配置类的字节码            </p>
+<p>​                            当我们使用Import的注解之后，有Import注解的类是父配置类，而导入的都是子配置类</p>
+<p>@PropertySource   </p>
+<p>​                作用：用于指定properties文件的位置</p>
+<p>​                            关键字 ： classpath   表示类路径下</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title="=========================================="></a>==========================================</h2><h3 id="Spring中的AOP配置"><a href="#Spring中的AOP配置" class="headerlink" title="Spring中的AOP配置"></a>Spring中的AOP配置</h3><p>spring中基于XML的AOP配置步骤：</p>
+<ol>
+<li><p>把通知Bean也交给spring容器来进行管理</p>
+</li>
+<li><p>使用aop:config标签表明开始AOP的配置</p>
+</li>
+<li><p>使用aop：aspect标签表明配置切面</p>
+<p>​                    id属性：是给切面提供一个唯一标识</p>
+<p>​                    ref属性：是指定通知类bean的id</p>
+</li>
+<li><p>在aop：aspect标签的内部使用对应标签来配置通知的类型</p>
+<p>​                我们现在是让我们定义的切面方法在切入点方法执行之前执行，所以是前置通知</p>
+<p>​                aop：before：表示配置前置通知</p>
+<p>​                method属性：用于指定Logger类中哪个方法是前置通知</p>
+<p>​                pointcut属性：用于指定切入点表达式，改表达式的含义指的是对业务层中哪些方法进行增强</p>
+<p>​        切入点表达式的写法：</p>
+<p>​                关键字：execution（表达式）</p>
+<p>​                表达式：</p>
+<p>​                                访问修饰符   返回值    包名.包名.包名…..类名.方法名（参数列表）</p>
+<p>​                标准的表达式写法  execution(public void lei.study.service.impl.userServiceImpl.saveUser()</p>
+</li>
+</ol>
+<p>   例如我们建立一个切入方法，就是打印日志信息，建立一个日志类，然后写一些方法</p>
+<p>   例如：</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 需要注入切入点的方法，也就是在切入点之前或者之后需要执行的方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printLogger</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"打印日志的方法，开始打印日志。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>   把上面的方法注入到userservice中</p>
+<p>   userServiceImpl.java</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userServiceImpl</span> <span class="keyword">implements</span> <span class="title">IUserService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"userServiceImpl保存用户的操作执行了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们想把日志信息注入到saveUser（）方法之前或者是之后执行，我们就可以在spring的配置文件中，进行AOP切面的一些配置，就可以使用AOP完成相关的切面编程</p>
+<p>在spring的配置文件中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"lei.study.service.impl.userServiceImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"printLogger"</span> <span class="attr">class</span>=<span class="string">"lei.study.utils.Logger"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"logAdvice"</span> <span class="attr">ref</span>=<span class="string">"printLogger"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--建立切入点方法的关联--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"printLogger"</span> <span class="attr">pointcut</span>=<span class="string">"execution(public void lei.study.service.impl.userServiceImpl.saveUser())"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:before</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里我们需要注意切入点表达式的写法</p>
+<p>表达式：</p>
+<p>​            访问修饰符   返回值    包名.包名.包名…..类名.方法名（参数列表）</p>
+<p>​            标准的表达式写法  execution(public void lei.study.service.impl.userServiceImpl.saveUser()</p>
+<p>全通配写法</p>
+<p>​            表达式的全通配写法    </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 表达式的全通配写法</span><br><span class="line">* *..*.*(..)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>解释说明：在上面的方法中，我们只对userService类中一个saveUser（）方法进行了增强，如果我们需要使用这个日之类对所有的userService中的方法都需要增强，我们不需要一个一个方法的进行编写，只需要写一个表达式的全通配写法   表达式的全通配写法           </p>
+<p><strong>注意：</strong></p>
+<p>​        在标准写法中，</p>
+<p><strong>访问修饰符可以省略</strong> ：  public void lei.study.service.impl.userServiceImpl.saveUser() 中的public可以省略，写成  void lei.study.service.impl.userServiceImpl.saveUser()</p>
+<p><strong>返回值可以使用通配符</strong>：表示任意返回值类型</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* lei.study.service.impl.userServiceImpl.saveUser()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>包名可以使用通配符：</strong>表示任意包。但是有几级包，就需要写几个*</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* *.*.*.*.userServiceImpl.saveUser()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>包名可以使用..表示当前包及其子包</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* *..userServiceImpl.saveUser()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>包名和方法名都可以使用*来实现通配：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* *..*.*()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>参数列表：</strong></p>
+<p>可以直接写数据类型</p>
+<p>​            基本类型直接写名称   int</p>
+<p>​            引用类型写包.类名的方式   java.lang.String        </p>
+<p>可以使用通配符表示任意类型，但是必须有参数</p>
+<p>可以使用..表示有无参数均可，有参数可以使任意类型</p>
+<p>全通配写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 表达式的全通配写法</span><br><span class="line">* *..*.*(..)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>实际开发中：</strong></p>
+<p>​    实际开发中切入点表达式的通常写法：</p>
+<p>​            我们可以切到业务层实现类下的所有方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* lei.study.service.impl.*.*(..)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>在上面的例子中我们可以使用如下的写法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">    表达式的全通配写法</span><br><span class="line">                * *..*.*(..)</span><br><span class="line">--&gt;</span><br><span class="line">&lt;aop:config&gt;</span><br><span class="line">    &lt;aop:aspect id=<span class="string">"logAdvice"</span> ref=<span class="string">"printLogger"</span>&gt;</span><br><span class="line">        &lt;!--建立切入点方法的关联--&gt;</span><br><span class="line">        &lt;aop:before method="printLogger" pointcut="execution(* *..*.*(..))"&gt;&lt;/aop:before&gt;</span><br><span class="line">    &lt;/aop:aspect&gt;</span><br><span class="line">&lt;/aop:config&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>通知的类型：</strong></p>
+<p><strong>前置通知</strong>：在切入点方法执行之前执行</p>
+<p><strong>后置通知</strong>：在切入点方法正常执行之后执行，也和异常通知永远只能执行一个 </p>
+<p><strong>异常通知</strong>：在切入点方法执行产生异常之后执行，它和后置通知永远只能执行一个</p>
+<p><strong>最终通知</strong>：无论切入点方法是否正常执行它都会在其后面执行。</p>
+<p><strong>环绕通知：</strong>当我们配置了环绕通知之后，切入点方法没有执行，而通知方法执行了。</p>
+<p>切面的配置：</p>
+<p>需要注入切入点的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforePrint</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"前置通知，打印日志的方法，开始打印日志。。。在切入点方法执行之前执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPrint</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"后置通知，结束打印日志。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printThrow</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"切入点方式产生异常之后，执行的异常通知"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterLogger</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是最终通知， 无论切入点方法是否正常执行都会在切入点之后执行的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"lei.study.service.impl.userServiceImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"printLogger"</span> <span class="attr">class</span>=<span class="string">"lei.study.utils.Logger"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    表达式的全通配写法</span></span><br><span class="line"><span class="comment">                * *..*.*(..)</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"logAdvice"</span> <span class="attr">ref</span>=<span class="string">"printLogger"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--建立切入点方法的关联--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"beforePrint"</span> <span class="attr">pointcut</span>=<span class="string">"execution(* lei.study.service.impl.*.*(..))"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-returning</span> <span class="attr">method</span>=<span class="string">"afterPrint"</span> <span class="attr">pointcut</span>=<span class="string">"execution(* lei.study.service.impl.*.*(..))"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-throwing</span> <span class="attr">method</span>=<span class="string">"printThrow"</span> <span class="attr">pointcut</span>=<span class="string">"execution(* lei.study.service.impl.*.*(..))"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">"afterLogger"</span> <span class="attr">pointcut</span>=<span class="string">"execution(* lei.study.service.impl.*.*(..))"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="spring中的事物控制"><a href="#spring中的事物控制" class="headerlink" title="spring中的事物控制"></a>spring中的事物控制</h2><h3 id="spring基于XML的声明式事务控制"><a href="#spring基于XML的声明式事务控制" class="headerlink" title="spring基于XML的声明式事务控制"></a>spring基于XML的声明式事务控制</h3><p>在spring中我们不用再编写关于事务的一些操作方法，我们可以直接使用xml配置的方式，对数据库连接操作中的方法进行相关事务的配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">spring中基于XML的声明式事务控制配置步骤 </span><br><span class="line">1. 配置事务管理器 </span><br><span class="line">2. 配置事务的通知           </span><br><span class="line">		此时我们需要导入事务的约束 tx的名称和约束  同时也需要aop的           </span><br><span class="line">		使用 &lt;tx:advice&gt; 配置事务的通知                    </span><br><span class="line">			id :给事务通知起一个唯一标识                    </span><br><span class="line">			transtration-manager：给事务通知提供一个事务管理器引用 </span><br><span class="line">3，配置AOP中的通用切入点表达式 </span><br><span class="line">4. 建立事务通知和切入点表达式的对应关系 </span><br><span class="line">5. 配置事务的属性        </span><br><span class="line">			是在事务的通知  tx:advice 标签的内部进行配置</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li><p><strong>在spring中配置事务管理器</strong></p>
+<p>DataSourceTransactionManager可以配置JDBC或者是ibatis关于事务的配置</p>
+<p>HiberateTransactionManager 可以配置整合Hiberate中关于事务的配置</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置事务管理器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><strong>配置事务的通知</strong>  （以及配置事务的属性）</li>
+</ol>
+<p>在配置事务的通知中，我们需要配置事务的一些属性</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!--配置事务的通知--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvicce"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--配置事务的属性</span></span><br><span class="line"><span class="comment">            isolation=""  用于指定事务的隔离级别   默认值是default ，表示使用数据库的默认隔离级别</span></span><br><span class="line"><span class="comment">            propagation=""  用于指定事务的传播行为，默认值是REQUIRED 表示一定有事务，增删改的选择，查询方法可以选择SUPPORTS</span></span><br><span class="line"><span class="comment">            read-only=""   用于指定事务是否只读，只有查询方法才能设置为true。默认值是false，表示读写</span></span><br><span class="line"><span class="comment">            rollback-for=""  用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚，没有默认值，表示任何异常都回滚</span></span><br><span class="line"><span class="comment">            no-rollback-for=""  用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常事务回滚，没有默认值，表示任何异常都回滚</span></span><br><span class="line"><span class="comment">            timeout=""     用于指定事务的超时时间，默认值是-1 表示永不超时，如果指定了数值，以秒为单位</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span> <span class="attr">read-only</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"find*"</span> <span class="attr">propagation</span>=<span class="string">"SUPPORTS"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><strong>配置事务的切入点表达式以及建立切入点表达式和事务通知的对应关系</strong></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--配置切入点表达式--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pt1"</span> <span class="attr">expression</span>=<span class="string">"execution(* lei.study.service.impl.*.*(..))"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:pointcut</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--建立切入点表达式和事务通知的对应关系--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvicce"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:advisor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="spring基于注解的声明式事务控制"><a href="#spring基于注解的声明式事务控制" class="headerlink" title="spring基于注解的声明式事务控制"></a>spring基于注解的声明式事务控制</h3>
+      
+    </div>
+    
+    
+    	
+
+    <div>
+		  
+			
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/06/09/spring/">spring整理</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 雷凯博 的个人博客">雷凯博</a></p>
+  <p><span>发布时间:</span>2020年06月09日 - 20:06</p>
+  <p><span>最后更新:</span>2021年05月16日 - 19:05</p>
+  <p><span>原始链接:</span><a href="/2020/06/09/spring/" title="spring整理">http://yoursite.com/2020/06/09/spring/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/06/09/spring/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+		  
+	</div>
+	
+	
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="雷凯博 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="雷凯博 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95%EF%BC%8C%E9%98%BF%E9%87%8C/" rel="tag"><i class="fa fa-tag"></i> 面试，阿里</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/08/%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" rel="next" title="腾讯面试整理">
+                <i class="fa fa-chevron-left"></i> 腾讯面试整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/09/mybatis/" rel="prev" title="mybatis整理">
+                mybatis整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzQzOS8yMzkzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.jpg"
+                alt="雷凯博" />
+            
+              <p class="site-author-name" itemprop="name">雷凯博</p>
+              <p class="site-description motion-element" itemprop="description">你现在所经历的挫折和失败，它只属于现在，把它交给时间，一切都是最好的安排</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/leikaibo1014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kaibo_lei@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/Leo1120178518" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/p/67b731c3f840" title="主题配置" target="_blank">主题配置</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-spring两个核心容器对象的区别"><span class="nav-text">1. spring两个核心容器对象的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-spring对bean的管理细节"><span class="nav-text">2. spring对bean的管理细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建bean的三种方式"><span class="nav-text">创建bean的三种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-bean对象的作用范围"><span class="nav-text">3. bean对象的作用范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-bean的生命周期"><span class="nav-text">4. bean的生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-spring的依赖注入"><span class="nav-text">5. spring的依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-使用构造函数提供注入"><span class="nav-text">1. 使用构造函数提供注入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-set方法注入-经常使用的方式"><span class="nav-text">2. set方法注入(经常使用的方式)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用set注入-复杂数据类型-集合类型的数据结构"><span class="nav-text">使用set注入 复杂数据类型/集合类型的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#null"><span class="nav-text">=========================================================</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring基于注解的IOC以及IOC的案例"><span class="nav-text">Spring基于注解的IOC以及IOC的案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-text">==================================================</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring的新注解"><span class="nav-text">Spring的新注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-text">==========================================</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring中的AOP配置"><span class="nav-text">Spring中的AOP配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring中的事物控制"><span class="nav-text">spring中的事物控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring基于XML的声明式事务控制"><span class="nav-text">spring基于XML的声明式事务控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring基于注解的声明式事务控制"><span class="nav-text">spring基于注解的声明式事务控制</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雷凯博</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">140.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://github.com/leikaibo1014">leikaibo</a> 运行驱动</div>
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+ 
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider"></span>
+ 
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
