@@ -793,6 +793,181 @@
       </tags>
   </entry>
   <entry>
+    <title>mybatis整理</title>
+    <url>/2020/06/09/mybatis/</url>
+    <content><![CDATA[<h2 id="1-mybatis的入门"><a href="#1-mybatis的入门" class="headerlink" title="1. mybatis的入门"></a>1. mybatis的入门</h2><p>mybatis的环境搭建</p>
+<p>​            第一步：创建maven工程并导入坐标</p>
+<p>​            第二步：创建实体类和dao的接口</p>
+<p>​            第三步：创建Mybatis的主配置文件sqlMapConfig.xml</p>
+<p>​            第四步：创建映射配置文件   IUseDao.xml</p>
+ <a id="more"></a>
+
+
+
+<p>mybatis的文件约束</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>mybatis的配置文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="comment">&lt;!--Mybatis的主配置文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置环境--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"mysql"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--配置MySQL的环境--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"mysql"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置事务的类型--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>&gt;</span><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置数据源，连接池--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/mybatis"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"123456"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--指定映射数据源文件的位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"config/userDao/userDao.xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们编写IUserDao的接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUserDao</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>编写User的实体类，注意实体类中的属性名称要和数据库中的相同</p>
+<p>编写映射器</p>
+<p>映射的约束文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"lei.study.dao.IUserDao"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultType</span>=<span class="string">"lei.study.domain.User"</span>&gt;</span></span><br><span class="line">        select * from user</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1590024681000.png" alt="1590024681000"></p>
+<p>编写测试类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> lei.study.dao.IUserDao;</span><br><span class="line"><span class="keyword">import</span> lei.study.domain.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//加载配置文件</span></span><br><span class="line">        InputStream is = Resources.getResourceAsStream(<span class="string">"sqlMapConfig.xml"</span>);</span><br><span class="line">        <span class="comment">//2.创建SqlSessionFactry工厂</span></span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory sessionFactory = builder.build(is);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. 使用工厂生产SQLSSession对象</span></span><br><span class="line">        SqlSession sqlSession = sessionFactory.openSession();</span><br><span class="line">        <span class="comment">//4. 使用sqlsession创建Dao接口的代理对象</span></span><br><span class="line">        IUserDao userDao = sqlSession.getMapper(IUserDao<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        List&lt;User&gt; users = userDao.findAll();</span><br><span class="line">        <span class="keyword">for</span> (User user: users</span><br><span class="line">             ) &#123;</span><br><span class="line">            System.out.println(user);</span><br><span class="line">        &#125;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">        is.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>分析上面的代码，我们发现</p>
+<ol>
+<li><p>创建工厂的时候，我们使用了建造者模式  SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();</p>
+<p>SqlSessionFactory sessionFactory = builder.build(is);</p>
+<p>我们只需要往建造者中传入字节流就可以</p>
+<p>构建者模式：把对象的创建细节隐藏，使使用者直接调用方法即可以拿到对象</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>生产sqlsession使用了工厂模式（解耦）</p>
+<p>SqlSession sqlSession = sessionFactory.openSession();</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>代理模式</p>
+<p> //4. 使用sqlsession创建Dao接口的代理对象</p>
+<pre><code>IUserDao userDao = sqlSession.getMapper(IUserDao.class);</code></pre><p>优势：就是在不改变源码的基础上对原有方法增强</p>
+</li>
+</ol>
+<p>除了使用上面的xml文件形式的配置，我们还可以使用注解的方式完成数据库的查询操作</p>
+<p>使用注解：</p>
+<p>我们需要在接口中的方法上使用@Select() 注解，指定SQL语句，同时需要在sqlMapConfig.xml中的mapper配置时，使用class属性指定dao接口的全限定类名</p>
+<p>在主配置文件中指定接口全限定类名</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--指使用注解的方式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"lei.study.dao.IUserDao"</span>&gt;</span><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在接口中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUserDao</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from user"</span>)</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意：我们在实际开发中，都是越简便越好，所以都是采用不写dao实现类的方式，不管使用XML还是注解配置，但是mybatis它是支持写dao实现类的。</p>
+<h2 id="2-自定义mybatis框架分析"><a href="#2-自定义mybatis框架分析" class="headerlink" title="2. 自定义mybatis框架分析"></a>2. 自定义mybatis框架分析</h2><p>通过快速入门示例，我们发现使用 mybatis 是非常容易的一件事情，因为只需要编写 Dao 接口并且按照 </p>
+<p>mybatis 要求编写两个配置文件，就可以实现功能。远比我们之前的 jdbc 方便多了。（我们使用注解之后，将变得 </p>
+<p>更为简单，只需要编写一个 mybatis 配置文件就够了。） </p>
+<p>但是，这里面包含了许多细节，比如为什么会有工厂对象（SqlSessionFactory）,为什么有了工厂之后还 要有构建者对象（SqlSessionFactoryBuilder），为什么 IUserDao.xml 在创建时有位置和文件名的要求等等。 这些问题我们在自定义 mybatis 框架进行讲解。 </p>
+<p>请注意：我们讲解自定义 Mybatis 框架，不是让大家回去自己去写个 mybatis，而是让我们能更好了了解 mybatis 内部是怎么执行的，在以后的开发中能更好的使用 mybatis 框架，同时对它的设计理念（设计模式）有 一个认识。</p>
+<h2 id="mybatis中的连接池"><a href="#mybatis中的连接池" class="headerlink" title="mybatis中的连接池"></a>mybatis中的连接池</h2><ol>
+<li>连接池，我们在实际开发中都会使用连接池，因为它可以减少我们开发的时间。</li>
+</ol>
+<ol start="2">
+<li>mybatis中的连接池 ：</li>
+</ol>
+<p>​        mybatis连接池提供了3中方式的配置 ：</p>
+<p>​                    配置的位置：主配置文件SqlMapConfig.xml中的dataSource标签，type属性就是表示采用何种连接池方式</p>
+<p>​                type属性 的取值：</p>
+<p>​                                POOLED：采用传统的javac.sql.DataSource规范中的连接池，mybatis中有针对规范的实现</p>
+<p>​                                UNPOOLED：采用传统的获取连接的方式，虽然也实现了javax.sql.DataSource接口，但是并没有使用池的思想</p>
+<p>​                                JNDI：采用服务器提供的JNDI技术实现，来获取DataSource对象，不同的服务器所能拿到的DataSource是不一样的。</p>
+<p>​                                        注意：如果不是web或者maven的war工程，是不能使用的，我们使用的是Tomcat服务器，采用的连接池就是dbcp连接池</p>
+<p>​                            </p>
+<h3 id="mybatis中的事务"><a href="#mybatis中的事务" class="headerlink" title="mybatis中的事务"></a>mybatis中的事务</h3><p>什么是事务</p>
+<p>事务的四大特性</p>
+<p>不考虑隔离性会产生的3个问题</p>
+<p>解决办法：四种隔离级别</p>
+<p>mybatis中是通过sqlsession对象的commit方法和rollback方法实现事务的提交和回滚</p>
+<h2 id="mybatis中的多表查询"><a href="#mybatis中的多表查询" class="headerlink" title="mybatis中的多表查询"></a>mybatis中的多表查询</h2><p>一对一的查询操作</p>
+<p>我们使用user表和account表关联</p>
+<p>在account表中新建主表属性  private  User  user</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> uid;</span><br><span class="line">    <span class="keyword">private</span> Double money;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>在account的配置文件中，我们编写映射文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"lei.study.dao.IAccountDao"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"accountMap"</span> <span class="attr">type</span>=<span class="string">"lei.study.domain.Account"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--非主键字段的对应--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"uid"</span> <span class="attr">column</span>=<span class="string">"uid"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"money"</span> <span class="attr">column</span>=<span class="string">"money"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"user"</span> <span class="attr">column</span>=<span class="string">"uid"</span> <span class="attr">javaType</span>=<span class="string">"lei.study.domain.User"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"userId"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userBirthday"</span> <span class="attr">column</span>=<span class="string">"birthday"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userSex"</span> <span class="attr">column</span>=<span class="string">"sex"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userAddress"</span> <span class="attr">column</span>=<span class="string">"address"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAllAccount"</span> <span class="attr">resultMap</span>=<span class="string">"accountMap"</span>&gt;</span></span><br><span class="line">        SELECT u.*,a.id AS aid,a.uid, a.money from account a, user u WHERE u.id = a.id</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>一对多的关系</p>
+<p>一个用户可能关联多张账户表</p>
+<p>在User实体中，新建Account属性集合</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> userId;</span><br><span class="line"><span class="keyword">private</span> String userName;</span><br><span class="line"><span class="keyword">private</span> Date userBirthday;</span><br><span class="line"><span class="keyword">private</span> String userSex;</span><br><span class="line"><span class="keyword">private</span> String userAddress;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> List&lt;Account&gt; accounts;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>UserDao的映射文件中</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"lei.study.dao.IUserDao"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置查询结果的列名和实体类的属性名的对应关系--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAccountMap"</span> <span class="attr">type</span>=<span class="string">"lei.study.domain.User"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"userId"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--非主键字段的对应--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userBirthday"</span> <span class="attr">column</span>=<span class="string">"birthday"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userSex"</span> <span class="attr">column</span>=<span class="string">"sex"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userAddress"</span> <span class="attr">column</span>=<span class="string">"address"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"accounts"</span> <span class="attr">ofType</span>=<span class="string">"lei.study.domain.Account"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"uid"</span> <span class="attr">column</span>=<span class="string">"uid"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"money"</span> <span class="attr">column</span>=<span class="string">"money"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultMap</span>=<span class="string">"userAccountMap"</span>&gt;</span></span><br><span class="line">        SELECT * FROM user u LEFT OUTER JOIN account a on u.id = a.uid;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="多对多的关系"><a href="#多对多的关系" class="headerlink" title="多对多的关系"></a>多对多的关系</h3><p>​    用户可以有多个角色</p>
+<p>​    一个角色可以赋予多个用户</p>
+<p>​    用户和角色之间是多对多</p>
+<h2 id="1-mybatis中的延迟加载"><a href="#1-mybatis中的延迟加载" class="headerlink" title="1. mybatis中的延迟加载"></a>1. mybatis中的延迟加载</h2><p>什么是延迟加载？</p>
+<p>问题：在一对多中，当我们有一个用户，它有100个账户</p>
+<p>​            在查询用户的时候，要不要把关联的账户查出来</p>
+<p>​            在查询账户的时候，要不要把关联的用户查出来？</p>
+<p>​            </p>
+<p>​        在查询用户时，用户下的账户信息是什么时候使用，什么时候查询的</p>
+<p>​        在查询账户时，账户的所属用户信息应该是随着账户查询时一起查询出来。</p>
+<p><strong>什么是延迟加载</strong>：在真正使用数据时才发起查询，不用的时候不用查询，，按需加载（懒加载）</p>
+<p><strong>什么是立即加载？</strong>：不管用不用，只要一调用方法，马上发起查询</p>
+<p>在对应的四种表关系中：一对一，多对一，一对一，多对多</p>
+<p><strong>一对多，多对多：</strong>通常情况下我们都是采用延迟加载</p>
+<p><strong>多对一，一对一：</strong>通常情况下，我们都是采用立即加载</p>
+<p>我们可以在mybatis全部配置中或者是每个映射器中配置相关的属性信息，然后进行配置。</p>
+<h2 id="2-mybatis中的缓存"><a href="#2-mybatis中的缓存" class="headerlink" title="2. mybatis中的缓存"></a>2. mybatis中的缓存</h2><p>什么是缓存？</p>
+<p>​        存在于内存中的临时数据</p>
+<p>为什么使用缓存</p>
+<p>​        减少和数据库的交互次数，提高执行效率</p>
+<p>什么样的数据使用缓存，什么样的数据不能使用</p>
+<p>​            适用于缓存：</p>
+<p>​                    经常查询，并且不经常改变的</p>
+<p>​                    数据的正确与否对最终结果影响不大的</p>
+<p>​            不适用与缓存：</p>
+<p>​                    经常改变的数据</p>
+<p>​                    数据的正确与否对最终的结果影响很大的</p>
+<p><strong>mybatis中一级缓存和二级缓存</strong></p>
+<p><strong>一级缓存：</strong></p>
+<p>​            它指的是Mybatis中Sqlsession对象的缓存</p>
+<p>​            当我们执行查询之后，查询的结果会同时存入到Sqlsession为我们提供的一块区域中，该区域的结构是一个Map，当我们再次查询同样的数据，mybatis会先去sqlsession中查询是否有，有的话直接拿出来用。</p>
+<p>​        当SqlSession对象消失的时候，mybatis的一级缓存也就消失了。</p>
+<p>一级缓存是sqlsession范围的缓存，当调用sqlsession的修改，添加，删除，commit（） close()等方法时，就会清空一级缓存。</p>
+<p><strong>二级缓存：</strong></p>
+<p>​        它指的是mybatis中的sqlsessionFacory对象的缓存，由同一个sqlsessFactory对象创建的SqlSession共享其缓存。</p>
+<p>​        二级缓存的使用步骤：</p>
+<p>​                    第一步：让Mybatis框架支持二级缓存，（在SQlMapConfig.xml中配置）</p>
+<p>​                    第二步：让当前的映射文件支持二级缓存（在IUserDao.xml中配置）</p>
+<p>​                    第三步：让当前的操作支持二级缓存（在select标签中进行相关类的配置）</p>
+]]></content>
+      <categories>
+        <category>面试整理</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>面试，阿里</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>spring整理</title>
     <url>/2020/06/09/spring/</url>
     <content><![CDATA[<h3 id="1-spring两个核心容器对象的区别"><a href="#1-spring两个核心容器对象的区别" class="headerlink" title="1. spring两个核心容器对象的区别"></a>1. spring两个核心容器对象的区别</h3><ol>
@@ -1196,188 +1371,14 @@
       </tags>
   </entry>
   <entry>
-    <title>mybatis整理</title>
-    <url>/2020/06/09/mybatis/</url>
-    <content><![CDATA[<h2 id="1-mybatis的入门"><a href="#1-mybatis的入门" class="headerlink" title="1. mybatis的入门"></a>1. mybatis的入门</h2><p>mybatis的环境搭建</p>
-<p>​            第一步：创建maven工程并导入坐标</p>
-<p>​            第二步：创建实体类和dao的接口</p>
-<p>​            第三步：创建Mybatis的主配置文件sqlMapConfig.xml</p>
-<p>​            第四步：创建映射配置文件   IUseDao.xml</p>
- <a id="more"></a>
-
-
-
-<p>mybatis的文件约束</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>mybatis的配置文件</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="comment">&lt;!--Mybatis的主配置文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置环境--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"mysql"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--配置MySQL的环境--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"mysql"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置事务的类型--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>&gt;</span><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置数据源，连接池--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/mybatis"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"123456"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--指定映射数据源文件的位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"config/userDao/userDao.xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>我们编写IUserDao的接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUserDao</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>编写User的实体类，注意实体类中的属性名称要和数据库中的相同</p>
-<p>编写映射器</p>
-<p>映射的约束文件</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"lei.study.dao.IUserDao"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultType</span>=<span class="string">"lei.study.domain.User"</span>&gt;</span></span><br><span class="line">        select * from user</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1590024681000.png" alt="1590024681000"></p>
-<p>编写测试类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> lei.study.dao.IUserDao;</span><br><span class="line"><span class="keyword">import</span> lei.study.domain.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//加载配置文件</span></span><br><span class="line">        InputStream is = Resources.getResourceAsStream(<span class="string">"sqlMapConfig.xml"</span>);</span><br><span class="line">        <span class="comment">//2.创建SqlSessionFactry工厂</span></span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory sessionFactory = builder.build(is);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. 使用工厂生产SQLSSession对象</span></span><br><span class="line">        SqlSession sqlSession = sessionFactory.openSession();</span><br><span class="line">        <span class="comment">//4. 使用sqlsession创建Dao接口的代理对象</span></span><br><span class="line">        IUserDao userDao = sqlSession.getMapper(IUserDao<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        List&lt;User&gt; users = userDao.findAll();</span><br><span class="line">        <span class="keyword">for</span> (User user: users</span><br><span class="line">             ) &#123;</span><br><span class="line">            System.out.println(user);</span><br><span class="line">        &#125;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">        is.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>分析上面的代码，我们发现</p>
-<ol>
-<li><p>创建工厂的时候，我们使用了建造者模式  SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();</p>
-<p>SqlSessionFactory sessionFactory = builder.build(is);</p>
-<p>我们只需要往建造者中传入字节流就可以</p>
-<p>构建者模式：把对象的创建细节隐藏，使使用者直接调用方法即可以拿到对象</p>
-</li>
-</ol>
-<ol start="2">
-<li><p>生产sqlsession使用了工厂模式（解耦）</p>
-<p>SqlSession sqlSession = sessionFactory.openSession();</p>
-</li>
-</ol>
-<ol start="3">
-<li><p>代理模式</p>
-<p> //4. 使用sqlsession创建Dao接口的代理对象</p>
-<pre><code>IUserDao userDao = sqlSession.getMapper(IUserDao.class);</code></pre><p>优势：就是在不改变源码的基础上对原有方法增强</p>
-</li>
-</ol>
-<p>除了使用上面的xml文件形式的配置，我们还可以使用注解的方式完成数据库的查询操作</p>
-<p>使用注解：</p>
-<p>我们需要在接口中的方法上使用@Select() 注解，指定SQL语句，同时需要在sqlMapConfig.xml中的mapper配置时，使用class属性指定dao接口的全限定类名</p>
-<p>在主配置文件中指定接口全限定类名</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--指使用注解的方式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"lei.study.dao.IUserDao"</span>&gt;</span><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>在接口中</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUserDao</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from user"</span>)</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>注意：我们在实际开发中，都是越简便越好，所以都是采用不写dao实现类的方式，不管使用XML还是注解配置，但是mybatis它是支持写dao实现类的。</p>
-<h2 id="2-自定义mybatis框架分析"><a href="#2-自定义mybatis框架分析" class="headerlink" title="2. 自定义mybatis框架分析"></a>2. 自定义mybatis框架分析</h2><p>通过快速入门示例，我们发现使用 mybatis 是非常容易的一件事情，因为只需要编写 Dao 接口并且按照 </p>
-<p>mybatis 要求编写两个配置文件，就可以实现功能。远比我们之前的 jdbc 方便多了。（我们使用注解之后，将变得 </p>
-<p>更为简单，只需要编写一个 mybatis 配置文件就够了。） </p>
-<p>但是，这里面包含了许多细节，比如为什么会有工厂对象（SqlSessionFactory）,为什么有了工厂之后还 要有构建者对象（SqlSessionFactoryBuilder），为什么 IUserDao.xml 在创建时有位置和文件名的要求等等。 这些问题我们在自定义 mybatis 框架进行讲解。 </p>
-<p>请注意：我们讲解自定义 Mybatis 框架，不是让大家回去自己去写个 mybatis，而是让我们能更好了了解 mybatis 内部是怎么执行的，在以后的开发中能更好的使用 mybatis 框架，同时对它的设计理念（设计模式）有 一个认识。</p>
-<h2 id="mybatis中的连接池"><a href="#mybatis中的连接池" class="headerlink" title="mybatis中的连接池"></a>mybatis中的连接池</h2><ol>
-<li>连接池，我们在实际开发中都会使用连接池，因为它可以减少我们开发的时间。</li>
-</ol>
-<ol start="2">
-<li>mybatis中的连接池 ：</li>
-</ol>
-<p>​        mybatis连接池提供了3中方式的配置 ：</p>
-<p>​                    配置的位置：主配置文件SqlMapConfig.xml中的dataSource标签，type属性就是表示采用何种连接池方式</p>
-<p>​                type属性 的取值：</p>
-<p>​                                POOLED：采用传统的javac.sql.DataSource规范中的连接池，mybatis中有针对规范的实现</p>
-<p>​                                UNPOOLED：采用传统的获取连接的方式，虽然也实现了javax.sql.DataSource接口，但是并没有使用池的思想</p>
-<p>​                                JNDI：采用服务器提供的JNDI技术实现，来获取DataSource对象，不同的服务器所能拿到的DataSource是不一样的。</p>
-<p>​                                        注意：如果不是web或者maven的war工程，是不能使用的，我们使用的是Tomcat服务器，采用的连接池就是dbcp连接池</p>
-<p>​                            </p>
-<h3 id="mybatis中的事务"><a href="#mybatis中的事务" class="headerlink" title="mybatis中的事务"></a>mybatis中的事务</h3><p>什么是事务</p>
-<p>事务的四大特性</p>
-<p>不考虑隔离性会产生的3个问题</p>
-<p>解决办法：四种隔离级别</p>
-<p>mybatis中是通过sqlsession对象的commit方法和rollback方法实现事务的提交和回滚</p>
-<h2 id="mybatis中的多表查询"><a href="#mybatis中的多表查询" class="headerlink" title="mybatis中的多表查询"></a>mybatis中的多表查询</h2><p>一对一的查询操作</p>
-<p>我们使用user表和account表关联</p>
-<p>在account表中新建主表属性  private  User  user</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> uid;</span><br><span class="line">    <span class="keyword">private</span> Double money;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>在account的配置文件中，我们编写映射文件</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"lei.study.dao.IAccountDao"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"accountMap"</span> <span class="attr">type</span>=<span class="string">"lei.study.domain.Account"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--非主键字段的对应--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"uid"</span> <span class="attr">column</span>=<span class="string">"uid"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"money"</span> <span class="attr">column</span>=<span class="string">"money"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"user"</span> <span class="attr">column</span>=<span class="string">"uid"</span> <span class="attr">javaType</span>=<span class="string">"lei.study.domain.User"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"userId"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userBirthday"</span> <span class="attr">column</span>=<span class="string">"birthday"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userSex"</span> <span class="attr">column</span>=<span class="string">"sex"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userAddress"</span> <span class="attr">column</span>=<span class="string">"address"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAllAccount"</span> <span class="attr">resultMap</span>=<span class="string">"accountMap"</span>&gt;</span></span><br><span class="line">        SELECT u.*,a.id AS aid,a.uid, a.money from account a, user u WHERE u.id = a.id</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>一对多的关系</p>
-<p>一个用户可能关联多张账户表</p>
-<p>在User实体中，新建Account属性集合</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> userId;</span><br><span class="line"><span class="keyword">private</span> String userName;</span><br><span class="line"><span class="keyword">private</span> Date userBirthday;</span><br><span class="line"><span class="keyword">private</span> String userSex;</span><br><span class="line"><span class="keyword">private</span> String userAddress;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> List&lt;Account&gt; accounts;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>UserDao的映射文件中</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"lei.study.dao.IUserDao"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置查询结果的列名和实体类的属性名的对应关系--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAccountMap"</span> <span class="attr">type</span>=<span class="string">"lei.study.domain.User"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"userId"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--非主键字段的对应--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userBirthday"</span> <span class="attr">column</span>=<span class="string">"birthday"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userSex"</span> <span class="attr">column</span>=<span class="string">"sex"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userAddress"</span> <span class="attr">column</span>=<span class="string">"address"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"accounts"</span> <span class="attr">ofType</span>=<span class="string">"lei.study.domain.Account"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"uid"</span> <span class="attr">column</span>=<span class="string">"uid"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"money"</span> <span class="attr">column</span>=<span class="string">"money"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultMap</span>=<span class="string">"userAccountMap"</span>&gt;</span></span><br><span class="line">        SELECT * FROM user u LEFT OUTER JOIN account a on u.id = a.uid;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="多对多的关系"><a href="#多对多的关系" class="headerlink" title="多对多的关系"></a>多对多的关系</h3><p>​    用户可以有多个角色</p>
-<p>​    一个角色可以赋予多个用户</p>
-<p>​    用户和角色之间是多对多</p>
-<h2 id="1-mybatis中的延迟加载"><a href="#1-mybatis中的延迟加载" class="headerlink" title="1. mybatis中的延迟加载"></a>1. mybatis中的延迟加载</h2><p>什么是延迟加载？</p>
-<p>问题：在一对多中，当我们有一个用户，它有100个账户</p>
-<p>​            在查询用户的时候，要不要把关联的账户查出来</p>
-<p>​            在查询账户的时候，要不要把关联的用户查出来？</p>
-<p>​            </p>
-<p>​        在查询用户时，用户下的账户信息是什么时候使用，什么时候查询的</p>
-<p>​        在查询账户时，账户的所属用户信息应该是随着账户查询时一起查询出来。</p>
-<p><strong>什么是延迟加载</strong>：在真正使用数据时才发起查询，不用的时候不用查询，，按需加载（懒加载）</p>
-<p><strong>什么是立即加载？</strong>：不管用不用，只要一调用方法，马上发起查询</p>
-<p>在对应的四种表关系中：一对一，多对一，一对一，多对多</p>
-<p><strong>一对多，多对多：</strong>通常情况下我们都是采用延迟加载</p>
-<p><strong>多对一，一对一：</strong>通常情况下，我们都是采用立即加载</p>
-<p>我们可以在mybatis全部配置中或者是每个映射器中配置相关的属性信息，然后进行配置。</p>
-<h2 id="2-mybatis中的缓存"><a href="#2-mybatis中的缓存" class="headerlink" title="2. mybatis中的缓存"></a>2. mybatis中的缓存</h2><p>什么是缓存？</p>
-<p>​        存在于内存中的临时数据</p>
-<p>为什么使用缓存</p>
-<p>​        减少和数据库的交互次数，提高执行效率</p>
-<p>什么样的数据使用缓存，什么样的数据不能使用</p>
-<p>​            适用于缓存：</p>
-<p>​                    经常查询，并且不经常改变的</p>
-<p>​                    数据的正确与否对最终结果影响不大的</p>
-<p>​            不适用与缓存：</p>
-<p>​                    经常改变的数据</p>
-<p>​                    数据的正确与否对最终的结果影响很大的</p>
-<p><strong>mybatis中一级缓存和二级缓存</strong></p>
-<p><strong>一级缓存：</strong></p>
-<p>​            它指的是Mybatis中Sqlsession对象的缓存</p>
-<p>​            当我们执行查询之后，查询的结果会同时存入到Sqlsession为我们提供的一块区域中，该区域的结构是一个Map，当我们再次查询同样的数据，mybatis会先去sqlsession中查询是否有，有的话直接拿出来用。</p>
-<p>​        当SqlSession对象消失的时候，mybatis的一级缓存也就消失了。</p>
-<p>一级缓存是sqlsession范围的缓存，当调用sqlsession的修改，添加，删除，commit（） close()等方法时，就会清空一级缓存。</p>
-<p><strong>二级缓存：</strong></p>
-<p>​        它指的是mybatis中的sqlsessionFacory对象的缓存，由同一个sqlsessFactory对象创建的SqlSession共享其缓存。</p>
-<p>​        二级缓存的使用步骤：</p>
-<p>​                    第一步：让Mybatis框架支持二级缓存，（在SQlMapConfig.xml中配置）</p>
-<p>​                    第二步：让当前的映射文件支持二级缓存（在IUserDao.xml中配置）</p>
-<p>​                    第三步：让当前的操作支持二级缓存（在select标签中进行相关类的配置）</p>
-]]></content>
-      <categories>
-        <category>面试整理</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>面试，阿里</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>腾讯面试整理</title>
     <url>/2020/06/08/%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[ <a id="more"></a>
+    <content><![CDATA[<h2 id="java相关："><a href="#java相关：" class="headerlink" title="java相关："></a>java相关：</h2><a id="more"></a>
+
+<!-- more -->
 
 
-
-<h2 id="java相关："><a href="#java相关：" class="headerlink" title="java相关："></a>java相关：</h2><h3 id="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"><a href="#JDK中哪一些是线程安全的集合类？是怎么保证安全的？" class="headerlink" title="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"></a>JDK中哪一些是线程安全的集合类？是怎么保证安全的？</h3><p>早在jdk的1.1版本中，所有的集合都是线程安全的。但是在1.2以及之后的版本中就出现了一些线程不安全的集合，为什么版本升级会出现一些线程不安全的集合呢？因为线程不安全的集合普遍比线程安全的集合效率高的多。随着业务的发展，特别是在web应用中，为了提高用户体验减少用户的等待时间，页面响应速度(也就是效率)是优先考虑的。而且对线程不安全的集合加锁以后也能达到安全的效果（但是效率会低，因为会有锁的获取以及等待）。其实在jdk源码中相同效果的集合线程安全的比线程不安全的就多了一个同步机制，但是效率上却低了不止一点点，因为效率低，所以已经不太建议使用了。</p>
+<h3 id="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"><a href="#JDK中哪一些是线程安全的集合类？是怎么保证安全的？" class="headerlink" title="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"></a>JDK中哪一些是线程安全的集合类？是怎么保证安全的？</h3><p>早在jdk的1.1版本中，所有的集合都是线程安全的。但是在1.2以及之后的版本中就出现了一些线程不安全的集合，为什么版本升级会出现一些线程不安全的集合呢？因为线程不安全的集合普遍比线程安全的集合效率高的多。随着业务的发展，特别是在web应用中，为了提高用户体验减少用户的等待时间，页面响应速度(也就是效率)是优先考虑的。而且对线程不安全的集合加锁以后也能达到安全的效果（但是效率会低，因为会有锁的获取以及等待）。其实在jdk源码中相同效果的集合线程安全的比线程不安全的就多了一个同步机制，但是效率上却低了不止一点点，因为效率低，所以已经不太建议使用了。</p>
 <p>Vector：就比Arraylist多了个同步化机制（线程安全）。</p>
 <p>Hashtable：就比Hashmap多了个线程安全。</p>
 <p>hashtable是线程安全的,即hashtable的方法都提供了同步机制；hashmap不是线程安全的,即不提供同步机制 ；hashtable不允许插入空值,hashmap允许!</p>
@@ -1942,7 +1943,8 @@
   <entry>
     <title>参考面经</title>
     <url>/2020/06/05/%E5%8F%82%E8%80%83%E9%9D%A2%E7%BB%8F/</url>
-    <content><![CDATA[ <a id="more"></a>
+    <content><![CDATA[<p>各公司面试题整理</p>
+<a id="more"></a>
 
 
 
@@ -2886,54 +2888,6 @@
       </tags>
   </entry>
   <entry>
-    <title>BP神经网络与KNN分类算法（ILPD数据集）</title>
-    <url>/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="ILPD数据集"><a href="#ILPD数据集" class="headerlink" title="ILPD数据集"></a>ILPD数据集</h2><p>ILPD数据集来自美国加州大学一个统计学习相关的网站上（UCI）数据集的名称叫做Indian Liver Patient Dataset印度肝病患者数据集，这个数据集由三个印度的教授收集自印度安得拉邦的东北部，包含了416个肝癌病人和167个非肝癌病人共计583个肝病患者的病历数据记录。583个病人中包含441名男性病人和142名女性病人，其中任何年龄超过89岁的患者都被列为年龄90。</p>
-<a id="more"></a>
-
-<p><img src="https://img-blog.csdnimg.cn/20190824183223375.png" alt="在这里插入图片描述"></p>
-<h2 id="ILPD数据集属性描述"><a href="#ILPD数据集属性描述" class="headerlink" title="ILPD数据集属性描述"></a>ILPD数据集属性描述</h2><p>在ILPD数据集中，该数据集包含416个肝脏患者记录和167个非肝脏患者记录。共计10个主要属性，以及583个样本数，里面有肝病患者和非肝病患者的记录。<br>具体属性描述如下表：<br><img src="https://img-blog.csdnimg.cn/20190824183303405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="原始数据集展示"><a href="#原始数据集展示" class="headerlink" title="原始数据集展示"></a>原始数据集展示</h2><p>该数据集是一个CSV格式的数据文件，一共有538行11列数据。<br>下图是对原始数据集的前25条数据展示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190824183323132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>数据的第一列代表患者年龄，第二列为患者性别。在这里性别是一个字符串形式的表示，我们在下面的数据分析中需要把数据转换为离散型的数据表示，可以方便我们的数据分析。数据的最后一行表示是否患病，1表示肝癌病人，2表示非肝癌病人。</p>
-<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>首先进行数据的简单预处理，进行偏差检测，即检查导致偏差的因素，并识别离散值与噪声值。然后进行数据清洗，即处理缺失值与噪声，通过观察数据集我们可以发现在数据集的第二列，性别表示中男性是male表示，女性是female表示，为了能让提高我们的分类准确率，这里需要进行替换，男性male用1表示，female用2来表示。<br>处理后的数据集表示如下：<br><img src="https://img-blog.csdnimg.cn/20190824183345370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="1-BP（反向传播）算法实现"><a href="#1-BP（反向传播）算法实现" class="headerlink" title="1. BP（反向传播）算法实现"></a>1. BP（反向传播）算法实现</h1><h3 id="BP算法描述"><a href="#BP算法描述" class="headerlink" title="BP算法描述"></a>BP算法描述</h3><p>BP算法（Back-propagation），误差反向传播算法，它的基本思想：学习过程由信号的正向传播（求损失）与误差的反向传播（误差回传）两个过程组成。网络的运行流程为：当输入一个样例后，获得该样例的特征向量，再根据权向量得到感知器的输入值，然后使用函数计算出每个感知器的输出，再将此输出作为下一层感知器的输入，依次类推，直到输出层。在多层的神经网络中，误差曲面可能有多个局部极小值，这意味着使用梯度下降算法找到的可能是局部极小值，而不是全局最小值。现在可以使用损失函数，这时可以根据损失函数来调整输出结点中的输入权向量，采用随机梯度下降算法求解，然后从后向前逐层调整权重，这就是反向传播算法计算的大致流程。<br>BP算法是一种有监督式的学习算法，其主要步骤是是输入学习样本，使用反向传播算法对网络的权值和偏差进行反复的调整训练，使输出的向量与期望向量尽可能地接近，当网络输出层的误差平方和小于指定的误差时训练完成，保存网络的权值和偏差。具体步骤如下：<br>（1）初始化，随机给定各连接权[w],[v]及阈值θi，rt。<br>（2）由给定的输入输出模式对计算隐层、输出层各单元输出bj=f（wijai-θj） ct=f（vjtbj－rt）<br>式中：bj为隐层第j个神经元实际输出；ct为输出层第t个神经元的实际输出；wij为输入层至隐层的连接权；vjt为隐层至输出层的连接权。<br>dtk=（ytk－ct）ct（1－ct） ejk=[dtvjt] bj（1－bj）<br>（3）选取下一个输入模式对返回第2步反复训练直到网络设输出误差达到要求结束训练。</p>
-<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>（1）数据集划分<br>在本数据集中，一共有538条数据，采用前400条数据进行参数训练，后138条数据进行测试数据。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%读取训练数据</span></span><br><span class="line">[NUM]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:K400'</span>)</span><br><span class="line">[A]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:J400'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%读取测试数据</span></span><br><span class="line">[NUMT]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:K583'</span>)</span><br><span class="line">[C]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:J583'</span>)</span><br></pre></td></tr></table></figure>
-<p>（2）算法步骤<br>将前400条数据作为输入，即（患者的年龄、患者的 性别性别、TB总胆红素 、DB直接胆红素、碱性磷酸酶、氨基转移酶、天冬氨酸氨基转移酶、TP总标本、ALB白蛋白 、A / G比率白蛋白和球蛋白比率）。将对应的分类结果作为输出。并用matlab自带的premnmx()函数将这些数据归一化处理。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%特征值归一化</span></span><br><span class="line"> [input,minI,maxI] = premnmx( [A ]')  ;</span><br></pre></td></tr></table></figure>
-<p>通过样本数据的训练，不断修正网络权值和阈值使误差函数沿负梯度方向下降，逼近期望输出。<br>归一化之后欧的数据形式如下：</p>
-<p><strong>训练集归一化：</strong><br><img src="https://img-blog.csdnimg.cn/20190824183613220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>测试集归一化：</strong><br><img src="https://img-blog.csdnimg.cn/20190824183625485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>输入输出：</strong></p>
-<p>该模型由每组数据的各项指标作为输入，以分类结果作为输出输入层的节点数为10，输出层的节点数为1。<br><strong>隐含层设计:</strong><br>IW = net.IW{1,1};<br>LW = net.LW{2,1};<br>b1 = net.b{1}<br>b2 = net.b{2}<br>net是训练得到的网络，IW表示隐含层的权矩阵，维数 = 隐含层神经元个数 * 特征数，LW表示隐含层权矩阵，维数 = 1 * 隐含层神经元个数，b1输入层的阈值，b2隐含层的阈值。<br>输入输入以及隐含层的设计如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190824183652148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>激励函数：</strong></p>
-<p>BP神经网络通常采用Sigmoid可微函数和线性函数作为网络的激励函数。本文选择S型正切函数tansig作为隐层神经元的激励函数。而由于网络的输出归一到[ -1, 1]范围内, 因此预测模型选取S 型对数函数tansig作为输出层神经元的激励函数。<br><strong>代码如下：</strong></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">out1 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-n1));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">Z = (LW * out1) + <span class="built_in">repmat</span>(b2,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>)); </span><br><span class="line">out2 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-Z));    <span class="comment">% tansig函数的表达式，out2表示输入层的输出结果</span></span><br></pre></td></tr></table></figure>
-<p>将训练样本数据归一化后输入网络, 设定网络隐层和输出层激励函数分别为tansig, 网络训练函数为traingdx, 网络性能函数为mse,隐层神经元数初设为4。<br><strong>设定网络参数：</strong></p>
-<p>网络迭代次数epochs为10000次, 期望误差goal为0.01, 学习速率lr为0.01，设置完毕，开始训练。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%设置训练参数</span></span><br><span class="line">net.trainparam.epochs = <span class="number">10000</span> ;</span><br><span class="line">net.trainparam.goal = <span class="number">0.01</span> ;</span><br><span class="line">net.trainParam.lr = <span class="number">0.01</span> ;</span><br></pre></td></tr></table></figure>
-
-<p><strong>完整代码</strong></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[NUM]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:K400'</span>)</span><br><span class="line">[A]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:J400'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">%特征值归一化</span></span><br><span class="line">[input,minI,maxI] = premnmx( [A ]')  ;</span><br><span class="line"><span class="comment">%构造输出矩阵</span></span><br><span class="line">s = <span class="built_in">size</span>(A,<span class="number">1</span>);</span><br><span class="line">output = <span class="built_in">zeros</span>( s , <span class="number">5</span>  ) ;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : s </span><br><span class="line">   output( <span class="built_in">i</span> , NUM(<span class="built_in">i</span>,<span class="number">11</span>)) = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%创建神经网络</span></span><br><span class="line">net = newff( minmax(input) , [<span class="number">55</span> <span class="number">5</span>] , &#123; <span class="string">'logsig'</span> <span class="string">'logsig'</span> &#125; , <span class="string">'traingdx'</span> ) ; </span><br><span class="line"> </span><br><span class="line"><span class="comment">%设置训练参数</span></span><br><span class="line">net.trainparam.show = <span class="number">25</span> ;</span><br><span class="line">net.trainparam.epochs = <span class="number">10000</span> ;</span><br><span class="line">net.trainparam.goal = <span class="number">0.01</span> ;</span><br><span class="line">net.trainParam.lr = <span class="number">0.01</span> ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%开始训练</span></span><br><span class="line">net = train( net, input , output' ) ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%读取测试数据</span></span><br><span class="line">[NUMT]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:K583'</span>)</span><br><span class="line">[C]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:J583'</span>)</span><br><span class="line"><span class="comment">%测试数据归一化</span></span><br><span class="line">testInput = tramnmx ( [C]' , minI, maxI ) ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%仿真</span></span><br><span class="line">Y = sim( net , testInput ) </span><br><span class="line">IW = net.IW&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;  <span class="comment">% net是训练得到的网络，IW表示隐含层的权矩阵</span></span><br><span class="line">                   <span class="comment">% 维数 = 隐含层神经元个数 * 特征数</span></span><br><span class="line">LW = net.LW&#123;<span class="number">2</span>,<span class="number">1</span>&#125;;  <span class="comment">% LW表示隐含层权矩阵，维数 = 1 * 隐含层神经元个数</span></span><br><span class="line">b1 = net.b&#123;<span class="number">1</span>&#125;    <span class="comment">% 输入层的阈值</span></span><br><span class="line">b2 = net.b&#123;<span class="number">2</span>&#125;    <span class="comment">% 隐含层的阈值</span></span><br><span class="line">t=<span class="built_in">size</span>(testInput,<span class="number">2</span>)</span><br><span class="line">u=IW * testInput;</span><br><span class="line">n1 = (IW * testInput) + <span class="built_in">repmat</span>(b1,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>));</span><br><span class="line">out1 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-n1));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">Z = (LW * out1) + <span class="built_in">repmat</span>(b2,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>));        <span class="comment">% purelin函数就是形如 y = x，所以直接可以得到out2</span></span><br><span class="line">out2 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-Z));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">out3=(<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-LW))) * (<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(- IW)));</span><br><span class="line">C= LW * IW;</span><br><span class="line">out4=<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-C));</span><br><span class="line"><span class="comment">%统计识别正确率</span></span><br><span class="line">[s1 , s2] = <span class="built_in">size</span>( Y ) ;</span><br><span class="line">hitNum = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : s2</span><br><span class="line">    [m , Index] = <span class="built_in">max</span>( Y( : ,  <span class="built_in">i</span> ) ) ;</span><br><span class="line">    <span class="keyword">if</span>( Index  ==  NUMT(<span class="built_in">i</span>,<span class="number">11</span>)   ) </span><br><span class="line">        hitNum = hitNum + <span class="number">1</span> ; </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">sprintf(<span class="string">'分类识别率是 %3.3f%%'</span>,<span class="number">100</span> * hitNum / s2 )</span><br></pre></td></tr></table></figure>
-<h3 id="实验结果分析"><a href="#实验结果分析" class="headerlink" title="实验结果分析"></a>实验结果分析</h3><p>网络训练完成后，进行测试集测试训练结果，与分类的正确率。<br><img src="https://img-blog.csdnimg.cn/20190824183915670.png" alt="在这里插入图片描述"><br>实验结果：<br>网络输出误差与训练状态<br><img src="https://img-blog.csdnimg.cn/20190824183924364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">图 网络训练误差<br><img src="https://img-blog.csdnimg.cn/20190824183940438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">图 网络训练状态</p>
-<h1 id="2-KNN算法分类"><a href="#2-KNN算法分类" class="headerlink" title="2. KNN算法分类"></a>2. KNN算法分类</h1><h3 id="KNN算法步骤"><a href="#KNN算法步骤" class="headerlink" title="KNN算法步骤"></a>KNN算法步骤</h3><p>KNN的算法原理描述与算法执行流程，我们在上一章的1.5章节已经介绍过，在这里不再重复介绍。本章节主要是KNN算法在印度肝病分类实验中的应用与分类效果。<br>KNN算法在分析印度肝病患者数据集时的具体算法步骤如下：<br>1）计算测试数据与各个训练数据之间的距离，也就是计算数据集中前400条训练数据与138条数据中各个属性之间的距离。<br>2）按照距离的递增关系进行排序，然后进行后续的坐标点的选择。<br>3）选取距离最小的K个点；<br>4）确定前K个点所在类别的出现频率；<br>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
-<h2 id="实验设计-1"><a href="#实验设计-1" class="headerlink" title="实验设计"></a>实验设计</h2><p>（1）数据集分类<br>前400行前10列作为训练数据，第11列作为测试标签，后138行前10列作为测试属性，后138行第11列作为测试标签。<br>[NUM]=xlsread(‘shujv’,’A1:J400’)<br>[A]=xlsread(‘shujv’,’K1:K400’)</p>
-<p>%读取测试数据<br>[NUMT]=xlsread(‘shujv’,’A401:J538’)<br>[C]=xlsread(‘shujv’,’K401:K538’)</p>
-<p><img src="https://img-blog.csdnimg.cn/20190824184108676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>（2）数据归一化<br>[mtrain,ntrain] = size(NUM);<br>[mtest,ntest] = size(NUMT);<br>dataset = [NUM;NUMT];<br>[dataset_scale,ps] = mapminmax(dataset’,0,1);<br>dataset_scale = dataset_scale’;<br>train_data = dataset_scale(1:mtrain,:);<br>test_data = dataset_scale( (mtrain+1):(mtrain+mtest),: );</p>
-<p>（3）算法代码<br>[NUM]=xlsread(‘shujv’,’A1:J400’)<br>[A]=xlsread(‘shujv’,’K1:K400’)<br>[NUMT]=xlsread(‘shujv’,’A401:J538’)<br>[C]=xlsread(‘shujv’,’K401:K538’)</p>
-<p>mdl = ClassificationKNN.fit(NUM,A,’NumNeighbors’,1);<br>predict_label   =     predict(mdl, NUMT);<br>accuracy   =   length(find(predict_label == C))/length(C)<em>100<br>*</em>测试分类标签和预测分类标签。（左侧为测试分类标签，右侧为预测分类标签）**<br><img src="https://img-blog.csdnimg.cn/20190824184135863.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>正确率：正确率 = 预测标签 / 测试标签<br>accuracy   =   length(find(predict_label == C))/length(C)*100</p>
-<p><img src="https://img-blog.csdnimg.cn/20190824184205848.png" alt="在这里插入图片描述"><br>由实验结果可以看出来印度肝病患者这个数据集用BP网络训练的模型，分类的准确率更高。KNN自身的优点具有：计算简单，易于理解，可解释性强；比较适合处理有缺失属性的样本；能够处理不相关的特征；在相对短的时间内能够对大型数据源做出可行且效果良好的结果。缺点是往往忽略了数据之间的相关性；BP神经网络实质上实现了一个从输入到输出的映射功能，数学理论证明三层的神经网络就能够以任意精度逼近任何非线性连续函数。这使得其特别适合于求解内部机制复杂的问题，即BP神经网络具有较强的非线性映射能力。BP神经网络在其局部的或者部分的神经元受到破坏后对全局的训练结果不会造成很大的影响，也就是说即使系统在受到局部损伤时还是可以正常工作的。即BP神经网络具有一定的容错能力。</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>BP</tag>
-        <tag>KNN</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SVM与KNN分类算法（wine数据集）</title>
     <url>/2019/11/10/2019-11-10-SVM%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p>本片文章是使用分类算法KNN,和SVM支持向量机分类算法，对Wine数据集进行分类的实现。</p>
@@ -2996,6 +2950,54 @@
         <tag>机器学习</tag>
         <tag>SVM</tag>
         <tag>MATLAB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BP神经网络与KNN分类算法（ILPD数据集）</title>
+    <url>/2019/11/10/2019-11-10-BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8EKNN%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="ILPD数据集"><a href="#ILPD数据集" class="headerlink" title="ILPD数据集"></a>ILPD数据集</h2><p>ILPD数据集来自美国加州大学一个统计学习相关的网站上（UCI）数据集的名称叫做Indian Liver Patient Dataset印度肝病患者数据集，这个数据集由三个印度的教授收集自印度安得拉邦的东北部，包含了416个肝癌病人和167个非肝癌病人共计583个肝病患者的病历数据记录。583个病人中包含441名男性病人和142名女性病人，其中任何年龄超过89岁的患者都被列为年龄90。</p>
+<a id="more"></a>
+
+<p><img src="https://img-blog.csdnimg.cn/20190824183223375.png" alt="在这里插入图片描述"></p>
+<h2 id="ILPD数据集属性描述"><a href="#ILPD数据集属性描述" class="headerlink" title="ILPD数据集属性描述"></a>ILPD数据集属性描述</h2><p>在ILPD数据集中，该数据集包含416个肝脏患者记录和167个非肝脏患者记录。共计10个主要属性，以及583个样本数，里面有肝病患者和非肝病患者的记录。<br>具体属性描述如下表：<br><img src="https://img-blog.csdnimg.cn/20190824183303405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="原始数据集展示"><a href="#原始数据集展示" class="headerlink" title="原始数据集展示"></a>原始数据集展示</h2><p>该数据集是一个CSV格式的数据文件，一共有538行11列数据。<br>下图是对原始数据集的前25条数据展示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824183323132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>数据的第一列代表患者年龄，第二列为患者性别。在这里性别是一个字符串形式的表示，我们在下面的数据分析中需要把数据转换为离散型的数据表示，可以方便我们的数据分析。数据的最后一行表示是否患病，1表示肝癌病人，2表示非肝癌病人。</p>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>首先进行数据的简单预处理，进行偏差检测，即检查导致偏差的因素，并识别离散值与噪声值。然后进行数据清洗，即处理缺失值与噪声，通过观察数据集我们可以发现在数据集的第二列，性别表示中男性是male表示，女性是female表示，为了能让提高我们的分类准确率，这里需要进行替换，男性male用1表示，female用2来表示。<br>处理后的数据集表示如下：<br><img src="https://img-blog.csdnimg.cn/20190824183345370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="1-BP（反向传播）算法实现"><a href="#1-BP（反向传播）算法实现" class="headerlink" title="1. BP（反向传播）算法实现"></a>1. BP（反向传播）算法实现</h1><h3 id="BP算法描述"><a href="#BP算法描述" class="headerlink" title="BP算法描述"></a>BP算法描述</h3><p>BP算法（Back-propagation），误差反向传播算法，它的基本思想：学习过程由信号的正向传播（求损失）与误差的反向传播（误差回传）两个过程组成。网络的运行流程为：当输入一个样例后，获得该样例的特征向量，再根据权向量得到感知器的输入值，然后使用函数计算出每个感知器的输出，再将此输出作为下一层感知器的输入，依次类推，直到输出层。在多层的神经网络中，误差曲面可能有多个局部极小值，这意味着使用梯度下降算法找到的可能是局部极小值，而不是全局最小值。现在可以使用损失函数，这时可以根据损失函数来调整输出结点中的输入权向量，采用随机梯度下降算法求解，然后从后向前逐层调整权重，这就是反向传播算法计算的大致流程。<br>BP算法是一种有监督式的学习算法，其主要步骤是是输入学习样本，使用反向传播算法对网络的权值和偏差进行反复的调整训练，使输出的向量与期望向量尽可能地接近，当网络输出层的误差平方和小于指定的误差时训练完成，保存网络的权值和偏差。具体步骤如下：<br>（1）初始化，随机给定各连接权[w],[v]及阈值θi，rt。<br>（2）由给定的输入输出模式对计算隐层、输出层各单元输出bj=f（wijai-θj） ct=f（vjtbj－rt）<br>式中：bj为隐层第j个神经元实际输出；ct为输出层第t个神经元的实际输出；wij为输入层至隐层的连接权；vjt为隐层至输出层的连接权。<br>dtk=（ytk－ct）ct（1－ct） ejk=[dtvjt] bj（1－bj）<br>（3）选取下一个输入模式对返回第2步反复训练直到网络设输出误差达到要求结束训练。</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>（1）数据集划分<br>在本数据集中，一共有538条数据，采用前400条数据进行参数训练，后138条数据进行测试数据。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%读取训练数据</span></span><br><span class="line">[NUM]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:K400'</span>)</span><br><span class="line">[A]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:J400'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">%读取测试数据</span></span><br><span class="line">[NUMT]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:K583'</span>)</span><br><span class="line">[C]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:J583'</span>)</span><br></pre></td></tr></table></figure>
+<p>（2）算法步骤<br>将前400条数据作为输入，即（患者的年龄、患者的 性别性别、TB总胆红素 、DB直接胆红素、碱性磷酸酶、氨基转移酶、天冬氨酸氨基转移酶、TP总标本、ALB白蛋白 、A / G比率白蛋白和球蛋白比率）。将对应的分类结果作为输出。并用matlab自带的premnmx()函数将这些数据归一化处理。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%特征值归一化</span></span><br><span class="line"> [input,minI,maxI] = premnmx( [A ]')  ;</span><br></pre></td></tr></table></figure>
+<p>通过样本数据的训练，不断修正网络权值和阈值使误差函数沿负梯度方向下降，逼近期望输出。<br>归一化之后欧的数据形式如下：</p>
+<p><strong>训练集归一化：</strong><br><img src="https://img-blog.csdnimg.cn/20190824183613220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>测试集归一化：</strong><br><img src="https://img-blog.csdnimg.cn/20190824183625485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>输入输出：</strong></p>
+<p>该模型由每组数据的各项指标作为输入，以分类结果作为输出输入层的节点数为10，输出层的节点数为1。<br><strong>隐含层设计:</strong><br>IW = net.IW{1,1};<br>LW = net.LW{2,1};<br>b1 = net.b{1}<br>b2 = net.b{2}<br>net是训练得到的网络，IW表示隐含层的权矩阵，维数 = 隐含层神经元个数 * 特征数，LW表示隐含层权矩阵，维数 = 1 * 隐含层神经元个数，b1输入层的阈值，b2隐含层的阈值。<br>输入输入以及隐含层的设计如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824183652148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>激励函数：</strong></p>
+<p>BP神经网络通常采用Sigmoid可微函数和线性函数作为网络的激励函数。本文选择S型正切函数tansig作为隐层神经元的激励函数。而由于网络的输出归一到[ -1, 1]范围内, 因此预测模型选取S 型对数函数tansig作为输出层神经元的激励函数。<br><strong>代码如下：</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">out1 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-n1));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">Z = (LW * out1) + <span class="built_in">repmat</span>(b2,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>)); </span><br><span class="line">out2 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-Z));    <span class="comment">% tansig函数的表达式，out2表示输入层的输出结果</span></span><br></pre></td></tr></table></figure>
+<p>将训练样本数据归一化后输入网络, 设定网络隐层和输出层激励函数分别为tansig, 网络训练函数为traingdx, 网络性能函数为mse,隐层神经元数初设为4。<br><strong>设定网络参数：</strong></p>
+<p>网络迭代次数epochs为10000次, 期望误差goal为0.01, 学习速率lr为0.01，设置完毕，开始训练。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%设置训练参数</span></span><br><span class="line">net.trainparam.epochs = <span class="number">10000</span> ;</span><br><span class="line">net.trainparam.goal = <span class="number">0.01</span> ;</span><br><span class="line">net.trainParam.lr = <span class="number">0.01</span> ;</span><br></pre></td></tr></table></figure>
+
+<p><strong>完整代码</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[NUM]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:K400'</span>)</span><br><span class="line">[A]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A1:J400'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">%特征值归一化</span></span><br><span class="line">[input,minI,maxI] = premnmx( [A ]')  ;</span><br><span class="line"><span class="comment">%构造输出矩阵</span></span><br><span class="line">s = <span class="built_in">size</span>(A,<span class="number">1</span>);</span><br><span class="line">output = <span class="built_in">zeros</span>( s , <span class="number">5</span>  ) ;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : s </span><br><span class="line">   output( <span class="built_in">i</span> , NUM(<span class="built_in">i</span>,<span class="number">11</span>)) = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%创建神经网络</span></span><br><span class="line">net = newff( minmax(input) , [<span class="number">55</span> <span class="number">5</span>] , &#123; <span class="string">'logsig'</span> <span class="string">'logsig'</span> &#125; , <span class="string">'traingdx'</span> ) ; </span><br><span class="line"> </span><br><span class="line"><span class="comment">%设置训练参数</span></span><br><span class="line">net.trainparam.show = <span class="number">25</span> ;</span><br><span class="line">net.trainparam.epochs = <span class="number">10000</span> ;</span><br><span class="line">net.trainparam.goal = <span class="number">0.01</span> ;</span><br><span class="line">net.trainParam.lr = <span class="number">0.01</span> ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%开始训练</span></span><br><span class="line">net = train( net, input , output' ) ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%读取测试数据</span></span><br><span class="line">[NUMT]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:K583'</span>)</span><br><span class="line">[C]=xlsread(<span class="string">'shujv'</span>,<span class="string">'A401:J583'</span>)</span><br><span class="line"><span class="comment">%测试数据归一化</span></span><br><span class="line">testInput = tramnmx ( [C]' , minI, maxI ) ;</span><br><span class="line"> </span><br><span class="line"><span class="comment">%仿真</span></span><br><span class="line">Y = sim( net , testInput ) </span><br><span class="line">IW = net.IW&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;  <span class="comment">% net是训练得到的网络，IW表示隐含层的权矩阵</span></span><br><span class="line">                   <span class="comment">% 维数 = 隐含层神经元个数 * 特征数</span></span><br><span class="line">LW = net.LW&#123;<span class="number">2</span>,<span class="number">1</span>&#125;;  <span class="comment">% LW表示隐含层权矩阵，维数 = 1 * 隐含层神经元个数</span></span><br><span class="line">b1 = net.b&#123;<span class="number">1</span>&#125;    <span class="comment">% 输入层的阈值</span></span><br><span class="line">b2 = net.b&#123;<span class="number">2</span>&#125;    <span class="comment">% 隐含层的阈值</span></span><br><span class="line">t=<span class="built_in">size</span>(testInput,<span class="number">2</span>)</span><br><span class="line">u=IW * testInput;</span><br><span class="line">n1 = (IW * testInput) + <span class="built_in">repmat</span>(b1,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>));</span><br><span class="line">out1 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-n1));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">Z = (LW * out1) + <span class="built_in">repmat</span>(b2,<span class="number">1</span>,<span class="built_in">size</span>(testInput,<span class="number">2</span>));        <span class="comment">% purelin函数就是形如 y = x，所以直接可以得到out2</span></span><br><span class="line">out2 =<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-Z));    <span class="comment">% tansig函数的表达式，out1表示输入层的输出结果</span></span><br><span class="line">out3=(<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-LW))) * (<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(- IW)));</span><br><span class="line">C= LW * IW;</span><br><span class="line">out4=<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-C));</span><br><span class="line"><span class="comment">%统计识别正确率</span></span><br><span class="line">[s1 , s2] = <span class="built_in">size</span>( Y ) ;</span><br><span class="line">hitNum = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : s2</span><br><span class="line">    [m , Index] = <span class="built_in">max</span>( Y( : ,  <span class="built_in">i</span> ) ) ;</span><br><span class="line">    <span class="keyword">if</span>( Index  ==  NUMT(<span class="built_in">i</span>,<span class="number">11</span>)   ) </span><br><span class="line">        hitNum = hitNum + <span class="number">1</span> ; </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">sprintf(<span class="string">'分类识别率是 %3.3f%%'</span>,<span class="number">100</span> * hitNum / s2 )</span><br></pre></td></tr></table></figure>
+<h3 id="实验结果分析"><a href="#实验结果分析" class="headerlink" title="实验结果分析"></a>实验结果分析</h3><p>网络训练完成后，进行测试集测试训练结果，与分类的正确率。<br><img src="https://img-blog.csdnimg.cn/20190824183915670.png" alt="在这里插入图片描述"><br>实验结果：<br>网络输出误差与训练状态<br><img src="https://img-blog.csdnimg.cn/20190824183924364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">图 网络训练误差<br><img src="https://img-blog.csdnimg.cn/20190824183940438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">图 网络训练状态</p>
+<h1 id="2-KNN算法分类"><a href="#2-KNN算法分类" class="headerlink" title="2. KNN算法分类"></a>2. KNN算法分类</h1><h3 id="KNN算法步骤"><a href="#KNN算法步骤" class="headerlink" title="KNN算法步骤"></a>KNN算法步骤</h3><p>KNN的算法原理描述与算法执行流程，我们在上一章的1.5章节已经介绍过，在这里不再重复介绍。本章节主要是KNN算法在印度肝病分类实验中的应用与分类效果。<br>KNN算法在分析印度肝病患者数据集时的具体算法步骤如下：<br>1）计算测试数据与各个训练数据之间的距离，也就是计算数据集中前400条训练数据与138条数据中各个属性之间的距离。<br>2）按照距离的递增关系进行排序，然后进行后续的坐标点的选择。<br>3）选取距离最小的K个点；<br>4）确定前K个点所在类别的出现频率；<br>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
+<h2 id="实验设计-1"><a href="#实验设计-1" class="headerlink" title="实验设计"></a>实验设计</h2><p>（1）数据集分类<br>前400行前10列作为训练数据，第11列作为测试标签，后138行前10列作为测试属性，后138行第11列作为测试标签。<br>[NUM]=xlsread(‘shujv’,’A1:J400’)<br>[A]=xlsread(‘shujv’,’K1:K400’)</p>
+<p>%读取测试数据<br>[NUMT]=xlsread(‘shujv’,’A401:J538’)<br>[C]=xlsread(‘shujv’,’K401:K538’)</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824184108676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>（2）数据归一化<br>[mtrain,ntrain] = size(NUM);<br>[mtest,ntest] = size(NUMT);<br>dataset = [NUM;NUMT];<br>[dataset_scale,ps] = mapminmax(dataset’,0,1);<br>dataset_scale = dataset_scale’;<br>train_data = dataset_scale(1:mtrain,:);<br>test_data = dataset_scale( (mtrain+1):(mtrain+mtest),: );</p>
+<p>（3）算法代码<br>[NUM]=xlsread(‘shujv’,’A1:J400’)<br>[A]=xlsread(‘shujv’,’K1:K400’)<br>[NUMT]=xlsread(‘shujv’,’A401:J538’)<br>[C]=xlsread(‘shujv’,’K401:K538’)</p>
+<p>mdl = ClassificationKNN.fit(NUM,A,’NumNeighbors’,1);<br>predict_label   =     predict(mdl, NUMT);<br>accuracy   =   length(find(predict_label == C))/length(C)<em>100<br>*</em>测试分类标签和预测分类标签。（左侧为测试分类标签，右侧为预测分类标签）**<br><img src="https://img-blog.csdnimg.cn/20190824184135863.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>正确率：正确率 = 预测标签 / 测试标签<br>accuracy   =   length(find(predict_label == C))/length(C)*100</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824184205848.png" alt="在这里插入图片描述"><br>由实验结果可以看出来印度肝病患者这个数据集用BP网络训练的模型，分类的准确率更高。KNN自身的优点具有：计算简单，易于理解，可解释性强；比较适合处理有缺失属性的样本；能够处理不相关的特征；在相对短的时间内能够对大型数据源做出可行且效果良好的结果。缺点是往往忽略了数据之间的相关性；BP神经网络实质上实现了一个从输入到输出的映射功能，数学理论证明三层的神经网络就能够以任意精度逼近任何非线性连续函数。这使得其特别适合于求解内部机制复杂的问题，即BP神经网络具有较强的非线性映射能力。BP神经网络在其局部的或者部分的神经元受到破坏后对全局的训练结果不会造成很大的影响，也就是说即使系统在受到局部损伤时还是可以正常工作的。即BP神经网络具有一定的容错能力。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>BP</tag>
+        <tag>KNN</tag>
       </tags>
   </entry>
   <entry>
@@ -5005,47 +5007,6 @@ where e.deptno=x.deptno and e.sal&gt;x.avg_sal;</code></pre><h2 id="内连接和
       </tags>
   </entry>
   <entry>
-    <title>使用Ajax同步请求增加页面等待提示</title>
-    <url>/2018/02/16/2018-02-16-%E4%BD%BF%E7%94%A8Ajax%E5%90%8C%E6%AD%A5%E8%AF%B7%E6%B1%82%E5%A2%9E%E5%8A%A0%E9%A1%B5%E9%9D%A2%E7%AD%89%E5%BE%85%E6%8F%90%E7%A4%BA/</url>
-    <content><![CDATA[<h1 id="使用Ajax同步请求增加页面等待提示"><a href="#使用Ajax同步请求增加页面等待提示" class="headerlink" title="使用Ajax同步请求增加页面等待提示"></a>使用Ajax同步请求增加页面等待提示</h1><p>最近在做项目时，有一个需求是批量打印好多个合同，使用AJAX向后台传送数据，等待后台执行后，需要把生成之后的文件地址传送过来。</p>
-<p>后台的处理时间比较长，根据合同的多少可能等待时间比较长，会达到10s左右，这个时候如果不加任何的提示，会导致用户因为没有看到是否执行而导致重复的操作，为了增加用户的体验感，，以及项目的完善性，</p>
-<p>这个时候就需要增加一个等待页面进行提示。</p>
-<a id="more"></a>
-
-<p>我们先来看一个Ajax同步请求与异步请求的区别：</p>
-<p>异步和同步：</p>
-<p>ajax中   async属性是设置同步和异步，async:false,时表示此时ajax为同步请求，如果不写或者设置成true表示异步请求</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">                    type : <span class="string">"get"</span>,</span><br><span class="line">                    <span class="keyword">async</span>:<span class="literal">true</span>,</span><br><span class="line">                    url :                       </span><br><span class="line">                    success : <span class="function"><span class="keyword">function</span>(<span class="params">targetPath</span>)</span>&#123;                   </span><br><span class="line">                    &#125;,</span><br></pre></td></tr></table></figure>
-
-
-
-<p>当设置成同步时，意味着执行完当前的程序段，才能执行下一段，它属于阻塞模式，其表现在网页上面就是会出现页面假死现象，也就是暂停当前的页面，用户不能操作其它的，必须等待当前请求返回数据，在这个过程中用户看不到任何的提示以及等待提醒。</p>
-<p>而使用异步方式请求，页面后再次段程序等待的时候，继续的向下执行，等待执行结束再返回结果，页面不会出现假死现象。</p>
-<p>我现在遇到的问题是：点击一个按钮，使用Ajax向后台传送数据，等待后台的执行，由于后台执行时间过长，这个时候页面出现所谓的假死现象，容易引发误操作。</p>
-<p>我的思路是：在ajax返回结果之前，增加一个遮罩层的函数显示效果，在执行之后，显示隐藏效果，于是我写了一个遮罩层的函数，准备放到ajax中。</p>
-<p>我通过查阅各种帖子发现有类似的描述，说是可以使用ajax的一个属性进行设置</p>
-<pre><code>beforeSend: function(){)</code></pre><p>，类似：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.ajax(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//省略了一些参数，这里只给出async 和 beforeSend</span></span><br><span class="line"><span class="keyword">async</span>: <span class="literal">false</span>, <span class="comment">//同步请求，默认情况下是异步（true）</span></span><br><span class="line">beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">$(<span class="string">'#warning'</span>).text(<span class="string">'正在处理，请稍等！'</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>但是设置成这样效果是出不来的，因为beforeSend只有在ajax设置成异步请求时，才会显示出beforeSend中函数的效果。</p>
-<p>在这里根据业务需要，ajax是不能改为异步的，因为必须等待文件地址返回后才能继续后面的操作。</p>
-<p>除此之外，loading也使用过，还有各种加提示的方法，但是sys为异步时，效果都会无法显示。</p>
-<p>在这个时候就需要引入一个JQuery中一个对象deferred，来对ajax进行封装异步函数。</p>
-<p>主要使用的是deferred中   $.when的方法使用，主要是对多个deferred对象进行并行化操作，当所有deferred对象都得到解决就执行后面添加的相应回调</p>
-<p>具体使用如下：</p>
-<p>使用之前需要先进行声明</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">var defer = $.Deferred();</span><br><span class="line">    <span class="selector-tag">function</span> <span class="selector-tag">toGetData</span>() &#123;</span><br><span class="line">        var defer = $.Deferred();</span><br><span class="line">        var checkedIds=$("input[name='backEntrust']:checked");</span><br><span class="line">            if(checkedIds.length==0)&#123;</span><br><span class="line">                <span class="selector-tag">alert</span>("请选中要打印的合同");</span><br><span class="line">                <span class="selector-tag">return</span> <span class="selector-tag">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            var r=confirm("确定打印吗？");</span><br><span class="line">            if (r==true)&#123;        </span><br><span class="line">                var enIds=new Array(checkedIds.length);</span><br><span class="line">                for(var i=0; i&lt;checkedIds.length; i++)&#123;</span><br><span class="line">                    enIds[i] = checkedIds[i].value;</span><br><span class="line">                    &#125;</span><br><span class="line">                   </span><br><span class="line">                 $.ajax(&#123;</span><br><span class="line">                    <span class="selector-tag">type</span> : "<span class="selector-tag">get</span>",</span><br><span class="line">                    <span class="selector-tag">async</span><span class="selector-pseudo">:true</span>,</span><br><span class="line">                    url :"$&#123;pageContext.request.contextPath&#125;/renWuFenPeiService_mergerSample.action?entrustIds="+enIds,</span><br><span class="line">                       </span><br><span class="line">                    <span class="selector-tag">success</span> : <span class="selector-tag">function</span>(<span class="selector-tag">targetPath</span>)&#123;</span><br><span class="line">                        defer.resolve(targetPath)                       </span><br><span class="line">                    &#125;, </span><br><span class="line">                    <span class="selector-tag">error</span> : <span class="selector-tag">function</span>() &#123;</span><br><span class="line">                        alert("样品检测委托单合并失败，请重试。");</span><br><span class="line">                        &#125;</span><br><span class="line">                        </span><br><span class="line">                    &#125;);    </span><br><span class="line">                                                                      </span><br><span class="line">            &#125;<span class="selector-tag">else</span> </span><br><span class="line">            &#123;</span><br><span class="line">                window.location.reload();</span><br><span class="line">             &#125; </span><br><span class="line">                             </span><br><span class="line">        <span class="selector-tag">return</span> <span class="selector-tag">defer</span><span class="selector-class">.promise</span>();        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    $('#batchPrint').on('click', function() &#123;</span><br><span class="line">        <span class="selector-tag">loading</span>();    显示遮罩层函数</span><br><span class="line">        $.when(toGetData()).done(function(targetPath)&#123;          </span><br><span class="line">           $(".shodow").hide()      </span><br><span class="line">          $("#batchPrinttwo").attr("href","/file/"+targetPath);</span><br><span class="line">          <span class="selector-tag">document</span><span class="selector-class">.getElementById</span>("<span class="selector-tag">batchPrinttwo</span>")<span class="selector-class">.click</span>();</span><br><span class="line">          <span class="selector-tag">loaded</span>();   取消遮罩层函数</span><br><span class="line">        &#125;);    </span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-
-<p><strong>在这段代码中，我们可以看到ajax设置的是异步请求，但是我们需要的是同步请求啊，在这使用了JQuery中的deferred之后，我们想要的显示效果就出来了，我们就可以使用ajax的异同请求，达到同步的效果。</strong></p>
-]]></content>
-      <categories>
-        <category>Java学习</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据库SQL语言以及常见操作</title>
     <url>/2018/02/16/2018-02-16-%E6%95%B0%E6%8D%AE%E5%BA%93SQL%E8%AF%AD%E8%A8%80%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<h1 id="SQL语言"><a href="#SQL语言" class="headerlink" title="SQL语言"></a>SQL语言</h1><h2 id="1-sql简介"><a href="#1-sql简介" class="headerlink" title="1.sql简介"></a>1.sql简介</h2><p>SQL：Structured  Query Language<br>Oracle  ： C/S 客户端发起请求，通过网络传递给服务器，服务器对请求进行响应</p>
@@ -5274,6 +5235,47 @@ select * from emp where deptno=10 or deptno=20;</code></pre><p><strong>like：�
       </tags>
   </entry>
   <entry>
+    <title>使用Ajax同步请求增加页面等待提示</title>
+    <url>/2018/02/16/2018-02-16-%E4%BD%BF%E7%94%A8Ajax%E5%90%8C%E6%AD%A5%E8%AF%B7%E6%B1%82%E5%A2%9E%E5%8A%A0%E9%A1%B5%E9%9D%A2%E7%AD%89%E5%BE%85%E6%8F%90%E7%A4%BA/</url>
+    <content><![CDATA[<h1 id="使用Ajax同步请求增加页面等待提示"><a href="#使用Ajax同步请求增加页面等待提示" class="headerlink" title="使用Ajax同步请求增加页面等待提示"></a>使用Ajax同步请求增加页面等待提示</h1><p>最近在做项目时，有一个需求是批量打印好多个合同，使用AJAX向后台传送数据，等待后台执行后，需要把生成之后的文件地址传送过来。</p>
+<p>后台的处理时间比较长，根据合同的多少可能等待时间比较长，会达到10s左右，这个时候如果不加任何的提示，会导致用户因为没有看到是否执行而导致重复的操作，为了增加用户的体验感，，以及项目的完善性，</p>
+<p>这个时候就需要增加一个等待页面进行提示。</p>
+<a id="more"></a>
+
+<p>我们先来看一个Ajax同步请求与异步请求的区别：</p>
+<p>异步和同步：</p>
+<p>ajax中   async属性是设置同步和异步，async:false,时表示此时ajax为同步请求，如果不写或者设置成true表示异步请求</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">                    type : <span class="string">"get"</span>,</span><br><span class="line">                    <span class="keyword">async</span>:<span class="literal">true</span>,</span><br><span class="line">                    url :                       </span><br><span class="line">                    success : <span class="function"><span class="keyword">function</span>(<span class="params">targetPath</span>)</span>&#123;                   </span><br><span class="line">                    &#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当设置成同步时，意味着执行完当前的程序段，才能执行下一段，它属于阻塞模式，其表现在网页上面就是会出现页面假死现象，也就是暂停当前的页面，用户不能操作其它的，必须等待当前请求返回数据，在这个过程中用户看不到任何的提示以及等待提醒。</p>
+<p>而使用异步方式请求，页面后再次段程序等待的时候，继续的向下执行，等待执行结束再返回结果，页面不会出现假死现象。</p>
+<p>我现在遇到的问题是：点击一个按钮，使用Ajax向后台传送数据，等待后台的执行，由于后台执行时间过长，这个时候页面出现所谓的假死现象，容易引发误操作。</p>
+<p>我的思路是：在ajax返回结果之前，增加一个遮罩层的函数显示效果，在执行之后，显示隐藏效果，于是我写了一个遮罩层的函数，准备放到ajax中。</p>
+<p>我通过查阅各种帖子发现有类似的描述，说是可以使用ajax的一个属性进行设置</p>
+<pre><code>beforeSend: function(){)</code></pre><p>，类似：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.ajax(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//省略了一些参数，这里只给出async 和 beforeSend</span></span><br><span class="line"><span class="keyword">async</span>: <span class="literal">false</span>, <span class="comment">//同步请求，默认情况下是异步（true）</span></span><br><span class="line">beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">$(<span class="string">'#warning'</span>).text(<span class="string">'正在处理，请稍等！'</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>但是设置成这样效果是出不来的，因为beforeSend只有在ajax设置成异步请求时，才会显示出beforeSend中函数的效果。</p>
+<p>在这里根据业务需要，ajax是不能改为异步的，因为必须等待文件地址返回后才能继续后面的操作。</p>
+<p>除此之外，loading也使用过，还有各种加提示的方法，但是sys为异步时，效果都会无法显示。</p>
+<p>在这个时候就需要引入一个JQuery中一个对象deferred，来对ajax进行封装异步函数。</p>
+<p>主要使用的是deferred中   $.when的方法使用，主要是对多个deferred对象进行并行化操作，当所有deferred对象都得到解决就执行后面添加的相应回调</p>
+<p>具体使用如下：</p>
+<p>使用之前需要先进行声明</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">var defer = $.Deferred();</span><br><span class="line">    <span class="selector-tag">function</span> <span class="selector-tag">toGetData</span>() &#123;</span><br><span class="line">        var defer = $.Deferred();</span><br><span class="line">        var checkedIds=$("input[name='backEntrust']:checked");</span><br><span class="line">            if(checkedIds.length==0)&#123;</span><br><span class="line">                <span class="selector-tag">alert</span>("请选中要打印的合同");</span><br><span class="line">                <span class="selector-tag">return</span> <span class="selector-tag">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            var r=confirm("确定打印吗？");</span><br><span class="line">            if (r==true)&#123;        </span><br><span class="line">                var enIds=new Array(checkedIds.length);</span><br><span class="line">                for(var i=0; i&lt;checkedIds.length; i++)&#123;</span><br><span class="line">                    enIds[i] = checkedIds[i].value;</span><br><span class="line">                    &#125;</span><br><span class="line">                   </span><br><span class="line">                 $.ajax(&#123;</span><br><span class="line">                    <span class="selector-tag">type</span> : "<span class="selector-tag">get</span>",</span><br><span class="line">                    <span class="selector-tag">async</span><span class="selector-pseudo">:true</span>,</span><br><span class="line">                    url :"$&#123;pageContext.request.contextPath&#125;/renWuFenPeiService_mergerSample.action?entrustIds="+enIds,</span><br><span class="line">                       </span><br><span class="line">                    <span class="selector-tag">success</span> : <span class="selector-tag">function</span>(<span class="selector-tag">targetPath</span>)&#123;</span><br><span class="line">                        defer.resolve(targetPath)                       </span><br><span class="line">                    &#125;, </span><br><span class="line">                    <span class="selector-tag">error</span> : <span class="selector-tag">function</span>() &#123;</span><br><span class="line">                        alert("样品检测委托单合并失败，请重试。");</span><br><span class="line">                        &#125;</span><br><span class="line">                        </span><br><span class="line">                    &#125;);    </span><br><span class="line">                                                                      </span><br><span class="line">            &#125;<span class="selector-tag">else</span> </span><br><span class="line">            &#123;</span><br><span class="line">                window.location.reload();</span><br><span class="line">             &#125; </span><br><span class="line">                             </span><br><span class="line">        <span class="selector-tag">return</span> <span class="selector-tag">defer</span><span class="selector-class">.promise</span>();        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    $('#batchPrint').on('click', function() &#123;</span><br><span class="line">        <span class="selector-tag">loading</span>();    显示遮罩层函数</span><br><span class="line">        $.when(toGetData()).done(function(targetPath)&#123;          </span><br><span class="line">           $(".shodow").hide()      </span><br><span class="line">          $("#batchPrinttwo").attr("href","/file/"+targetPath);</span><br><span class="line">          <span class="selector-tag">document</span><span class="selector-class">.getElementById</span>("<span class="selector-tag">batchPrinttwo</span>")<span class="selector-class">.click</span>();</span><br><span class="line">          <span class="selector-tag">loaded</span>();   取消遮罩层函数</span><br><span class="line">        &#125;);    </span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>在这段代码中，我们可以看到ajax设置的是异步请求，但是我们需要的是同步请求啊，在这使用了JQuery中的deferred之后，我们想要的显示效果就出来了，我们就可以使用ajax的异同请求，达到同步的效果。</strong></p>
+]]></content>
+      <categories>
+        <category>Java学习</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Oracle数据库 sqlplus常用命令</title>
     <url>/2018/02/10/2018-02-10-Oracle%E6%95%B0%E6%8D%AE%E5%BA%93-sqlplus%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<a id="more"></a>
@@ -5289,63 +5291,6 @@ select * from emp where deptno=10 or deptno=20;</code></pre><p><strong>like：�
       <tags>
         <tag>数据库</tag>
         <tag>Oracle</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 11g安装步骤与卸载步骤</title>
-    <url>/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/</url>
-    <content><![CDATA[<h2 id="1-安装步骤"><a href="#1-安装步骤" class="headerlink" title="1.安装步骤"></a>1.安装步骤</h2><p>首先先下载好Oracle安装包（这个就不用说了，上Oracle官网自己找下载入口），将下载好后的两个压缩文件解压至同一文件夹下，</p>
-<a id="more"></a>
-
-<p>解压提供的压缩包，看到如下目录：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190105212846190.png" alt="在这里插入图片描述"><br>第一个目录是Oracle的安装文件目录<br>第二个目录是32位的PLsql链接64的Oracle需要的客户端文件<br>第三个目录是PLSQL的安装文件，其中包括中文扩展包等</p>
-<h1 id="1、Oracle的安装"><a href="#1、Oracle的安装" class="headerlink" title="1、Oracle的安装"></a>1、Oracle的安装</h1><p>步骤一：双击datebase目录下的setup.exe文件，打开安装程序<br><img src="https://img-blog.csdnimg.cn/20190105212933396.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>步骤二：不用填写任何东西，直接点击“下一步”。如果有提示，点击“继续”即可<br><img src="https://img-blog.csdnimg.cn/20190105212949213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤三：安装选项按照默认的不变，直接点击“下一步”按钮<br><img src="https://img-blog.csdnimg.cn/20190105213007874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤四：默认选择“桌面类”，点击“下一步”按钮<br><img src="https://img-blog.csdnimg.cn/20190105213024648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤五：查看Oracle的安装目录，可以默认不用修改。这里主要输入全局数据库的管理口令和确认口令。这里密码统一输入orcl。下面的警告可以不用处理，点击“下一步”按钮，直到点击“完成”按钮，Oracle开始安装<br><img src="https://img-blog.csdnimg.cn/20190105213040265.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤六：安装成功后，不要急着点击弹出的框的“确定”按钮。因为数据库中某些用户处于锁定状态，需要解锁。因此点击“口令管理”按钮，对下列用户进行解锁，设置口令<br><img src="https://img-blog.csdnimg.cn/20190105213056948.png" alt="在这里插入图片描述"><br>选择口令管理，主要观察一下几个用户：</p>
-<ul>
-<li>普通用户：Scott用户的密码：tiger</li>
-<li>普通管理员：system用户的密码：orcl</li>
-<li>超级管理员：sys用户的密码：orcl</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20190105213118617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>步骤七：激活账户设置过口令后，点击确定按钮，关闭窗口。整个安装过程结束。打开cmd运行框，输入sqlplus，打开数据库登录窗口。用户名输入scott，密码输入tiger。回车登录进入到数据库，表明数据库一切正常<br><img src="https://img-blog.csdnimg.cn/20190105213138384.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="2、Oracle服务介绍"><a href="#2、Oracle服务介绍" class="headerlink" title="2、Oracle服务介绍"></a>2、Oracle服务介绍</h1><p>Oracle安装成功后，因此启动了多个服务，占用内存比较大，因此需要关闭某些不必要的服务。Oracle11g安装后，一共有以下几个服务：<br><img src="https://img-blog.csdnimg.cn/20190105213206104.png" alt="在这里插入图片描述"></p>
-<p>具体操作是右键“我的电脑”–“管理”–“服务和应用程序”—“服务”，可以看到上图的Oracle服务。<br>具体每个服务的介绍如下：<br>| Oracle ORCL VSS Writer Service<br>默认手动操作<br>–Oracle卷映射拷贝写入服务，VSS(Volume Shadow Copy Service)能够让存储基础设备(比如磁盘，阵列等)创建高保真的时间点映像，即映射拷贝(shadow copy)。它可以在多卷或者单个卷上创建映射拷贝，同时不会影响到系统的系统能。(非必须启动) |<br>|–|<br>| 默认开启启动 Oracle数据库控制台服务，orcl是Oracle的实例标识，默认的实例为orcl。在运行Enterprise Manager(企业管理器OEM)的时候，需要启动这个服务。(非必须启动)  |<br>|-  OracleJobSchedulerORCL<br>默认自动禁止  Oracle作业调度(定时器)服务，ORCL是Oracle实例标识。(非必须启动)   -|<br>|- OracleMTSRecoveryService<br>默认开机启动 服务端控制。该服务允许数据库充当一个微软事务服务器MTS、COM/COM+对象和分布式环境下的事务的资源管理器。(非必须启动)   -|<br>|- OracleOraDb11g_home1ClrAgent<br>默认手动操作  Oracle数据库.NET扩展服务的一部分。 (非必须启动)-|<br>|-OracleOraDb11g_home1TNSListener 默认开机启动 监听器服务，服务只有在数据库需要远程访问的时候才需要。<br>|- OracleServiceORCL  默认开机启动   数据库服务(数据库实例)，是Oracle核心服务该服务，是数据库启动的基础， 只有该服务启动，Oracle数据库才能正常启动。(必须启动)-| -|</p>
-<p><strong>通过以上内容，将除了OracleOraDb11g_home1TNSListener和OracleServiceORCL设置为自动启动外，其他的都设置为手动启动。这样可以给电脑剩下很多的内存空间。</strong></p>
-<h1 id="3、PLSQL的安装和链接"><a href="#3、PLSQL的安装和链接" class="headerlink" title="3、PLSQL的安装和链接"></a>3、PLSQL的安装和链接</h1><p>我们这里用的是Oracle 64位，而PLSQL是32位的。下面是我们的操作步骤<br><strong>步骤一：安装PLSQL且破解成功</strong><br>步骤二：假设Oracle的安装目录是D:\app\hp，将installclient_11_2目录拷贝到Oracle安装的目录：D:\app\hp\product中。如下图；<br><img src="https://img-blog.csdnimg.cn/20190105213656526.png" alt="在这里插入图片描述"><br>步骤三：在目录<strong>D:\app\hp\product\11.2.0\dbhome_1\NETWORK\ADMIN中找到两个文件listener.ora和tnsnames.ora，将此两个文件拷贝到D:\app\hp\product\instantclient_11_2\NETWORK\ADMIN<br>（注意NETWORK和ADMIN目录需要自己新建）</strong></p>
-<p>步骤四：打开PLSQL客户端后，取消登陆，进入主界面<br>点击工具—首选项—连接。将其中的”注销“更改为”提交“；<br>Oracle主目录名写入：D:\app\hp\product\instantclient_11_2<br>OCI库的目录写入：D:\app\hp\product\instantclient_11_2\OCI.DLL<br>应用–确定–关闭PLSQL_Developer重新运行</p>
-<p><img src="https://img-blog.csdnimg.cn/20190105213729667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>步骤五：关闭PLSQL，重新打开PLSQL，然后输入用户名密码scott/tiger，选择数据库为orcl，点击登陆就可以操作数据库了</p>
-<p><img src="https://img-blog.csdnimg.cn/20190105213750666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>数据库的三个常用的用户及默认密码<br>sys:change_on_install<br>system:manager<br>scott:tiger<br> （本机在安装时对初始密码进行更改为123456，scott密码仍未tiger）</p>
-<p>Oracle客户端：<br>sqlplus：Oracle自带的<br>sqlplus的启用：<br>(1)Oracle的安装目录中找到sqlplus<br>(2)命令行中输入：sqlplus username/password@ip:port/database sid<br>(3)开始菜单-&gt;运行:输入sqlplus username/password@ip:port/database sid<br>注意：<br>(1)@ip:port：登录远程数据库使用，登录本地数据库可以省略，可以写成：sqlplus username/password<br>(2)database sid:选择数据库的意思。<br>(3)问题:登陆本地数据库：sqlplus username/password@ORCL</p>
-<p>注意：<br>在口令管理中，，忘记解锁怎么办？<br>解锁用户和修改密码：<br>（1）sqlplus连接到数据库：sqlplus sys/123456 as sysdba<br>（2）输入解锁语句：alter user scott account unlock;<br>（3）修改密码：alter user scott identified by 654321;<br>        passw【ord】用户名:可以去修改其他用户的密码。<br>         passw:表示修改自己的密码。</p>
-<h1 id="4-Oracle的卸载步骤："><a href="#4-Oracle的卸载步骤：" class="headerlink" title="4 Oracle的卸载步骤："></a>4 Oracle的卸载步骤：</h1><p>1.我的电脑右键管理－＞服务停止所有Oracle服务。<br>或者控制面板－＞管理工具－＞服务停止所有Oracle服务<br>2.开始－＞程序－＞Oracle －＞Oracle Installation Products－＞ Universal Installer 卸装所有Oracle产品，但Universal Installer本身不能被删除<br>3.点击卸载产品，选择需要卸载的产品，点击删除按钮<br>4.卸载完成后重启计算机<br>5.运行regedit，删除HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services，滚动这个列表，删除所有Oracle入口。<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application， 删除所有Oracle入口。</p>
-<p>注意，最主要的是最后一步，删除注册表中得在内容。</p>
-]]></content>
-      <categories>
-        <category>Oracle数据库</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-        <tag>Oracle</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Servlet中读取txt文本文件路径问题</title>
-    <url>/2018/02/10/2018-02-10-Servlet%E4%B8%AD%E8%AF%BB%E5%8F%96txt%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>在进行javaweb开发中，遇到了一个问题，就是Servlet读取webcontent下的文本文件路径问题，会出现系统找不到文件的各种错误，经过查找问题，发现原来是由于这个项目部署在tomcat上之后，文件的目录结构会发生相应的一些变化，所以说使用常规的获取相对或绝对路径的方式在这个照常使用会导致运行之后，系统提示找不到文件路径的一些错误提示。<br>下面对如何在servlet中读取WEB-INF下的我存放的txt文件进行记录。</p>
-<a id="more"></a>
-
-<p>下图为项目路径，而这里要实现的便是使用teacherProduce这一个Servlet来读取WEB-INF目录下的teacher1.txt文件。<br><img src="https://img-blog.csdnimg.cn/20190122091729965.png" alt="在这里插入图片描述"><br>在这里说明一些获取文件路径的问题<br>常规的相对路径在这里无效，在tomcat上部署后目录结构变了<br>要使用getServletContext().getRealPath 来获取文件的路径。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String pathname = <span class="keyword">this</span>.getServletContext().getRealPath(<span class="string">"/txt/teacher1.txt"</span>);</span><br></pre></td></tr></table></figure>
-<p>需要注意的是：getServletContext().getRealPath只能在servlet中使用。</p>
-<p>完整代码如下</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">teacherProduce</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		</span><br><span class="line">		request.setCharacterEncoding(<span class="string">"UTF-8"</span>);		</span><br><span class="line">		<span class="comment">//读取文件</span></span><br><span class="line">		String content = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		String pathname = <span class="keyword">this</span>.getServletContext().getRealPath(<span class="string">"/txt/teacher1.txt"</span>);</span><br><span class="line">		</span><br><span class="line">		String encoding = <span class="string">"UTF-8"</span>;</span><br><span class="line">	    File file = <span class="keyword">new</span> File(pathname);	    </span><br><span class="line">	    System.out.println(file);</span><br><span class="line">	    </span><br><span class="line">	    BufferedReader br = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InputStreamReader reader = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">             br = <span class="keyword">new</span> BufferedReader(reader);</span><br><span class="line">             String line = <span class="string">""</span>;</span><br><span class="line">             <span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                 System.out.println(line);</span><br><span class="line">                 content = content +line;</span><br><span class="line">             &#125;</span><br><span class="line">             </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(br != <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    br.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">	    		                </span><br><span class="line">        request.setAttribute(<span class="string">"content"</span>, content);	</span><br><span class="line">		</span><br><span class="line">		request.getRequestDispatcher(<span class="string">"/personProduce/personProduce.jsp"</span>).forward(request, response);				</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		doGet(request, response);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Java学习</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -5461,6 +5406,63 @@ TimeStamp：比Date更精确的一种日期类型。
       <tags>
         <tag>数据库</tag>
         <tag>Oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 11g安装步骤与卸载步骤</title>
+    <url>/2018/02/10/2018-02-10-Oracle-11g%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E4%B8%8E%E5%8D%B8%E8%BD%BD%E6%AD%A5%E9%AA%A4/</url>
+    <content><![CDATA[<h2 id="1-安装步骤"><a href="#1-安装步骤" class="headerlink" title="1.安装步骤"></a>1.安装步骤</h2><p>首先先下载好Oracle安装包（这个就不用说了，上Oracle官网自己找下载入口），将下载好后的两个压缩文件解压至同一文件夹下，</p>
+<a id="more"></a>
+
+<p>解压提供的压缩包，看到如下目录：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190105212846190.png" alt="在这里插入图片描述"><br>第一个目录是Oracle的安装文件目录<br>第二个目录是32位的PLsql链接64的Oracle需要的客户端文件<br>第三个目录是PLSQL的安装文件，其中包括中文扩展包等</p>
+<h1 id="1、Oracle的安装"><a href="#1、Oracle的安装" class="headerlink" title="1、Oracle的安装"></a>1、Oracle的安装</h1><p>步骤一：双击datebase目录下的setup.exe文件，打开安装程序<br><img src="https://img-blog.csdnimg.cn/20190105212933396.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>步骤二：不用填写任何东西，直接点击“下一步”。如果有提示，点击“继续”即可<br><img src="https://img-blog.csdnimg.cn/20190105212949213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤三：安装选项按照默认的不变，直接点击“下一步”按钮<br><img src="https://img-blog.csdnimg.cn/20190105213007874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤四：默认选择“桌面类”，点击“下一步”按钮<br><img src="https://img-blog.csdnimg.cn/20190105213024648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤五：查看Oracle的安装目录，可以默认不用修改。这里主要输入全局数据库的管理口令和确认口令。这里密码统一输入orcl。下面的警告可以不用处理，点击“下一步”按钮，直到点击“完成”按钮，Oracle开始安装<br><img src="https://img-blog.csdnimg.cn/20190105213040265.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>步骤六：安装成功后，不要急着点击弹出的框的“确定”按钮。因为数据库中某些用户处于锁定状态，需要解锁。因此点击“口令管理”按钮，对下列用户进行解锁，设置口令<br><img src="https://img-blog.csdnimg.cn/20190105213056948.png" alt="在这里插入图片描述"><br>选择口令管理，主要观察一下几个用户：</p>
+<ul>
+<li>普通用户：Scott用户的密码：tiger</li>
+<li>普通管理员：system用户的密码：orcl</li>
+<li>超级管理员：sys用户的密码：orcl</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20190105213118617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>步骤七：激活账户设置过口令后，点击确定按钮，关闭窗口。整个安装过程结束。打开cmd运行框，输入sqlplus，打开数据库登录窗口。用户名输入scott，密码输入tiger。回车登录进入到数据库，表明数据库一切正常<br><img src="https://img-blog.csdnimg.cn/20190105213138384.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="2、Oracle服务介绍"><a href="#2、Oracle服务介绍" class="headerlink" title="2、Oracle服务介绍"></a>2、Oracle服务介绍</h1><p>Oracle安装成功后，因此启动了多个服务，占用内存比较大，因此需要关闭某些不必要的服务。Oracle11g安装后，一共有以下几个服务：<br><img src="https://img-blog.csdnimg.cn/20190105213206104.png" alt="在这里插入图片描述"></p>
+<p>具体操作是右键“我的电脑”–“管理”–“服务和应用程序”—“服务”，可以看到上图的Oracle服务。<br>具体每个服务的介绍如下：<br>| Oracle ORCL VSS Writer Service<br>默认手动操作<br>–Oracle卷映射拷贝写入服务，VSS(Volume Shadow Copy Service)能够让存储基础设备(比如磁盘，阵列等)创建高保真的时间点映像，即映射拷贝(shadow copy)。它可以在多卷或者单个卷上创建映射拷贝，同时不会影响到系统的系统能。(非必须启动) |<br>|–|<br>| 默认开启启动 Oracle数据库控制台服务，orcl是Oracle的实例标识，默认的实例为orcl。在运行Enterprise Manager(企业管理器OEM)的时候，需要启动这个服务。(非必须启动)  |<br>|-  OracleJobSchedulerORCL<br>默认自动禁止  Oracle作业调度(定时器)服务，ORCL是Oracle实例标识。(非必须启动)   -|<br>|- OracleMTSRecoveryService<br>默认开机启动 服务端控制。该服务允许数据库充当一个微软事务服务器MTS、COM/COM+对象和分布式环境下的事务的资源管理器。(非必须启动)   -|<br>|- OracleOraDb11g_home1ClrAgent<br>默认手动操作  Oracle数据库.NET扩展服务的一部分。 (非必须启动)-|<br>|-OracleOraDb11g_home1TNSListener 默认开机启动 监听器服务，服务只有在数据库需要远程访问的时候才需要。<br>|- OracleServiceORCL  默认开机启动   数据库服务(数据库实例)，是Oracle核心服务该服务，是数据库启动的基础， 只有该服务启动，Oracle数据库才能正常启动。(必须启动)-| -|</p>
+<p><strong>通过以上内容，将除了OracleOraDb11g_home1TNSListener和OracleServiceORCL设置为自动启动外，其他的都设置为手动启动。这样可以给电脑剩下很多的内存空间。</strong></p>
+<h1 id="3、PLSQL的安装和链接"><a href="#3、PLSQL的安装和链接" class="headerlink" title="3、PLSQL的安装和链接"></a>3、PLSQL的安装和链接</h1><p>我们这里用的是Oracle 64位，而PLSQL是32位的。下面是我们的操作步骤<br><strong>步骤一：安装PLSQL且破解成功</strong><br>步骤二：假设Oracle的安装目录是D:\app\hp，将installclient_11_2目录拷贝到Oracle安装的目录：D:\app\hp\product中。如下图；<br><img src="https://img-blog.csdnimg.cn/20190105213656526.png" alt="在这里插入图片描述"><br>步骤三：在目录<strong>D:\app\hp\product\11.2.0\dbhome_1\NETWORK\ADMIN中找到两个文件listener.ora和tnsnames.ora，将此两个文件拷贝到D:\app\hp\product\instantclient_11_2\NETWORK\ADMIN<br>（注意NETWORK和ADMIN目录需要自己新建）</strong></p>
+<p>步骤四：打开PLSQL客户端后，取消登陆，进入主界面<br>点击工具—首选项—连接。将其中的”注销“更改为”提交“；<br>Oracle主目录名写入：D:\app\hp\product\instantclient_11_2<br>OCI库的目录写入：D:\app\hp\product\instantclient_11_2\OCI.DLL<br>应用–确定–关闭PLSQL_Developer重新运行</p>
+<p><img src="https://img-blog.csdnimg.cn/20190105213729667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>步骤五：关闭PLSQL，重新打开PLSQL，然后输入用户名密码scott/tiger，选择数据库为orcl，点击登陆就可以操作数据库了</p>
+<p><img src="https://img-blog.csdnimg.cn/20190105213750666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbzExMjAxNzg1MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>数据库的三个常用的用户及默认密码<br>sys:change_on_install<br>system:manager<br>scott:tiger<br> （本机在安装时对初始密码进行更改为123456，scott密码仍未tiger）</p>
+<p>Oracle客户端：<br>sqlplus：Oracle自带的<br>sqlplus的启用：<br>(1)Oracle的安装目录中找到sqlplus<br>(2)命令行中输入：sqlplus username/password@ip:port/database sid<br>(3)开始菜单-&gt;运行:输入sqlplus username/password@ip:port/database sid<br>注意：<br>(1)@ip:port：登录远程数据库使用，登录本地数据库可以省略，可以写成：sqlplus username/password<br>(2)database sid:选择数据库的意思。<br>(3)问题:登陆本地数据库：sqlplus username/password@ORCL</p>
+<p>注意：<br>在口令管理中，，忘记解锁怎么办？<br>解锁用户和修改密码：<br>（1）sqlplus连接到数据库：sqlplus sys/123456 as sysdba<br>（2）输入解锁语句：alter user scott account unlock;<br>（3）修改密码：alter user scott identified by 654321;<br>        passw【ord】用户名:可以去修改其他用户的密码。<br>         passw:表示修改自己的密码。</p>
+<h1 id="4-Oracle的卸载步骤："><a href="#4-Oracle的卸载步骤：" class="headerlink" title="4 Oracle的卸载步骤："></a>4 Oracle的卸载步骤：</h1><p>1.我的电脑右键管理－＞服务停止所有Oracle服务。<br>或者控制面板－＞管理工具－＞服务停止所有Oracle服务<br>2.开始－＞程序－＞Oracle －＞Oracle Installation Products－＞ Universal Installer 卸装所有Oracle产品，但Universal Installer本身不能被删除<br>3.点击卸载产品，选择需要卸载的产品，点击删除按钮<br>4.卸载完成后重启计算机<br>5.运行regedit，删除HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services，滚动这个列表，删除所有Oracle入口。<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application， 删除所有Oracle入口。</p>
+<p>注意，最主要的是最后一步，删除注册表中得在内容。</p>
+]]></content>
+      <categories>
+        <category>Oracle数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Servlet中读取txt文本文件路径问题</title>
+    <url>/2018/02/10/2018-02-10-Servlet%E4%B8%AD%E8%AF%BB%E5%8F%96txt%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在进行javaweb开发中，遇到了一个问题，就是Servlet读取webcontent下的文本文件路径问题，会出现系统找不到文件的各种错误，经过查找问题，发现原来是由于这个项目部署在tomcat上之后，文件的目录结构会发生相应的一些变化，所以说使用常规的获取相对或绝对路径的方式在这个照常使用会导致运行之后，系统提示找不到文件路径的一些错误提示。<br>下面对如何在servlet中读取WEB-INF下的我存放的txt文件进行记录。</p>
+<a id="more"></a>
+
+<p>下图为项目路径，而这里要实现的便是使用teacherProduce这一个Servlet来读取WEB-INF目录下的teacher1.txt文件。<br><img src="https://img-blog.csdnimg.cn/20190122091729965.png" alt="在这里插入图片描述"><br>在这里说明一些获取文件路径的问题<br>常规的相对路径在这里无效，在tomcat上部署后目录结构变了<br>要使用getServletContext().getRealPath 来获取文件的路径。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String pathname = <span class="keyword">this</span>.getServletContext().getRealPath(<span class="string">"/txt/teacher1.txt"</span>);</span><br></pre></td></tr></table></figure>
+<p>需要注意的是：getServletContext().getRealPath只能在servlet中使用。</p>
+<p>完整代码如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">teacherProduce</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		</span><br><span class="line">		request.setCharacterEncoding(<span class="string">"UTF-8"</span>);		</span><br><span class="line">		<span class="comment">//读取文件</span></span><br><span class="line">		String content = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		String pathname = <span class="keyword">this</span>.getServletContext().getRealPath(<span class="string">"/txt/teacher1.txt"</span>);</span><br><span class="line">		</span><br><span class="line">		String encoding = <span class="string">"UTF-8"</span>;</span><br><span class="line">	    File file = <span class="keyword">new</span> File(pathname);	    </span><br><span class="line">	    System.out.println(file);</span><br><span class="line">	    </span><br><span class="line">	    BufferedReader br = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InputStreamReader reader = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">             br = <span class="keyword">new</span> BufferedReader(reader);</span><br><span class="line">             String line = <span class="string">""</span>;</span><br><span class="line">             <span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                 System.out.println(line);</span><br><span class="line">                 content = content +line;</span><br><span class="line">             &#125;</span><br><span class="line">             </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(br != <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    br.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">	    		                </span><br><span class="line">        request.setAttribute(<span class="string">"content"</span>, content);	</span><br><span class="line">		</span><br><span class="line">		request.getRequestDispatcher(<span class="string">"/personProduce/personProduce.jsp"</span>).forward(request, response);				</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		doGet(request, response);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Java学习</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>

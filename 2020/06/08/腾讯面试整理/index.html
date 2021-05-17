@@ -88,15 +88,15 @@
 
 
 
-<meta name="description" content="java相关：JDK中哪一些是线程安全的集合类？是怎么保证安全的？早在jdk的1.1版本中，所有的集合都是线程安全的。但是在1.2以及之后的版本中就出现了一些线程不安全的集合，为什么版本升级会出现一些线程不安全的集合呢？因为线程不安全的集合普遍比线程安全的集合效率高的多。随着业务的发展，特别是在web应用中，为了提高用户体验减少用户的等待时间，页面响应速度(也就是效率)是优先考虑的。而且">
+<meta name="description" content="java相关：">
 <meta name="keywords" content="java,面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="腾讯面试整理">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;08&#x2F;%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86&#x2F;index.html">
 <meta property="og:site_name" content="雷凯博的博客">
-<meta property="og:description" content="java相关：JDK中哪一些是线程安全的集合类？是怎么保证安全的？早在jdk的1.1版本中，所有的集合都是线程安全的。但是在1.2以及之后的版本中就出现了一些线程不安全的集合，为什么版本升级会出现一些线程不安全的集合呢？因为线程不安全的集合普遍比线程安全的集合效率高的多。随着业务的发展，特别是在web应用中，为了提高用户体验减少用户的等待时间，页面响应速度(也就是效率)是优先考虑的。而且">
+<meta property="og:description" content="java相关：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-05-16T11:04:06.718Z">
+<meta property="og:updated_time" content="2021-05-17T02:06:45.707Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -449,11 +449,12 @@
       
 
       
-         <a id="more"></a>
+        <h2 id="java相关："><a href="#java相关：" class="headerlink" title="java相关："></a>java相关：</h2><a id="more"></a>
+
+<!-- more -->
 
 
-
-<h2 id="java相关："><a href="#java相关：" class="headerlink" title="java相关："></a>java相关：</h2><h3 id="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"><a href="#JDK中哪一些是线程安全的集合类？是怎么保证安全的？" class="headerlink" title="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"></a>JDK中哪一些是线程安全的集合类？是怎么保证安全的？</h3><p>早在jdk的1.1版本中，所有的集合都是线程安全的。但是在1.2以及之后的版本中就出现了一些线程不安全的集合，为什么版本升级会出现一些线程不安全的集合呢？因为线程不安全的集合普遍比线程安全的集合效率高的多。随着业务的发展，特别是在web应用中，为了提高用户体验减少用户的等待时间，页面响应速度(也就是效率)是优先考虑的。而且对线程不安全的集合加锁以后也能达到安全的效果（但是效率会低，因为会有锁的获取以及等待）。其实在jdk源码中相同效果的集合线程安全的比线程不安全的就多了一个同步机制，但是效率上却低了不止一点点，因为效率低，所以已经不太建议使用了。</p>
+<h3 id="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"><a href="#JDK中哪一些是线程安全的集合类？是怎么保证安全的？" class="headerlink" title="JDK中哪一些是线程安全的集合类？是怎么保证安全的？"></a>JDK中哪一些是线程安全的集合类？是怎么保证安全的？</h3><p>早在jdk的1.1版本中，所有的集合都是线程安全的。但是在1.2以及之后的版本中就出现了一些线程不安全的集合，为什么版本升级会出现一些线程不安全的集合呢？因为线程不安全的集合普遍比线程安全的集合效率高的多。随着业务的发展，特别是在web应用中，为了提高用户体验减少用户的等待时间，页面响应速度(也就是效率)是优先考虑的。而且对线程不安全的集合加锁以后也能达到安全的效果（但是效率会低，因为会有锁的获取以及等待）。其实在jdk源码中相同效果的集合线程安全的比线程不安全的就多了一个同步机制，但是效率上却低了不止一点点，因为效率低，所以已经不太建议使用了。</p>
 <p>Vector：就比Arraylist多了个同步化机制（线程安全）。</p>
 <p>Hashtable：就比Hashmap多了个线程安全。</p>
 <p>hashtable是线程安全的,即hashtable的方法都提供了同步机制；hashmap不是线程安全的,即不提供同步机制 ；hashtable不允许插入空值,hashmap允许!</p>
@@ -549,7 +550,7 @@
   <p><span>本文标题:</span><a href="/2020/06/08/%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/">腾讯面试整理</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 雷凯博 的个人博客">雷凯博</a></p>
   <p><span>发布时间:</span>2020年06月08日 - 20:06</p>
-  <p><span>最后更新:</span>2021年05月16日 - 19:05</p>
+  <p><span>最后更新:</span>2021年05月17日 - 10:05</p>
   <p><span>原始链接:</span><a href="/2020/06/08/%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" title="腾讯面试整理">http://yoursite.com/2020/06/08/%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/06/08/%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/"  aria-label="复制成功！"></i></span>
   </p>
@@ -647,8 +648,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/06/09/mybatis/" rel="prev" title="mybatis整理">
-                mybatis整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/09/spring/" rel="prev" title="spring整理">
+                spring整理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
