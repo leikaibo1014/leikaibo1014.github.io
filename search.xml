@@ -580,9 +580,10 @@
   <entry>
     <title>Java常见面试题整理</title>
     <url>/2020/06/09/Java%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[ <a id="more"></a>
+    <content><![CDATA[<p>java常见面试题整理</p>
+<a id="more"></a>
 
-
+<!-- more-->
 
 <h2 id="java相关："><a href="#java相关：" class="headerlink" title="java相关："></a>java相关：</h2><h3 id="Java中线程安全的集合类？"><a href="#Java中线程安全的集合类？" class="headerlink" title="Java中线程安全的集合类？"></a>Java中线程安全的集合类？</h3><p>java中的线程安全是什么：</p>
 <p>就是线程同步的意思，就是当一个程序对一个线程安全的方法或者语句进行访问的时候，其他的不能再对他进行操作了，必须等到这次访问结束以后才能对这个线程安全的方法进行访问</p>
